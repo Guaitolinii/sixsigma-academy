@@ -1,0 +1,223 @@
+@import "tailwindcss";
+
+@theme {
+  --color-dark-bg: #0A0A0F;
+  --color-dark-card: #12121A;
+  --color-dark-sidebar: #0D0D18;
+  --color-dark-border: #1E1E2E;
+  --color-dark-hover: #1A1A2E;
+  --color-gold: #C9A84C;
+  --color-gold-light: #F0C96A;
+  --color-cyan: #00D4FF;
+  --color-success: #00FF88;
+  --color-error: #FF4757;
+  --color-text-primary: #E8E8E8;
+  --color-text-secondary: #888888;
+  --color-text-muted: #666666;
+  --color-streak: #FF8C00;
+  --font-display: 'Bebas Neue', sans-serif;
+  --font-body: 'DM Sans', sans-serif;
+}
+
+body {
+  margin: 0;
+  background: var(--color-dark-bg);
+  color: var(--color-text-primary);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--color-dark-bg);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--color-dark-border);
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-gold);
+}
+
+/* Animação de glow nos cards */
+.card-glow {
+  transition: all 0.3s ease;
+}
+.card-glow:hover {
+  box-shadow: 0 0 20px rgba(201, 168, 76, 0.15), 0 0 40px rgba(201, 168, 76, 0.05);
+  border-color: rgba(201, 168, 76, 0.4) !important;
+  transform: translateY(-2px);
+}
+
+/* Lesson content styling */
+.lesson-content h1 {
+  font-size: 1.75rem;
+  font-weight: 800;
+  color: var(--color-gold);
+  margin-bottom: 1rem;
+  margin-top: 2rem;
+}
+.lesson-content h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: 0.75rem;
+  margin-top: 1.75rem;
+}
+.lesson-content h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--color-cyan);
+  margin-bottom: 0.5rem;
+  margin-top: 1.25rem;
+}
+.lesson-content p {
+  color: var(--color-text-secondary);
+  line-height: 1.8;
+  margin-bottom: 1rem;
+}
+.lesson-content strong {
+  color: var(--color-text-primary);
+  font-weight: 600;
+}
+.lesson-content ul, .lesson-content ol {
+  color: var(--color-text-secondary);
+  padding-left: 1.5rem;
+  margin-bottom: 1rem;
+  line-height: 1.8;
+}
+.lesson-content li {
+  margin-bottom: 0.35rem;
+}
+.lesson-content table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.25rem 0;
+  font-size: 0.875rem;
+}
+.lesson-content th {
+  background: var(--color-dark-sidebar);
+  color: var(--color-gold);
+  padding: 0.75rem 1rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-dark-border);
+  font-weight: 600;
+}
+.lesson-content td {
+  padding: 0.65rem 1rem;
+  border-bottom: 1px solid var(--color-dark-border);
+  color: var(--color-text-secondary);
+}
+.lesson-content tr:hover td {
+  background: rgba(201, 168, 76, 0.03);
+}
+.lesson-content blockquote {
+  border-left: 3px solid var(--color-gold);
+  background: rgba(201, 168, 76, 0.06);
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+  border-radius: 0 8px 8px 0;
+  color: var(--color-text-secondary);
+}
+.lesson-content code {
+  background: var(--color-dark-sidebar);
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  font-size: 0.85em;
+  color: var(--color-cyan);
+}
+.lesson-content pre {
+  background: var(--color-dark-sidebar);
+  padding: 1rem;
+  border-radius: 8px;
+  overflow-x: auto;
+  margin: 1rem 0;
+  border: 1px solid var(--color-dark-border);
+}
+.lesson-content pre code {
+  background: none;
+  padding: 0;
+  color: var(--color-text-secondary);
+}
+
+/* Confetti animation */
+@keyframes confetti-fall {
+  0% { transform: translateY(-100vh) rotate(0deg); opacity: 1; }
+  100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  25% { transform: translateX(-8px); }
+  75% { transform: translateX(8px); }
+}
+
+.animate-shake {
+  animation: shake 0.4s ease;
+}
+
+@keyframes pulse-gold {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(201, 168, 76, 0.4); }
+  50% { box-shadow: 0 0 0 10px rgba(201, 168, 76, 0); }
+}
+
+.pulse-gold {
+  animation: pulse-gold 2s infinite;
+}
+
+/* --- RESPONSIVIDADE MOBILE --- */
+
+/* Tabelas scrolláveis no mobile */
+.lesson-content table {
+  display: block;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 640px) {
+  .lesson-content h1 {
+    font-size: 1.35rem;
+    margin-top: 1.25rem;
+  }
+  .lesson-content h2 {
+    font-size: 1.1rem;
+    margin-top: 1.25rem;
+  }
+  .lesson-content h3 {
+    font-size: 1rem;
+    margin-top: 1rem;
+  }
+  .lesson-content p {
+    font-size: 0.9rem;
+    line-height: 1.7;
+  }
+  .lesson-content ul, .lesson-content ol {
+    padding-left: 1rem;
+    font-size: 0.9rem;
+  }
+  .lesson-content th, .lesson-content td {
+    padding: 0.5rem 0.65rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
+  }
+  .lesson-content blockquote {
+    padding: 0.5rem 0.75rem;
+    font-size: 0.9rem;
+  }
+
+  /* Remove card hover transform on touch */
+  .card-glow:hover {
+    transform: none;
+  }
+}
