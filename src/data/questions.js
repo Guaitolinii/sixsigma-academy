@@ -1,4 +1,4 @@
-﻿// ============================================================
+// ============================================================
 // data_quiz.js — 120+ questões para o sistema gamificado
 // ============================================================
 
@@ -474,140 +474,148 @@ export const quizQuestions = [
   correct: 1,
   explanation: "O DOE usado foi um fatorial completo 2³ com 3 fatores (Velocidade, Pressão, Rotação) em 2 níveis e 3 replicações = 24 rodadas. O resultado revelou que a interação Velocidade × Pressão era mais importante do que os efeitos individuais." },
 
-// ──── QUESTÕES AVANÇADAS MISTAS ───────────────────────────
+// ──── QUESTÕES AVANÇADAS MISTAS (MBA & MASTER BLACK BELT) ────────
 { id:"q048", module:3, topic:"Capacidade", difficulty:"hard",
-  question: "Se Cpk = 1,0 e o processo está centrado (Cp = Cpk), qual é a taxa de defeitos esperada?",
-  options: ["0,27% (2.700 ppm)","0,67% (6.700 ppm)","3,4 ppm","66.807 ppm"],
+  question: "Se um processo tem distribuiçao não normal e Cpk não pode ser calculado via métodos tradicionais, qual a abordagem correta para um Master Black Belt?",
+  options: [
+    "Transformação de Box-Cox ou Johnson, seguida do cálculo normal",
+    "Assumir normalidade se n > 30 (Teorema do Limite Central)",
+    "Usar o Cp no lugar do Cpk",
+    "Calcular a média e dividir por 3"
+  ],
   correct: 0,
-  explanation: "Cpk = 1,0 significa que o processo opera a ±3σ das especificações. Com distribuição normal, 99,73% está dentro de ±3σ, portanto 0,27% (2.700 ppm ou ~66.807 DPMO com o desvio de 1,5σ do Motorola) estão fora." },
+  explanation: "Para calcular a capacidade de dados não normais, a Regra de Ouro é: 1) Tentar descobrir o porquê da não-normalidade. 2) Aplicar Box-Cox (se dados > 0) ou Transformação de Johnson para normalizar matematicamente os dados antes do cálculo do Z-Score." },
 
-{ id:"q049", module:5, topic:"Correlação", difficulty:"medium",
-  question: "O coeficiente de correlação r = -0,87 indica:",
+{ id:"q049", module:5, topic:"Regressão", difficulty:"hard",
+  question: "Ao executar uma Regressão Linear Múltipla, você nota que o R-Sq(adj) é 89%, mas o R-Sq(pred) é apenas 45%. O que isso indica?",
   options: [
-    "Correlação positiva forte",
-    "Sem correlação",
-    "Correlação negativa forte",
-    "Correlação positiva moderada"
-  ],
-  correct: 2,
-  explanation: "r varia de -1 a +1. r = -0,87 indica correlação negativa forte: quando uma variável aumenta, a outra tende a diminuir fortemente. Mas correlação não é causalidade — é necessário investigar a relação." },
-
-{ id:"q050", module:7, topic:"SPC", difficulty:"hard",
-  question: "Um processo tem carta X̄-R estável por 20 semanas. Então você implementa uma melhoria (nova matéria-prima). Os próximos 8 pontos ficam todos abaixo da linha central. Você deve:",
-  options: [
-    "Ignorar — pontos dentro dos limites de controle são normais",
-    "Recalcular os limites de controle com os novos dados para capturar a melhoria real",
-    "Aumentar os limites de controle para acomodar os novos pontos",
-    "Suspender a melhoria — os dados indicam problemas"
+    "O modelo é perfeitamente válido e pronto para uso",
+    "Overfitting (Sobreajuste). O modelo explica bem o passado, mas é péssimo em prever o futuro (novos dados)",
+    "Underfitting. Faltam variáveis no modelo",
+    "Multicolinearidade alta entre todos os preditores"
   ],
   correct: 1,
-  explanation: "Quando uma melhoria deliberada é implementada, os limites de controle devem ser recalculados com os dados pós-melhoria. Os limites anteriores refletem a capacidade antiga. 8 pontos abaixo da linha central é sinal de mudança positiva (Regra 2 de Nelson)." },
+  explanation: "Um R-Sq(pred) muito menor que o R-Sq(adj) grita OVERFITTING. Você incluiu variáveis demais (ruído) que se ajustaram perfeitamente à sua amostra atual, quebrando a capacidade preditiva do modelo para dados que ele nunca viu." },
 
-// ──── MAIS QUESTÕES (total 120+) ─────────────────────────
-{ id:"q051", module:2, topic:"VOC", difficulty:"medium",
-  question: "NPS (Net Promoter Score) categoriza clientes em:",
+{ id:"q050", module:7, topic:"SPC Preditivo", difficulty:"hard",
+  question: "Qual Carta de Controle é matematicamente superior para detectar pequenas mudanças na média do processo (shifts < 1.5σ)?",
   options: [
-    "Satisfeitos, Insatisfeitos, Neutros",
-    "Promotores (9–10), Neutros (7–8), Detratores (0–6)",
-    "Fiéis (8–10), Passivos (5–7), Perdidos (0–4)",
-    "Há apenas uma categoria numérica de 1–100"
-  ],
-  correct: 1,
-  explanation: "NPS = % Promotores (nota 9-10) - % Detratores (nota 0-6). Neutros (7-8) não entram no cálculo. Varia de -100 a +100. NPS > 50 é considerado excelente." },
-
-{ id:"q052", module:8, topic:"5S", difficulty:"easy",
-  question: "Qual é a ordem correta dos 5S?",
-  options: [
-    "Seiton, Seiri, Seiso, Seiketsu, Shitsuke",
-    "Seiri, Seiton, Seiso, Seiketsu, Shitsuke",
-    "Shitsuke, Seiri, Seiton, Seiso, Seiketsu",
-    "Seiso, Seiton, Seiri, Shitsuke, Seiketsu"
-  ],
-  correct: 1,
-  explanation: "5S: Seiri (Classificar/Sort), Seiton (Ordenar/Set in Order), Seiso (Limpar/Shine), Seiketsu (Padronizar/Standardize), Shitsuke (Sustentar/Sustain). A ordem importa — não adianta ordenar antes de classificar." },
-
-{ id:"q053", module:4, topic:"Estatística", difficulty:"hard",
-  question: "Quando os dados de um processo NÃO seguem distribuição normal, qual alternativa ao t-test você usa para comparar 2 grupos?",
-  options: ["ANOVA","Teste F","Mann-Whitney (Wilcoxon)","Chi-quadrado"],
-  correct: 2,
-  explanation: "Mann-Whitney (também chamado Wilcoxon rank-sum test) é o equivalente não-paramétrico do t-test de 2 amostras independentes. Não assume normalidade — usa ranqueamento dos dados em vez das médias." },
-
-{ id:"q054", module:6, topic:"Kaizen", difficulty:"easy",
-  question: "O que é um 'Kaizen Event' (ou Kaizen Blitz)?",
-  options: [
-    "Um erro grave no processo que precisa de correção urgente",
-    "Um evento focado e intensivo (2–5 dias) para implementar melhorias rápidas em um processo",
-    "Uma reunião mensal de revisão de indicadores",
-    "O encerramento formal de um projeto DMAIC"
-  ],
-  correct: 1,
-  explanation: "Kaizen Event (Blitz) é um workshop intensivo de 2–5 dias onde uma equipe multifuncional se concentra em analisar e melhorar um processo específico. É rápido, focado e gera resultados visíveis imediatamente." },
-
-{ id:"q055", module:3, topic:"Medição", difficulty:"medium",
-  question: "O que é 'Bias' (Tendência) em análise de sistema de medição?",
-  options: [
-    "A variação entre diferentes operadores",
-    "A diferença sistemática entre o valor medido e o valor verdadeiro de referência",
-    "A variação do instrumento ao longo de seu range",
-    "O erro aleatório de cada medição"
-  ],
-  correct: 1,
-  explanation: "Bias = diferença entre a média das medições e o valor de referência verdadeiro. Se um paquímetro consistentemente mede 0,5mm a mais, tem bias de +0,5mm. Diferente de repetibilidade (variação aleatória)." },
-
-{ id:"q056", module:9, topic:"Confiabilidade", difficulty:"hard",
-  question: "A distribuição de Weibull é frequentemente usada em análise de confiabilidade porque:",
-  options: [
-    "É sempre simétrica como a Normal",
-    "Modela apenas falhas aleatórias",
-    "Pode modelar falhas por desgaste precoce, aleatório e por desgaste (banheira) com o mesmo parâmetro β",
-    "É mais simples que a distribuição Normal"
+    "Carta X-Bar R",
+    "Carta I-MR",
+    "CUSUM (Somas Acumuladas) ou EWMA (Média Móvel Exponencialmente Ponderada)",
+    "Carta p"
   ],
   correct: 2,
-  explanation: "A distribuição de Weibull tem flexibilidade única: β < 1 modela falhas precoces (burn-in), β = 1 = falhas aleatórias (Exponencial), β > 1 = desgaste progressivo. Essa versatilidade a torna ideal para análise de confiabilidade (curva da banheira)." },
+  explanation: "Cartas de Shewhart clássicas (X-Bar) reagem bem a grandes mudanças (> 1.5σ). Para micro-shifts (< 1.5σ), CUSUM e EWMA são superiores pois carregam o histórico ('memória') das amostras anteriores, expondo tendências microscópicas instantaneamente." },
 
-// Questões de aplicação contextual (voltadas para vendas/CRM)
-{ id:"q057", module:8, topic:"Lean-CRM", difficulty:"medium",
-  question: "No contexto de um CRM de vendas B2B, qual dos seguintes é um exemplo de desperdício 'Overproduction' (Superprodução)?",
+{ id:"q051", module:6, topic:"DOE", difficulty:"hard",
+  question: "Seu budget permite apenas 16 rodadas (runs). Você tem 5 fatores contínuos. Que design permite investigar efeitos principais E interações duplas sem aliasing severo?",
   options: [
-    "Proposta enviada antes do cliente estar pronto para receber",
-    "Vendedor esperando aprovação de crédito por 3 dias",
-    "Relatório automático de pipeline gerado diariamente que ninguém abre",
-    "Lead mal qualificado passado para o time comercial"
-  ],
-  correct: 2,
-  explanation: "Relatório gerado e não utilizado é clássico de Overproduction — produzir mais informação do que o demandado. No CRM, isso inclui campos preenchidos que nunca são lidos, workflows que disparam sem necessidade, e e-mails automáticos não relevantes." },
-
-{ id:"q058", module:2, topic:"Define-CRM", difficulty:"medium",
-  question: "Aplicando SIPOC a um processo de CRM, quem seria o 'Supplier' (Fornecedor) mais comum?",
-  options: [
-    "O cliente que compra o produto",
-    "Marketing Digital (que gera leads), feiras, indicações — quem alimenta o funil",
-    "O sistema de CRM em si",
-    "O vendedor responsável pela conta"
+    "Fatorial Completo 2^5",
+    "Fatorial Fracionado 2^(5-1) Resolução V",
+    "Plackett-Burman de 12 corridas",
+    "Taguchi L8"
   ],
   correct: 1,
-  explanation: "No SIPOC de um processo comercial, os Suppliers são quem fornece os inputs (leads, informações, dados de preço). Marketing, feiras, indicações fornecem os leads. ERP fornece preços. Financeiro fornece a política de crédito." },
+  explanation: "Um Fatorial Fracionado 2^(5-1) exige 16 rodadas (Meia fração de 32). Sendo Resolução V, ele garante que os Efeitos Principais nunca se confundam com Interações Duplas (aliasing ocorre apenas com triplas ou maiores), sendo o gold standard para Screening de 5 fatores." },
 
-{ id:"q059", module:7, topic:"Control-CRM", difficulty:"hard",
-  question: "Para monitorar o Lead Time do processo Lead-to-Order usando SPC, qual carta de controle é mais adequada?",
+{ id:"q052", module:6, topic:"Simulation", difficulty:"hard",
+  question: "Por que um Master Black Belt prefere a Simulação de Monte Carlo em vez do cálculo tradicional de tolerância de pior caso (Worst Case Tolerance)?",
   options: [
-    "Carta p (proporção)",
-    "Carta c (contagem de defeitos)",
-    "Carta X-MR (medições individuais com amplitude móvel)",
-    "Carta X̄-R (médias e amplitudes de subgrupos)"
+    "Porque o Worst Case exige software pago",
+    "Worst Case assume que todas as peças estouram os limites dimensionais simultaneamente, algo estatisticamente improvável, gerando custos de usinagem astronômicos",
+    "Monte Carlo ignora as variações das peças",
+    "Não há diferença, ambas dão a mesma largura de tolerância"
+  ],
+  correct: 1,
+  explanation: "Tolerance Design tradicional (Worst Case) soma linearmente as tolerâncias (Ex: 0.1 + 0.1 + 0.1 = 0.3 gap). É irrealista. Monte Carlo soma variâncias estatísticas (Root Sum Square - RSS), provando que é quase impossível que as 3 peças venham com seu limite máximo ao mesmo tempo. Isso barateia o projeto mecânico em milhões." },
+
+{ id:"q053", module:11, topic:"Valuation", difficulty:"hard",
+  question: "O Controller Financeiro pergunta: 'O projeto X economizou 400 horas de operadores este ano. Onde está o Hard Saving?' Qual a resposta de um verdadeiro Black Belt?",
+  options: [
+    "O tempo economizado vale US$ 40/hora, logo Hard Saving = US$ 16.000",
+    "É Soft Saving (Cost Avoidance). O Hard Saving só existirá se essas 400 horas forem convertidas em demissões (redução de folha) ou em incremento direto de vendas sem contratar mais gente",
+    "Hard Saving de oportunidade futura",
+    "Isso entra no DRE como Receita Não Operacional"
+  ],
+  correct: 1,
+  explanation: "Controladoria de classe mundial não aceita tempo como Hard Saving a menos que afete o fluxo de caixa. Se as pessoas ganharam tempo mas continuam sentadas no escritório ganhando o mesmo salário, o custo fixo da empresa faturou US$ 0 a mais. É categorizado rigidamente como Soft Savings." },
+
+{ id:"q054", module:9, topic:"DFSS", difficulty:"hard",
+  question: "Na matriz QFD (House of Quality), o teto triangular serve para:",
+  options: [
+    "Correlacionar a Voz do Cliente (VOC) com os Requisitos Funcionais",
+    "Fazer o benchmark da concorrência",
+    "Identificar correlações técnicas (Coflitos ou Sinergias) entre os próprios requisitos de engenharia (HOWs vs HOWs)",
+    "Calcular a TIR do projeto"
   ],
   correct: 2,
-  explanation: "Lead Time é uma medida contínua individual (um valor por pedido). Quando não é possível ou prático formar subgrupos racionais, usa-se a Carta X-MR (Indivíduos e Amplitude Móvel). A Carta X̄-R requer subgrupos de 2–9 medições do mesmo ponto do processo." },
+  explanation: "O Teto do QFD mapeia os trade-offs de engenharia. Exemplo: Para um carro, o Requisito 1 (Espessura do Aço = Segurança) TEM COLARELAÇÃO NEGATIVA com Requisito 2 (Peso = Consumo de combustível). O Teto força o engenheiro a resolver contradições usando ferramentas como TRIZ." },
 
-{ id:"q060", module:5, topic:"Analyze-CRM", difficulty:"medium",
-  question: "Uma empresa tem taxa de conversão de leads de 8%. Quer entender se o tipo de canal (site, feira, indicação) influencia a conversão. Qual teste estatístico usar?",
+{ id:"q055", module:6, topic:"Robust Design", difficulty:"hard",
+  question: "Na Função Perda de Taguchi, o que o mestre Genichi Taguchi propôs contrariando a engenharia ocidental clássica?",
   options: [
-    "t-test de 2 amostras",
-    "ANOVA",
-    "Teste Chi-quadrado de independência",
-    "Análise de Regressão Linear"
+    "Se a peça estiver dentro da especificação (LIE a LSE), o custo da má qualidade é zero",
+    "A perda financeira aumenta quadraticamente à medida que o produto se afasta do Target (valor nominal), mesmo que ainda esteja dentro dos limites de especificação",
+    "Limites de especificação não devem existir",
+    "Qualidade só custa caro quando o cliente processa a empresa"
   ],
-  correct: 2,
-  explanation: "Para testar a relação entre duas variáveis categóricas (canal: site/feira/indicação vs. resultado: converteu/não converteu), o teste Chi-quadrado de independência é o adequado. Trabalha com tabelas de contingência." }
+  correct: 1,
+  explanation: "A ocidental 'Goal Post Mentality' diz que entre 9,9 e 10,1 a peça é perfeita. Taguchi provou que se o nominal é 10,0, uma peça com 10,08 (dentro, portanto aprovada) já gera degradação no cliente (vibração, óleo vazando 3 anos depois). A função de perda quadrática (L=k(y-m)²) mudou o mundo." },
+
+{ id:"q056", module:12, topic:"Tollgate", difficulty:"hard",
+  question: "Durante a defesa da Fase Analyze ao Board (Tollgate), o MBB questiona por que você usou Regressão Logística Binária em vez de Regressão Linear. A resposta correta:",
+  options: [
+    "Pois temos múltiplos preditores independentes",
+    "Porque a variável resposta (Y) do projeto era Discreta/Binária (Ex: Cliente Cancelou vs Não Cancelou), e Linear só aceita Y contínuo",
+    "Por causa do R-sq muito alto da Linear",
+    "Para normalizar os resíduos através da curva logística"
+  ],
+  correct: 1,
+  explanation: "Regressão Linear Média exige que a resposta Y seja contínua (Dinheiro, Tempo, Comprimento). Quando prevemos eventos binários (Passa/Falha, Default/Pagou, Churn/Ficou), a matemática muda para a distribuição binomial, exigindo Regressão Logística." },
+
+{ id:"q057", module:4, topic:"Testes Hipóteses", difficulty:"hard",
+  question: "Um Black Belt analisa o teste 2-Sample t de médias da linha A vs B e encontra um p-valor de 0,14 (Alfa = 0,05). Porém, os tamanhos das amostras eram n=4 de cada lado. O que ele deve reportar?",
+  options: [
+    "Falha ao rejeitar H0. As linhas são iguais matematicamente.",
+    "Falha ao rejeitar H0, mas alerta para Alto Risco de Erro Tipo II. O Teste não tinha 'Poder' (Power) estatístico devido ao 'n' extremamente baixo para afirmar igualdade garantida.",
+    "Rejeita H0, há diferença entre A e B.",
+    "Usa ANOVA no lugar do t-test e avança."
+  ],
+  correct: 1,
+  explanation: "O p-valor > 0,05 diz que não conseguimos provar que são diferentes. MAs o n=4 destrói o Poder do Teste (1-Beta). É muito provável que a diferença exista (Erro Tipo II), mas a 'lupa' (tamanho da amostra) foi fraca demais para enxergá-la. Nunca declare 'igualdade' com Power < 80%." },
+
+{ id:"q058", module:11, topic:"Change Management", difficulty:"medium",
+  question: "Um gerente de área boicota seu projeto Lean. Na Matriz de Stakeholders, ele possui Alto Poder na empresa e Baixo Apoio ao Seu Projeto. Sua estratégia de ADKAR deve focar em:",
+  options: [
+    "Cercá-lo de e-mails copiando todo mundo",
+    "Usar o seu Executive Sponsor (o VP dele) para alinhar as métricas dele com o seu projeto, forçando 'Desire' (Desejo) top-down, seguido de reuniões de cocriação bottom-up",
+    "Esperar ele sair de férias para implementar a Poka-Yoke",
+    "Aplicar o passo 'Knowledge' do ADKAR enviando PDFs sobre Lean"
+  ],
+  correct: 1,
+  explanation: "Gatekeepers políticos operam pela carteira. O MBB aciona o Executive Sponsor para mudar os KPIs de bônus do gerente. Assim que a meta do gerente passa a depender da redução de desperdício do projeto (criando o passo Desire na força bruta/política), a gestão de mudança funciona." },
+
+{ id:"q059", module:5, topic:"R-FMEA", difficulty:"hard",
+  question: "A diferença técnica mortal entre o FMEA Tradicional de Engenharia e o FMEA Reverso (R-FMEA) focado pelo Master Black Belt no chão de fábrica é:",
+  options: [
+    "O R-FMEA é assinado pelo Fornecedor",
+    "O FMEA tradicional ocorre na sala de reunião imaginando falhas. O R-FMEA é uma auditoria de campo para verificar se todo Modo de Falha Severo (RPN>100) realmente tem os controles (Detecção) ativados no mundo real",
+    "R-FMEA avalia os lucros após as falhas",
+    "Não há diferença estatística ou filosófica"
+  ],
+  correct: 1,
+  explanation: "Acidentes fatais ocorrem com FMEAs notas 10 e aprovados. O engenheiro presumiu que a Detecção era nota 2 ('Controle Eletrônico Robusto'). O MBB faz o R-FMEA indo na linha e injetando um defeito de propósito. Se o robô não parar a máquina, o engenheiro mentiu na sala do FMEA. Isso é o FMEA Reverso." },
+
+{ id:"q060", module:8, topic:"Heijunka", difficulty:"hard",
+  question: "Em uma implementação real de Lean, o sistema Heijunka Box proíbe a 'Produção em Lote Econômico' padrão e exige:",
+  options: [
+    "Produzir os grandes pedidos nos primeiros 15 dias do mês",
+    "Nivelamento Misto. Ex: Se a demanda diária é 50 Carros Verdes e 50 Azuis, produzir V-A-V-A-V-A em pequenos pitches, absorvendo o choque da demanda do cliente de forma estabilizada",
+    "Ter um pulmão de estoque gigantesco",
+    "Parar a linha a cada 30 minutos para 5S"
+  ],
+  correct: 1,
+  explanation: "Heijunka = Nivelamento de Volume e Mix. Em vez de fazer 10 dias de produto A (lote de setup) e jogar estresse para a logística ou quebrar a cadeia de suplementos (Efeito Chicote), nivela-se a produção sequenciando A-B-A-B sincronizado com o Takt Time real do mercado consumidor." }
 
 ]; // fim do array quizQuestions
