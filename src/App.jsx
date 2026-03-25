@@ -8,6 +8,8 @@ import CasesPage from './pages/CasesPage';
 import QuizPage from './pages/QuizPage';
 import RankingPage from './pages/RankingPage';
 import GlossaryPage from './pages/GlossaryPage';
+import FormulasPage from './pages/FormulasPage';
+import SimuladoPage from './pages/SimuladoPage';
 import { useState, useEffect } from 'react';
 import { Menu } from 'lucide-react';
 
@@ -82,6 +84,8 @@ export default function App() {
             <Route path="/modulo/:id" element={<LessonPage />} />
             <Route path="/cases" element={<CasesPage />} />
             <Route path="/quiz" element={<QuizPage />} />
+            <Route path="/simulado" element={<SimuladoPage />} />
+            <Route path="/formulas" element={<FormulasPage />} />
             <Route path="/ranking" element={<RankingPage />} />
             <Route path="/glossario" element={<GlossaryPage />} />
           </Routes>

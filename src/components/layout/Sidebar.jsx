@@ -4,7 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   LayoutDashboard, BookOpen, FlaskConical, Zap, Trophy, BookMarked,
-  ChevronLeft, ChevronRight, Flame, Menu, X
+  ChevronLeft, ChevronRight, Flame, Menu, X, Calculator, Timer
 } from 'lucide-react';
 
 const navItems = [
@@ -12,6 +12,8 @@ const navItems = [
   { to: "/modulos",   icon: BookOpen,        label: "Módulos"    },
   { to: "/cases",     icon: FlaskConical,    label: "Cases DMAIC"},
   { to: "/quiz",      icon: Zap,             label: "Quiz Arena" },
+  { to: "/simulado",  icon: Timer,           label: "Simulado 4h"},
+  { to: "/formulas",  icon: Calculator,      label: "Fórmulas"   },
   { to: "/ranking",   icon: Trophy,          label: "Ranking"    },
   { to: "/glossario", icon: BookMarked,      label: "Glossário"  },
 ];

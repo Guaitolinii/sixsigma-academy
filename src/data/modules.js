@@ -341,6 +341,30 @@ Medidos em meses/anos contínuos. Incorpora desgastes de máquinas antigas, turn
 * Como os subgrupos "pulos de lótus" entram e estouram as tolerâncias temporais, o desvio padrão de Pp é absurdamente maior (mais ineficiente) que do Cp.
 * A diferença entre o **Cpk (Potencial Laboratorial)** e o **Ppk (Realidade Agreste)** sinaliza severos problemas de *Manutenção no Processo*. Se Cpk > 1.5 e Ppk = 0.6, seu processo é biologicamente bom mas está pessimamente mantido (manutenções irregulares e variação de Matéria-Prima inter-lotes destruindo o Ppk meses afio).
       `
+    },
+    {
+      id: "3.4",
+      title: "Amostragem Estatística e Power & Sample Size",
+      content: `
+# A Matemática da Amostragem
+
+Coletar dados não é uma atividade aleatória. Inspeção 100% de peças em fábricas de alto volume não apenas é inviável, mas é comprovadamente falha devido ao erro humano da inspeção de fadiga motora. O profissional Master Black Belt calcula o tamanho exato de amostra necessário para garantir \`95%\` de confiança estatística com o menor custo de captura possível.
+
+## Tamanho da Amostra Básico (Sample Size)
+A variável crítica é a **Margem de Erro Aceitável (E)**, o desvio padrão da população e o Nível de Confiança ($Z$).
+*   Para dados Contínuos: $n = ( \\frac{Z \\times s}{E} )^2$
+*   Se o desvio é altíssimo, você terá que puxar muito mais amostras da linha para ter confiança estatística da realidade.
+
+## Power and Sample Size (Poder do Teste)
+O poder descobre **a capacidade do seu Teste detectar uma diferença quando a diferença realmente existe** (Poder é o Complementar ao Erro Tipo II: $1 - \\beta$).
+Se você aprova uma resina barata, um Power Ratio ideal no software precisa estar parametrizado em **80% a 90%**.
+Se o Power de teste for muito baixo (ex: $20%$), significa que você está fazendo a pesquisa e amostrando tão poucas amostras que mesmo que o fornecedor envie algo estragado, o sino de Gauss do "status quo" mascarará a diferença real.
+
+## Modos de Amostragem
+1.  **Amostragem Aleatória Simples**: Sorteio cego (Random Number Generator).
+2.  **Amostragem Estratificada**: A fábrica de garrafas tem 3 turnos (Manhã = 50% produção, Tarde = 30%, Noite = 20%). A amostra DEVE retirar exatamente esses percentuais proporcionais. Se sortear aleatoriamente, um turno pode ser esquecido e o projeto fica enviesado.
+3.  **Amostragem Sistemática**: Tirar uma garrafa a cada hora cheia. O perigo mortal aqui é a **Sincronicidade de Frequência Oculta**. E se a máquina de extrusão dá um \`glitch\` de oscilação elétrica toda hora no ponteiro do relógio zero-zero? O Black Belt será perfeitamente enganado.
+      `
     }
   ]
 },
@@ -706,6 +730,34 @@ Um OCAP não diz: "Se a máquina quebrar, avise a manutenção". Um OCAP de clas
 ## Controle C-Level: Dashboards de Governança
 Como Black Belt, você entregou a linha para o supervisor no "Hand-Off", mas você pendurou os dados em PowerBI reportando para a Diretoria. O Projeto Six Sigma não tira férias. Se a governança apitar vermelho 1 ano depois, o sponsor cancela o bônus do gerente da área (Ownership processual garantido).
       `
+    },
+    {
+      id: "7.3",
+      title: "As 8 Regras de Nelson e Seleção de Cartas SPC",
+      content: `
+# Interpretando Subliminares: Regras de Nelson
+
+Se um inspetor acha que um ponto precisa sair fora da Zona de Controle ($\u00b1 3\\sigma$) para o processo estar \`Fora de Controle\`, ele não sabe SPC. As tendências matemáticas e físicas denunciam a falha de máquina antes da destruição real de um lote.
+As 8 Regras Western Electric (Regras de Nelson):
+1.  **Regra 1**: 1 ponto a mais de 3 desvios da linha central. (Explosão súbita).
+2.  **Regra 2**: 9 pontos consecutivos no mesmo lado do Centro. (A média deslocou sutilmente permanentemente, indicando mudança na temperatura fria da sala).
+3.  **Regra 3**: 6 pontos estritamente crescentes ou decrescentes seguidos. (A ferramenta do Torno ou a agulha está sofrendo **Desgaste / Wear** gradual por fricção temporal).
+4.  **Regra 4**: 14 pontos oscilantes (up-down-up-down) (Válvula solta oscilando a mola em over-compensation cíclica mecânica).
+5.  **Regra 5**: 2 de 3 pontos seguidos entre $2\\sigma$ e $3\\sigma$ (Sinalizador primário).
+6.  **Regra 6**: 4 de 5 pontos consecutivos no mesmo lado entre $1\\sigma$ e $2\\sigma$.
+7.  **Regra 7**: 15 pontos amontoados muito juntos dentro de $1\\sigma$ contínuo (A régua de medição travou, ou o operador com medo de erro está \`fabricando a ata de medição no papel\` inventando números e fraudando a auditoria).
+8.  **Regra 8**: 8 pontos, nenhum caindo em $1\\sigma$ do meio. Processo saltando violentamente entre limites superiores e inferiores como estilhaço da Mistura Dupla (Over-correção de turnos, dois fornecedores alimentando o túnel caoticamente sem fusão).
+
+## Seleção Correta de Qual Carta Usar
+Usar a carta errada para o Dado errado cria Falsos Positivos e Alarmes Falsos:
+*   **Contínuo n=1** (Produção lenta, peças massivas como Aviões): **I-MR** (Individual & Moving Range).
+*   **Contínuo n=2 a n=8** (Puxa subgrupos frequentes num lote de pregos): **X-Bar R** (Média e Amplitude).
+*   **Contínuo n > 9** ou alto volume: **X-Bar S** (Média e Desvio Padrão Real subgrupo).
+*   **Atributo (Defeituosa Unitária Inteira)** com Lote Fixo (ex: caixas de 500): **np-Chart**.
+*   **Atributo Varável Lote**: **p-Chart**.
+*   **Contagem de Arranhões (Defeitos Multiplos em mesma peça)** com área Fixa: **c-Chart**.
+*   **Defeitos Múltiplos com áreas Varáveis**: **u-Chart**.
+      `
     }
   ]
 },
@@ -750,6 +802,27 @@ Com Setup quase gratuito, habilitou-se a **Heijunka Box**: Em vez de fazer 1000 
 ## TPM (Total Productive Maintenance)
 Manutenção Preventiva é jogar óleo na máquina quebrada. TPM é a "Manutenção Empoderada". O operador limpa, ouve o ranger da engrenagem, relata anomalias sônicas 3 meses antes da correia arrebentar, e lubrifica o eixo. A **OEE (Overall Equipment Effectiveness)** passa de 50% para 85% de Classe Mundial.
 $OEE = Disponibilidade \\times Performance \\times Qualidade$.
+      `
+    },
+    {
+      id: "8.3",
+      title: "5S, SMED e Kanban Detalhado",
+      content: `
+# As Armas Táticas do Lean 
+
+Enquanto a arquitetura Lean dita fluxo, os soldados físicos na fábrica executam o Just-in-Time usando a trindade da estabilização:
+
+## 5S (Organização Visual e Disciplina)
+Não se trata de uma "faxina". O 5S expõe a ineficiência do operador de ter que procurar chaves combinadas sumidas. Desviou os olhos 10 segundos da bancada para achar a chave 14mm = Tempo de Valor Não-Adicionado (NVA). Se a chave está desenhada fisicamente e fixada na parede (Set in Order), um desvio instantaneamente relata falta visual à coordenação de 30 metros de distância. O 5S Pavimentou a fundação mental de um Lean Sustentável.
+
+## SMED (Single Minute Exchange of Die) - Setup Rápido
+É a ciência cirúrgica de alterar calibrações de máquinas durante tryouts reduzidas a menos de 10 minutos para matar de vez a restrição financeira Lote OEA (Lote Econômico). 
+*   **Passo Vital**: Converter Setup Interno (ajustes feitos apenas com Prensas paradas) em Setup Externo (Ajuste ou rosqueamento e esquadrejamento feito COM o robô ainda soldando e funcionando ativamente com molde sobressalente offline para encaixe futuro).
+
+## Kanban e Filas Lineares (Supermercados de Produção)
+As indústrias operam em ritmo de cascata destrutiva Empurrada (Push). O centro comercial dita a fabricação para injetar blocos indiscriminadamente baseados em palpites de ERP (MRP 2) de meses à frente (Overproduction - O pai dos desperdícios).
+A Metodologia **Puxada (Pull / Just In Time)** via Kanban impõe que Nada Flui na Célula A até a Célula C entregar para o Operador D da ponta de Lote. Todo palete de chão ou prateleira deve virar um "Supermercado Limitado".
+*   Os cartões lógicos controlam o tráfego aéreo das docas, exigindo abastecimento reverso exato da quantidade consumida pela baia, forçando zero oxigênio físico sem lote em chao de fabrica.
       `
     }
   ]

@@ -319,10 +319,12 @@ export default function QuizPage() {
         <h3 className="font-semibold mb-4" style={{ color: '#E8E8E8' }}>Selecione o módulo:</h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
           {moduleOptions.map(m => (
-            <button
+            <motion.button
               key={m.id}
-              onClick={() => setSelectedModule(m.id)}
-              className="flex justify-between items-center px-4 py-3 rounded-lg text-[13px] text-left cursor-pointer transition-all"
+              whileHover={{ scale: 1.02, backgroundColor: selectedModule === m.id ? '#C9A84C33' : '#1E1E2E' }}
+              whileTap={{ scale: 0.98 }}
+              onClick={() => setSelectedModule(selectedModule === m.id ? null : m.id)}
+              className="flex justify-between items-center px-4 py-3 rounded-lg text-[13px] text-left cursor-pointer transition-colors"
               style={{
                 background: selectedModule === m.id ? '#C9A84C22' : '#0D0D18',
                 border: `1px solid ${selectedModule === m.id ? '#C9A84C' : '#1E1E2E'}`,
@@ -336,7 +338,7 @@ export default function QuizPage() {
                  m.id === 99 ? quizQuestions.filter(q => q.module === 0).length :
                  quizQuestions.filter(q => q.module === m.id).length}q
               </span>
-            </button>
+            </motion.button>
           ))}
         </div>
       </div>
