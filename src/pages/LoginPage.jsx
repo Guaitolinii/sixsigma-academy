@@ -10,11 +10,13 @@ export default function LoginPage() {
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
   const [error, setError] = useState(null);
+  const [successMessage, setSuccessMessage] = useState(null);
   const [loading, setLoading] = useState(false);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError(null);
+    setSuccessMessage(null);
     setLoading(true);
 
     try {
@@ -22,7 +24,15 @@ export default function LoginPage() {
         await login(email, password);
       } else {
         if (!name.trim()) throw new Error("O nome é obrigatório para cadastro.");
-        await register(email, password, name);
+        const data = await register(email, password, name);
+        
+        // Se registrou mas não logou automaticamente (exige confirmação de email)
+        if (data?.user && !data?.session) {
+          setSuccessMessage("Conta criada com sucesso! Enviamos um e-mail de confirmação. Por favor, verifique sua caixa de entrada (e pasta de spam) para ativar sua conta.");
+          setEmail('');
+          setPassword('');
+          setName('');
+        }
       }
     } catch (err) {
       setError(err.message || 'Ocorreu um erro ao autenticar.');
@@ -60,6 +70,13 @@ export default function LoginPage() {
           <div className="flex items-center gap-2 p-3 mb-4 rounded-lg text-sm" style={{ background: '#3A1010', color: '#FF6B6B', border: '1px solid #5A1A1A' }}>
             <AlertCircle size={16} />
             <span>{error}</span>
+          </div>
+        )}
+
+        {successMessage && !isLogin && (
+          <div className="flex items-center gap-2 p-3 mb-4 rounded-lg text-sm" style={{ background: '#0D2B14', color: '#4ADE80', border: '1px solid #14401E' }}>
+            <Mail size={16} className="shrink-0" />
+            <span>{successMessage}</span>
           </div>
         )}
 
