@@ -1,82 +1,123 @@
-import { useApp } from '../context/AppContext';
+import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-
-const FAKE_LEADERS = [
-  { name: "Carlos MBB", xp: 12500, badges: 15 },
-  { name: "Ana Green Belt", xp: 8200, badges: 10 },
-  { name: "Roberto BB", xp: 6800, badges: 8 },
-  { name: "Marina DFSS", xp: 5200, badges: 6 },
-  { name: "Paulo Lean", xp: 4100, badges: 5 },
-  { name: "Julia Stats", xp: 3300, badges: 4 },
-  { name: "Pedro DMAIC", xp: 2800, badges: 3 },
-];
+import { supabase } from '../lib/supabase';
+import { Trophy, Medal, Star, ShieldAlert } from 'lucide-react';
+import { useAuth } from '../context/AuthContext';
 
 export default function RankingPage() {
-  const { xp, level } = useApp();
+  const { user } = useAuth();
+  const [profiles, setProfiles] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
 
-  const allPlayers = [
-    ...FAKE_LEADERS,
-    { name: "Você 🎯", xp, badges: 0, isYou: true },
-  ].sort((a, b) => b.xp - a.xp);
+  useEffect(() => {
+    fetchRanking();
+  }, []);
+
+  const fetchRanking = async () => {
+    try {
+      const { data, error } = await supabase
+        .from('user_profiles')
+        .select('id, name, total_xp')
+        .order('total_xp', { ascending: false })
+        .limit(50);
+      
+      if (error) throw error;
+      setProfiles(data);
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const getMedalColor = (index) => {
+    if (index === 0) return '#C9A84C'; // Ouro
+    if (index === 1) return '#C0C0C0'; // Prata
+    if (index === 2) return '#CD7F32'; // Bronze
+    return '#333344'; // Restante
+  };
 
   return (
-    <div>
-      <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-2xl font-extrabold mb-2" style={{ color: '#C9A84C' }}>
-        🏆 Ranking
+    <div className="pb-20">
+      <motion.h1 
+        initial={{ opacity: 0, y: -10 }} 
+        animate={{ opacity: 1, y: 0 }} 
+        className="text-2xl font-extrabold mb-2 flex items-center gap-2" 
+        style={{ color: '#C9A84C', fontFamily: "'Bebas Neue', sans-serif", letterSpacing: '1px' }}
+      >
+        <Trophy size={26} />
+        Ranking Global
       </motion.h1>
-      <p className="mb-8" style={{ color: '#666' }}>Veja sua posição entre os estudantes Six Sigma.</p>
+      <p className="mb-8" style={{ color: '#666' }}>
+        Os 50 melhores Master Black Belts da academia. Complete módulos e quizzes para subir.
+      </p>
 
-      {/* Podium */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-8">
-        {allPlayers.slice(0, 3).map((p, i) => {
-          const podiumColors = ['#C9A84C', '#C0C0C0', '#CD7F32'];
-          const podiumEmoji = ['👑', '🥈', '🥉'];
-          return (
-            <motion.div
-              key={p.name}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: i * 0.15 }}
-              className="rounded-xl p-4 sm:p-6 text-center"
-              style={{
-                background: p.isYou ? 'rgba(201,168,76,0.1)' : '#12121A',
-                border: `1px solid ${p.isYou ? '#C9A84C' : podiumColors[i] + '44'}`,
-                order: i === 0 ? 1 : i === 1 ? 0 : 2,
-              }}
-            >
-              <div className="text-3xl sm:text-4xl mb-1 sm:mb-2">{podiumEmoji[i]}</div>
-              <div className="text-sm sm:text-base font-bold mb-1" style={{ color: p.isYou ? '#C9A84C' : '#E8E8E8' }}>{p.name}</div>
-              <div className="text-lg sm:text-xl font-extrabold" style={{ color: podiumColors[i] }}>{p.xp.toLocaleString()} XP</div>
-            </motion.div>
-          );
-        })}
-      </div>
-
-      {/* Full list */}
-      <div className="rounded-xl overflow-hidden" style={{ background: '#12121A', border: '1px solid #1E1E2E' }}>
-        {allPlayers.map((p, i) => (
-          <motion.div
-            key={p.name}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ delay: i * 0.06 }}
-            className="flex items-center px-3 sm:px-6 py-3 sm:py-4"
-            style={{
-              borderBottom: '1px solid #1E1E2E',
-              background: p.isYou ? 'rgba(201,168,76,0.08)' : 'transparent',
-            }}
-          >
-            <span className="w-8 text-center text-xs sm:text-sm font-bold" style={{ color: i < 3 ? '#C9A84C' : '#666' }}>
-              #{i + 1}
-            </span>
-            <span className="flex-1 ml-3 sm:ml-4 text-xs sm:text-sm font-semibold truncate" style={{ color: p.isYou ? '#C9A84C' : '#E8E8E8' }}>
-              {p.name}
-            </span>
-            <span className="text-xs sm:text-sm font-bold mr-3 sm:mr-6 shrink-0" style={{ color: '#F0C96A' }}>{p.xp.toLocaleString()} XP</span>
-            <span className="text-[10px] sm:text-xs shrink-0" style={{ color: '#666' }}>{p.badges} 🏅</span>
-          </motion.div>
-        ))}
-      </div>
+      {error ? (
+        <div className="p-4 rounded-lg flex items-center gap-2" style={{ background: '#3A1010', color: '#FF6B6B' }}>
+          <ShieldAlert size={20} />
+          <span>Erro ao carregar ranking: {error}</span>
+        </div>
+      ) : loading ? (
+        <div className="flex justify-center py-20">
+          <div className="w-8 h-8 rounded-full border-4 border-t-transparent animate-spin" style={{ borderColor: '#C9A84C', borderTopColor: 'transparent' }} />
+        </div>
+      ) : (
+        <motion.div 
+          initial={{ opacity: 0 }} 
+          animate={{ opacity: 1 }}
+          className="rounded-xl overflow-hidden"
+          style={{ background: '#12121A', border: '1px solid #1E1E2E' }}
+        >
+          <div className="grid grid-cols-[40px_1fr_80px] sm:grid-cols-[60px_1fr_100px] gap-4 p-4 font-bold text-xs uppercase tracking-wider border-b" style={{ borderColor: '#1E1E2E', color: '#666' }}>
+            <div className="text-center">Pos</div>
+            <div>Especialista</div>
+            <div className="text-right">XP</div>
+          </div>
+          
+          <div className="flex flex-col">
+            {profiles.map((p, i) => {
+              const isMe = user?.id === p.id;
+              
+              return (
+                <motion.div 
+                  key={p.id}
+                  whileHover={{ backgroundColor: '#1E1E2E' }}
+                  className="grid grid-cols-[40px_1fr_80px] sm:grid-cols-[60px_1fr_100px] gap-4 p-4 items-center border-b last:border-0 transition-colors"
+                  style={{ 
+                    borderColor: '#1E1E2E',
+                    background: isMe ? '#C9A84C11' : 'transparent'
+                  }}
+                >
+                  <div className="flex justify-center">
+                    {i < 3 ? (
+                      <Medal size={24} style={{ color: getMedalColor(i) }} />
+                    ) : (
+                      <span className="font-bold text-sm" style={{ color: '#666' }}>{i + 1}º</span>
+                    )}
+                  </div>
+                  
+                  <div className="flex items-center gap-3 overflow-hidden">
+                    <div className="w-8 h-8 rounded-full flex items-center justify-center text-xs font-bold shrink-0" style={{ background: '#1E1E2E', color: '#C9A84C' }}>
+                      {p.name.charAt(0).toUpperCase()}
+                    </div>
+                    <div className="truncate">
+                      <div className="font-semibold text-sm truncate" style={{ color: isMe ? '#C9A84C' : '#E8E8E8' }}>
+                        {p.name} {isMe && <span className="text-[10px] ml-1 bg-[#C9A84C] text-[#0A0A0F] px-1.5 py-0.5 rounded-full">VOCÊ</span>}
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div className="text-right flex items-center justify-end gap-1">
+                    <span className="font-bold" style={{ color: '#C9A84C' }}>{p.total_xp.toLocaleString()}</span>
+                    <Star size={12} style={{ color: '#C9A84C' }} className="hidden sm:inline" />
+                  </div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </motion.div>
+      )}
     </div>
   );
 }

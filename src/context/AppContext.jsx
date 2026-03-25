@@ -1,4 +1,6 @@
 import { createContext, useContext, useState, useEffect } from 'react';
+import { supabase } from '../lib/supabase';
+import { useAuth } from './AuthContext';
 
 const LEVELS = [
   { name: "White Belt",  min: 0,    max: 500,  color: "#FFFFFF", icon: "⬜" },
@@ -15,7 +17,20 @@ function getLevel(xp) {
 const AppContext = createContext(null);
 
 export function AppProvider({ children }) {
+  const { user, session } = useAuth();
   const [xp, setXP] = useState(() => parseInt(localStorage.getItem("ss_xp") || "0"));
+
+  useEffect(() => {
+    if (user) {
+      supabase.from('user_profiles').select('total_xp').eq('id', user.id).single()
+        .then(({ data }) => {
+          if (data) {
+            setXP(data.total_xp);
+            localStorage.setItem("ss_xp", data.total_xp.toString());
+          }
+        });
+    }
+  }, [user]);
   const [completedModules, setCompletedModules] = useState(
     () => JSON.parse(localStorage.getItem("ss_completed") || "[]")
   );
@@ -51,7 +66,18 @@ export function AppProvider({ children }) {
   useEffect(() => { localStorage.setItem("ss_badges", JSON.stringify(badges)); }, [badges]);
   useEffect(() => { localStorage.setItem("ss_fav_terms", JSON.stringify(favoriteTerms)); }, [favoriteTerms]);
 
-  const addXP = (amount) => setXP(prev => prev + amount);
+  const addXP = async (amount) => {
+    setXP(prev => prev + amount);
+    if (user && session) {
+      try {
+        await supabase.functions.invoke('update-xp', {
+          body: { xp_earned: amount }
+        });
+      } catch (e) {
+        console.error("Failed to sync XP with server", e);
+      }
+    }
+  };
 
   const completeLesson = (lessonId) => {
     if (!completedLessons.includes(lessonId)) {

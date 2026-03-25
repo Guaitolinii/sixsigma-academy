@@ -1,5 +1,6 @@
-import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { AppProvider } from './context/AppContext';
+import { AuthProvider, useAuth } from './context/AuthContext';
 import Sidebar from './components/layout/Sidebar';
 import Dashboard from './pages/Dashboard';
 import ModuleGrid from './pages/ModuleGrid';
@@ -10,6 +11,7 @@ import RankingPage from './pages/RankingPage';
 import GlossaryPage from './pages/GlossaryPage';
 import FormulasPage from './pages/FormulasPage';
 import SimuladoPage from './pages/SimuladoPage';
+import LoginPage from './pages/LoginPage';
 import { useState, useEffect } from 'react';
 import { Menu } from 'lucide-react';
 
@@ -36,7 +38,6 @@ function Layout({ children }) {
         onMobileClose={() => setMobileOpen(false)}
       />
 
-      {/* Mobile Top Bar */}
       {isMobile && (
         <header
           className="fixed top-0 left-0 right-0 z-30 flex items-center justify-between px-4 py-3"
@@ -52,7 +53,7 @@ function Layout({ children }) {
           <div className="text-base font-extrabold tracking-widest" style={{ color: '#C9A84C', fontFamily: "'Bebas Neue', sans-serif" }}>
             Σ SIX SIGMA
           </div>
-          <div style={{ width: 36 }} /> {/* spacer for centering */}
+          <div style={{ width: 36 }} />
         </header>
       )}
 
@@ -73,24 +74,44 @@ function Layout({ children }) {
   );
 }
 
+function AppRoutes() {
+  const { user } = useAuth();
+
+  if (!user) {
+    return (
+      <Routes>
+        <Route path="/login" element={<LoginPage />} />
+        <Route path="*" element={<Navigate to="/login" replace />} />
+      </Routes>
+    );
+  }
+
+  return (
+    <Layout>
+      <Routes>
+        <Route path="/" element={<Dashboard />} />
+        <Route path="/modulos" element={<ModuleGrid />} />
+        <Route path="/modulo/:id" element={<LessonPage />} />
+        <Route path="/cases" element={<CasesPage />} />
+        <Route path="/quiz" element={<QuizPage />} />
+        <Route path="/simulado" element={<SimuladoPage />} />
+        <Route path="/formulas" element={<FormulasPage />} />
+        <Route path="/ranking" element={<RankingPage />} />
+        <Route path="/glossario" element={<GlossaryPage />} />
+        <Route path="*" element={<Navigate to="/" replace />} />
+      </Routes>
+    </Layout>
+  );
+}
+
 export default function App() {
   return (
-    <AppProvider>
-      <BrowserRouter>
-        <Layout>
-          <Routes>
-            <Route path="/" element={<Dashboard />} />
-            <Route path="/modulos" element={<ModuleGrid />} />
-            <Route path="/modulo/:id" element={<LessonPage />} />
-            <Route path="/cases" element={<CasesPage />} />
-            <Route path="/quiz" element={<QuizPage />} />
-            <Route path="/simulado" element={<SimuladoPage />} />
-            <Route path="/formulas" element={<FormulasPage />} />
-            <Route path="/ranking" element={<RankingPage />} />
-            <Route path="/glossario" element={<GlossaryPage />} />
-          </Routes>
-        </Layout>
-      </BrowserRouter>
-    </AppProvider>
+    <AuthProvider>
+      <AppProvider>
+        <BrowserRouter>
+          <AppRoutes />
+        </BrowserRouter>
+      </AppProvider>
+    </AuthProvider>
   );
 }

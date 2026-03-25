@@ -1,10 +1,11 @@
 import { NavLink, useLocation } from 'react-router-dom';
 import { useApp } from '../../context/AppContext';
+import { useAuth } from '../../context/AuthContext';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   LayoutDashboard, BookOpen, FlaskConical, Zap, Trophy, BookMarked,
-  ChevronLeft, ChevronRight, Flame, Menu, X, Calculator, Timer
+  ChevronLeft, ChevronRight, Flame, Menu, X, Calculator, Timer, LogOut
 } from 'lucide-react';
 
 const navItems = [
@@ -20,6 +21,7 @@ const navItems = [
 
 export default function Sidebar({ isMobile, mobileOpen, onMobileClose }) {
   const { xp, level, streak } = useApp();
+  const { logout } = useAuth();
   const [desktopOpen, setDesktopOpen] = useState(true);
   const location = useLocation();
 
@@ -114,16 +116,27 @@ export default function Sidebar({ isMobile, mobileOpen, onMobileClose }) {
                 ))}
               </nav>
 
-              {/* Streak */}
-              <div
-                className="mx-3 mb-3 px-3 py-2.5 rounded-lg flex items-center gap-2"
-                style={{ background: '#1A0A00', border: '1px solid rgba(255, 107, 0, 0.2)' }}
-              >
-                <Flame size={20} className="text-orange-500 shrink-0" />
-                <div>
-                  <div className="text-base font-bold" style={{ color: '#FF8C00' }}>{streak} dias</div>
-                  <div className="text-[11px]" style={{ color: '#666' }}>sequência atual</div>
+              {/* Streak and Logout */}
+              <div className="mx-3 mb-3 flex gap-2">
+                <div
+                  className="flex-1 px-3 py-2.5 rounded-lg flex items-center gap-2"
+                  style={{ background: '#1A0A00', border: '1px solid rgba(255, 107, 0, 0.2)' }}
+                >
+                  <Flame size={20} className="text-orange-500 shrink-0" />
+                  <div>
+                    <div className="text-base font-bold" style={{ color: '#FF8C00' }}>{streak} dias</div>
+                    <div className="text-[11px]" style={{ color: '#666' }}>sequência atual</div>
+                  </div>
                 </div>
+                
+                <button
+                  onClick={logout}
+                  title="Sair"
+                  className="px-4 py-2.5 rounded-lg flex items-center justify-center cursor-pointer shrink-0 transition-colors"
+                  style={{ background: '#2E0C0C', border: '1px solid #4A1515', color: '#FF6B6B' }}
+                >
+                  <LogOut size={20} />
+                </button>
               </div>
             </motion.aside>
           )}
@@ -218,6 +231,18 @@ export default function Sidebar({ isMobile, mobileOpen, onMobileClose }) {
           </motion.div>
         )}
       </AnimatePresence>
+
+      <div className="mx-3 mb-2 mt-auto">
+        <button
+          onClick={logout}
+          className="w-full flex items-center justify-center gap-2 p-2 rounded-md cursor-pointer transition-colors duration-200 hover:bg-[#3A1010]"
+          style={{ background: '#2E0C0C', border: '1px solid #4A1515', color: '#FF6B6B' }}
+          title="Sair"
+        >
+          <LogOut size={16} />
+          {desktopOpen && <span className="text-sm font-semibold">Sair</span>}
+        </button>
+      </div>
 
       {/* Toggle */}
       <button
