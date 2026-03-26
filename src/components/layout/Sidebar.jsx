@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
   LayoutDashboard, BookOpen, FlaskConical, Zap, Trophy, BookMarked,
-  ChevronLeft, ChevronRight, Flame, Menu, X, Calculator, Timer, LogOut
+  ChevronLeft, ChevronRight, Flame, Menu, X, Calculator, Timer, LogOut, Shield
 } from 'lucide-react';
 
 const navItems = [
@@ -20,7 +20,7 @@ const navItems = [
 ];
 
 export default function Sidebar({ isMobile, mobileOpen, onMobileClose }) {
-  const { xp, level, streak } = useApp();
+  const { xp, level, streak, isAdmin } = useApp();
   const { logout } = useAuth();
   const [desktopOpen, setDesktopOpen] = useState(true);
   const location = useLocation();
@@ -96,7 +96,7 @@ export default function Sidebar({ isMobile, mobileOpen, onMobileClose }) {
 
               {/* Nav */}
               <nav className="flex-1 py-2 overflow-y-auto">
-                {navItems.map(item => (
+                {[...navItems, ...(isAdmin ? [{ to: "/admin", icon: Shield, label: "Painel Admin" }] : [])].map(item => (
                   <NavLink key={item.to} to={item.to} end={item.to === "/"} className="group block">
                     {({ isActive }) => (
                       <div
@@ -193,7 +193,7 @@ export default function Sidebar({ isMobile, mobileOpen, onMobileClose }) {
 
       {/* Nav */}
       <nav className="flex-1 py-2 overflow-y-auto">
-        {navItems.map(item => (
+        {[...navItems, ...(isAdmin ? [{ to: "/admin", icon: Shield, label: "Painel Admin" }] : [])].map(item => (
           <NavLink key={item.to} to={item.to} end={item.to === "/"} className="group block">
             {({ isActive }) => (
               <div

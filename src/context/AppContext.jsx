@@ -19,16 +19,20 @@ const AppContext = createContext(null);
 export function AppProvider({ children }) {
   const { user, session } = useAuth();
   const [xp, setXP] = useState(() => parseInt(localStorage.getItem("ss_xp") || "0"));
+  const [isAdmin, setIsAdmin] = useState(false);
 
   useEffect(() => {
     if (user) {
-      supabase.from('user_profiles').select('total_xp').eq('id', user.id).single()
+      supabase.from('user_profiles').select('total_xp, is_admin').eq('id', user.id).single()
         .then(({ data }) => {
           if (data) {
             setXP(data.total_xp);
+            setIsAdmin(data.is_admin === true);
             localStorage.setItem("ss_xp", data.total_xp.toString());
           }
         });
+    } else {
+      setIsAdmin(false);
     }
   }, [user]);
   const [completedModules, setCompletedModules] = useState(
@@ -124,7 +128,7 @@ export function AppProvider({ children }) {
 
   return (
     <AppContext.Provider value={{
-      xp, addXP, level, LEVELS, getLevel,
+      xp, addXP, level, LEVELS, getLevel, isAdmin,
       completedModules, completeModule,
       completedLessons, completeLesson,
       quizStats, setQuizStats,

@@ -12,6 +12,7 @@ import GlossaryPage from './pages/GlossaryPage';
 import FormulasPage from './pages/FormulasPage';
 import SimuladoPage from './pages/SimuladoPage';
 import LoginPage from './pages/LoginPage';
+import AdminPage from './pages/AdminPage';
 import { useState, useEffect } from 'react';
 import { Menu } from 'lucide-react';
 
@@ -76,6 +77,7 @@ function Layout({ children }) {
 
 function AppRoutes() {
   const { user } = useAuth();
+  const { isAdmin } = useApp();
 
   if (!user) {
     return (
@@ -98,6 +100,7 @@ function AppRoutes() {
         <Route path="/formulas" element={<FormulasPage />} />
         <Route path="/ranking" element={<RankingPage />} />
         <Route path="/glossario" element={<GlossaryPage />} />
+        {isAdmin && <Route path="/admin" element={<AdminPage />} />}
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Layout>
