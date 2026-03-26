@@ -192,7 +192,7 @@ export default function AdminPage() {
                             onClick={() => handleXpAdjust(u.id, 500)}
                             disabled={isProcessing}
                             title="Adicionar 500 XP"
-                            className="p-1.5 rounded-md hover:bg-[#14401E] transition-colors"
+                            className="p-1.5 rounded-md hover:bg-[#14401E] transition-all hover:scale-105 active:scale-95 hover:shadow-lg"
                             style={{ background: '#0D2B14', color: '#4ADE80', border: '1px solid #1A4D24' }}
                           >
                             <TrendingUp size={16} />
@@ -203,7 +203,7 @@ export default function AdminPage() {
                             onClick={() => handleXpAdjust(u.id, -500)}
                             disabled={isProcessing || u.total_xp === 0}
                             title="Remover 500 XP"
-                            className="p-1.5 rounded-md hover:bg-[#4A1515] transition-colors disabled:opacity-30"
+                            className="p-1.5 rounded-md hover:bg-[#4A1515] transition-all disabled:opacity-30 hover:scale-105 active:scale-95 hover:shadow-lg"
                             style={{ background: '#2E0C0C', color: '#F87171', border: '1px solid #4A1515' }}
                           >
                             <TrendingDown size={16} />
@@ -216,7 +216,7 @@ export default function AdminPage() {
                             onClick={() => handleDelete(u.id, u.name)}
                             disabled={isProcessing || u.is_admin}
                             title="Deletar permanentemente"
-                            className="p-1.5 rounded-md hover:bg-[#4A1515] transition-colors disabled:opacity-30"
+                            className="p-1.5 rounded-md hover:bg-[#4A1515] transition-all disabled:opacity-30 ml-2 hover:scale-105 active:scale-95 hover:shadow-lg hover:shadow-red-500/20"
                             style={{ background: '#2E0C0C', color: '#EF4444', border: '1px solid #4A1515' }}
                           >
                             <Trash2 size={16} />
