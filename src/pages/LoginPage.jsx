@@ -4,8 +4,9 @@ import { useAuth } from '../context/AuthContext';
 import { Lock, Mail, User, AlertCircle } from 'lucide-react';
 
 export default function LoginPage() {
-  const { login, register } = useAuth();
+  const { login, register, resetPassword } = useAuth();
   const [isLogin, setIsLogin] = useState(true);
+  const [isForgotPassword, setIsForgotPassword] = useState(false);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [name, setName] = useState('');
@@ -20,13 +21,15 @@ export default function LoginPage() {
     setLoading(true);
 
     try {
-      if (isLogin) {
+      if (isForgotPassword) {
+        await resetPassword(email);
+        setSuccessMessage("E-mail de recuperação enviado! Verifique sua caixa de entrada.");
+      } else if (isLogin) {
         await login(email, password);
       } else {
         if (!name.trim()) throw new Error("O nome é obrigatório para cadastro.");
         const data = await register(email, password, name);
         
-        // Se registrou mas não logou automaticamente (exige confirmação de email)
         if (data?.user && !data?.session) {
           setSuccessMessage("Conta criada com sucesso! Enviamos um e-mail de confirmação. Por favor, verifique sua caixa de entrada (e pasta de spam) para ativar sua conta.");
           setEmail('');
@@ -35,7 +38,7 @@ export default function LoginPage() {
         }
       }
     } catch (err) {
-      setError(err.message || 'Ocorreu um erro ao autenticar.');
+      setError(err.message || 'Ocorreu um erro na requisição.');
     } finally {
       setLoading(false);
     }
@@ -62,7 +65,11 @@ export default function LoginPage() {
             Σ SIX SIGMA
           </h1>
           <p className="text-sm mt-2" style={{ color: '#888' }}>
-            {isLogin ? 'Faça login para continuar seu progresso.' : 'Crie sua conta para começar a treinar.'}
+            {isForgotPassword 
+              ? 'Digite seu e-mail para receber um link de redefinição.' 
+              : isLogin 
+                ? 'Faça login para continuar seu progresso.' 
+                : 'Crie sua conta para começar a treinar.'}
           </p>
         </div>
 
@@ -73,7 +80,7 @@ export default function LoginPage() {
           </div>
         )}
 
-        {successMessage && !isLogin && (
+        {successMessage && (
           <div className="flex items-center gap-2 p-3 mb-4 rounded-lg text-sm" style={{ background: '#0D2B14', color: '#4ADE80', border: '1px solid #14401E' }}>
             <Mail size={16} className="shrink-0" />
             <span>{successMessage}</span>
@@ -81,7 +88,7 @@ export default function LoginPage() {
         )}
 
         <form onSubmit={handleSubmit} className="flex flex-col gap-4">
-          {!isLogin && (
+          {!isLogin && !isForgotPassword && (
             <div>
               <label className="block text-xs font-semibold mb-1" style={{ color: '#AAA' }}>Nome Completo</label>
               <div className="relative">
@@ -119,24 +126,42 @@ export default function LoginPage() {
             </div>
           </div>
 
-          <div>
-            <label className="block text-xs font-semibold mb-1" style={{ color: '#AAA' }}>Senha</label>
-            <div className="relative">
-              <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none" style={{ color: '#666' }}>
-                <Lock size={16} />
+          {!isForgotPassword && (
+            <div>
+              <div className="flex justify-between items-center mb-1">
+                <label className="block text-xs font-semibold" style={{ color: '#AAA' }}>Senha</label>
+                {isLogin && (
+                  <button
+                    type="button"
+                    onClick={() => {
+                      setIsForgotPassword(true);
+                      setError(null);
+                      setSuccessMessage(null);
+                    }}
+                    className="text-xs hover:underline cursor-pointer transition-colors"
+                    style={{ color: '#C9A84C' }}
+                  >
+                    Esqueceu a senha?
+                  </button>
+                )}
               </div>
-              <input
-                type="password"
-                required
-                minLength={6}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                className="w-full pl-10 pr-3 py-2 rounded-lg text-sm outline-none transition-all"
-                style={{ background: '#0D0D18', border: '1px solid #1E1E2E', color: '#E8E8E8' }}
-                placeholder="••••••••"
-              />
+              <div className="relative">
+                <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none" style={{ color: '#666' }}>
+                  <Lock size={16} />
+                </div>
+                <input
+                  type="password"
+                  required
+                  minLength={6}
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                  className="w-full pl-10 pr-3 py-2 rounded-lg text-sm outline-none transition-all"
+                  style={{ background: '#0D0D18', border: '1px solid #1E1E2E', color: '#E8E8E8' }}
+                  placeholder="••••••••"
+                />
+              </div>
             </div>
-          </div>
+          )}
 
           <button
             type="submit"
@@ -144,22 +169,38 @@ export default function LoginPage() {
             className="w-full py-2.5 rounded-lg text-sm font-bold tracking-wide mt-2 transition-transform active:scale-95 disabled:opacity-50"
             style={{ background: '#C9A84C', color: '#0A0A0F' }}
           >
-            {loading ? 'Aguarde...' : isLogin ? 'ENTRAR' : 'CRIAR CONTA'}
+            {loading ? 'Aguarde...' : isForgotPassword ? 'RECUPERAR SENHA' : isLogin ? 'ENTRAR' : 'CRIAR CONTA'}
           </button>
         </form>
 
-        <div className="mt-6 text-center">
-          <button
-            type="button"
-            onClick={() => {
-              setIsLogin(!isLogin);
-              setError(null);
-            }}
-            className="text-xs hover:underline cursor-pointer"
-            style={{ color: '#888' }}
-          >
-            {isLogin ? 'Não tem uma conta? Cadastre-se' : 'Já tem uma conta? Faça login'}
-          </button>
+        <div className="mt-6 flex flex-col gap-2 text-center">
+          {isForgotPassword ? (
+            <button
+              type="button"
+              onClick={() => {
+                setIsForgotPassword(false);
+                setError(null);
+                setSuccessMessage(null);
+              }}
+              className="text-xs hover:underline cursor-pointer"
+              style={{ color: '#888' }}
+            >
+              Voltar para o Login
+            </button>
+          ) : (
+            <button
+              type="button"
+              onClick={() => {
+                setIsLogin(!isLogin);
+                setError(null);
+                setSuccessMessage(null);
+              }}
+              className="text-xs hover:underline cursor-pointer"
+              style={{ color: '#888' }}
+            >
+              {isLogin ? 'Não tem uma conta? Cadastre-se' : 'Já tem uma conta? Faça login'}
+            </button>
+          )}
         </div>
       </motion.div>
     </div>

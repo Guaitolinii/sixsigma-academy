@@ -12,6 +12,7 @@ import GlossaryPage from './pages/GlossaryPage';
 import FormulasPage from './pages/FormulasPage';
 import SimuladoPage from './pages/SimuladoPage';
 import LoginPage from './pages/LoginPage';
+import ResetPasswordPage from './pages/ResetPasswordPage';
 import AdminPage from './pages/AdminPage';
 import { useState, useEffect } from 'react';
 import { Menu } from 'lucide-react';
@@ -79,31 +80,33 @@ function AppRoutes() {
   const { user } = useAuth();
   const { isAdmin } = useApp();
 
-  if (!user) {
-    return (
-      <Routes>
-        <Route path="/login" element={<LoginPage />} />
-        <Route path="*" element={<Navigate to="/login" replace />} />
-      </Routes>
-    );
-  }
-
   return (
-    <Layout>
-      <Routes>
-        <Route path="/" element={<Dashboard />} />
-        <Route path="/modulos" element={<ModuleGrid />} />
-        <Route path="/modulo/:id" element={<LessonPage />} />
-        <Route path="/cases" element={<CasesPage />} />
-        <Route path="/quiz" element={<QuizPage />} />
-        <Route path="/simulado" element={<SimuladoPage />} />
-        <Route path="/formulas" element={<FormulasPage />} />
-        <Route path="/ranking" element={<RankingPage />} />
-        <Route path="/glossario" element={<GlossaryPage />} />
-        <Route path="/admin" element={isAdmin ? <AdminPage /> : <Navigate to="/" replace />} />
-        <Route path="*" element={<Navigate to="/" replace />} />
-      </Routes>
-    </Layout>
+    <Routes>
+      <Route path="/login" element={user ? <Navigate to="/" replace /> : <LoginPage />} />
+      <Route path="/reset-password" element={<ResetPasswordPage />} />
+      
+      <Route path="/*" element={
+        user ? (
+          <Layout>
+            <Routes>
+              <Route path="/" element={<Dashboard />} />
+              <Route path="/modulos" element={<ModuleGrid />} />
+              <Route path="/modulo/:id" element={<LessonPage />} />
+              <Route path="/cases" element={<CasesPage />} />
+              <Route path="/quiz" element={<QuizPage />} />
+              <Route path="/simulado" element={<SimuladoPage />} />
+              <Route path="/formulas" element={<FormulasPage />} />
+              <Route path="/ranking" element={<RankingPage />} />
+              <Route path="/glossario" element={<GlossaryPage />} />
+              <Route path="/admin" element={isAdmin ? <AdminPage /> : <Navigate to="/" replace />} />
+              <Route path="*" element={<Navigate to="/" replace />} />
+            </Routes>
+          </Layout>
+        ) : (
+          <Navigate to="/login" replace />
+        )
+      } />
+    </Routes>
   );
 }
 
