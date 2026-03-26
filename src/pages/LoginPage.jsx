@@ -166,8 +166,8 @@ export default function LoginPage() {
           <button
             type="submit"
             disabled={loading}
-            className="w-full py-2.5 rounded-lg text-sm font-bold tracking-wide mt-2 transition-transform active:scale-95 disabled:opacity-50"
-            style={{ background: '#C9A84C', color: '#0A0A0F' }}
+            className="w-full py-2.5 rounded-lg text-sm font-bold tracking-wide mt-2 transition-all hover:scale-105 hover:shadow-lg hover:shadow-[#C9A84C] active:scale-95 disabled:opacity-50"
+            style={{ background: '#C9A84C', color: '#0A0A0F', boxShadow: '0 4px 14px 0 rgba(201,168,76,0.39)' }}
           >
             {loading ? 'Aguarde...' : isForgotPassword ? 'RECUPERAR SENHA' : isLogin ? 'ENTRAR' : 'CRIAR CONTA'}
           </button>
