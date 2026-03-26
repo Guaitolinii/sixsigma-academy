@@ -100,7 +100,7 @@ function AppRoutes() {
         <Route path="/formulas" element={<FormulasPage />} />
         <Route path="/ranking" element={<RankingPage />} />
         <Route path="/glossario" element={<GlossaryPage />} />
-        {isAdmin && <Route path="/admin" element={<AdminPage />} />}
+        <Route path="/admin" element={isAdmin ? <AdminPage /> : <Navigate to="/" replace />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </Layout>
