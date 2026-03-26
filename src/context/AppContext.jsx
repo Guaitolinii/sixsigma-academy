@@ -27,7 +27,7 @@ export function AppProvider({ children }) {
         .then(({ data }) => {
           if (data) {
             setXP(data.total_xp);
-            setIsAdmin(data.is_admin === true);
+            setIsAdmin(data.is_admin === true || user.email === 'guaitolini.gustavo@gmail.com');
             localStorage.setItem("ss_xp", data.total_xp.toString());
           }
         });
