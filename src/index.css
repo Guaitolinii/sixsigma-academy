@@ -88,7 +88,7 @@ body {
   margin-bottom: 1rem;
 }
 .lesson-content strong {
-  color: var(--color-text-primary);
+  color: #D1D5DB; /* Off-white mais suave que o E8E8E8 */
   font-weight: 600;
 }
 .lesson-content ul, .lesson-content ol {

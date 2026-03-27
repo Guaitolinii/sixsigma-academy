@@ -1,130 +1,251 @@
-// ============================================================
+﻿// ============================================================
 // data_modules.js — Conteúdo completo dos 12 módulos
+// Six Sigma Academy — Nível MBA / Master Black Belt
+// Didática Dr. Claude Hartwell — "Why before How"
 // ============================================================
 
 export const modules = [
-
 // ── MÓDULO 1 ─────────────────────────────────────────────
 {
   id: 1,
-  title: "Fundamentos do Six Sigma (Nível Executivo)",
-  description: "História, Filosofia Matemática, COPQ (Cost of Poor Quality) e Estrutura de Governança Belt.",
-  difficulty: "Avançado",
+  title: "Fundamentos do Six Sigma",
+  description: "O que é Six Sigma, por que ele existe, a matemática da variabilidade, e o papel de cada Belt na organização.",
+  difficulty: "Básico",
   lessons: [
     {
       id: "1.1",
-      title: "Gênese e a Matemática do Six Sigma",
+      title: "O que é Six Sigma? — A Origem e o Propósito",
       content: `
-# A Matemática e Filosofia do Six Sigma
+# O que é Six Sigma?
 
-Six Sigma não é apenas uma "iniciativa de qualidade"; é uma **metodologia quantitativa de gestão estratégica** com o objetivo de reduzir drasticamente a variabilidade, otimizando o fluxo de caixa (bottom-line) pela eliminação de desperdícios sistêmicos.
+## A Ideia em Uma Frase
 
-## A Gênese Histórica
+> **Six Sigma é um método que usa dados e estatística para encontrar as causas reais dos problemas em um processo e eliminar essas causas de forma permanente.**
 
-Originada na **Motorola (1986)** pelo engenheiro Bill Smith e impulsionada por Bob Galvin, a metodologia surgiu da percepção matemática de que a "complexidade e a variação nos processos de manufatura causavam defeitos ocultos antes que o produto saísse da fábrica". Em 1995, **Jack Welch** (CEO da General Electric) tornou o Six Sigma a filosofia central da GE, conectando bônus executivos diretamente ao treinamento Black Belt, escalando o framework globalmente com bilhões relatados em *Hard Savings*.
+Não é "achismo". Não é reunião de brainstorming sem direção. É investigação metódica: medir, analisar, provar com números, corrigir e garantir que o problema não volta.
 
-## O que estatisticamente significa "Seis Sigma"?
+---
 
-A letra grega **σ (sigma)** representa o **Desvio Padrão**, uma medida quadrática de variância ou "afastamento" dos dados em relação à média ($\mu$). 
+## Por que o Six Sigma foi Criado?
 
-Um processo "6 Sigma" significa que a tolerância limite do cliente (Limite de Especificação Superior ou Inferior) está localizada a uma distância de **6 desvios padrões** de distância da média do processo. Isso garante que a esmagadora maioria da curva de distribuição normal flutua de modo seguro, "cabendo" com enorme folga dentro do que o cliente aceita.
+Imagine que você é dono de uma fábrica de celulares nos anos 1980. Cada aparelho tem centenas de componentes. Se cada componente tem uma chance "pequena" de defeito — digamos 1% — no final da linha de montagem, **quase nenhum aparelho sai perfeito**.
 
-| Nível Sigma | DPMO (Defeitos por Milhão) | Probabilidade de Sucesso | Casos Práticos |
-|-------------|----------------------------|--------------------------|----------------|
-| **2σ**      | 308.538                    | 69,1%                    | Nível de startups imaturas |
-| **3σ**      | 66.807                     | 93,3%                    | Média das indústrias hoje  |
-| **4σ**      | 6.210                      | 99,4%                    | Hospitais medianos         |
-| **6σ**      | 3,4                        | 99,99966%                | Aviação comercial segura   |
+Esse era o problema da **Motorola em 1986**. O engenheiro **Bill Smith** percebeu que "pequenas" falhas individuais se **multiplicam** ao longo de um processo complexo. A solução não era inspecionar mais no final — era **reduzir a variação em cada etapa individual** a um nível tão baixo que defeitos se tornassem estatisticamente raros.
 
-## O Teorema do Top Shift de 1.5 Sigma
+Ele chamou esse nível de perfeição de **"Six Sigma"** — seis desvios padrão de distância entre a média do processo e o limite de erro.
 
-Uma dúvida clássica acadêmica: a área estatística fora de 6 sigmas de uma curva Normal exata (z=6) equivale a **0,002 DPMO**, não 3,4. De onde vêm os 3,4 DPMO?
+### A Explosão Global
 
-A Motorola descobriu empiricamente que os processos sofrem entropia natural. Ferramentas desgastam, turnos mudam, fornecedores sofrem variações inter-lotes. Eles comprovaram que a média de um processo, a longo prazo, **desliza ou desvia (Shift)** tipicamente cerca de **1,5 \u03c3** em direção a um dos limites de especificação.
+Em 1995, **Jack Welch**, CEO da General Electric, adotou o Six Sigma como estratégia central da empresa. Os resultados foram tão expressivos (bilhões em economia documentada) que o método se espalhou para toda indústria — saúde, bancos, logística, tecnologia, serviços.
 
-Ao calcularmos a probabilidade de falha de uma curva cujo limite é Z=6, mas que *escorregou 1.5 sigma* (ou seja, uma cauda a Z=4.5), a área sob a cauda defeituosa passa exatamente a ser **3,4 DPMO**.
+---
 
-## Lean vs. Six Sigma: Integração Sinergética
+## O que Significa "Sigma" na Prática?
 
-Historicamente antagônicos, hoje operam fundidos. 
-* **Lean (Velocidade & Eficiência):** Tense em reduzir LEAD TIME cortando o Munda, Mura, Muri (Desperdícios, Assimetria, Sobrecarga). Ferramentas: VSM, Quick Changeover (SMED), Kanban.
-* **Six Sigma (Qualidade & Previsibilidade):** Foca em comprimir a VARIABILIDADE do Y nas tolerâncias do cliente pelo mapeamento da equação $Y = f(X_i)$. Ferramentas: DOE, SPC, Regressão.
+A letra grega **σ (sigma)** representa o **desvio padrão** em estatística. Em linguagem do dia a dia:
 
-**Lean estabiliza o caos (o fluxo), Six Sigma otimiza a precisão do alvo.**
+> **O desvio padrão mede o quanto os resultados de um processo variam em relação ao resultado ideal.**
+
+### Analogia: O Arqueiro e o Alvo
+
+Pense em um arqueiro atirando flechas em um alvo:
+
+- **Média (μ):** É onde a maioria das flechas se concentra. Se o arqueiro é bom, a média está no centro do alvo.
+- **Desvio Padrão (σ):** É o quanto as flechas se espalham ao redor dessa média. Um σ pequeno = flechas agrupadas. Um σ grande = flechas espalhadas.
+
+**Six Sigma** diz: "Quero que minhas flechas estejam tão agrupadas no centro que mesmo as piores flechas ainda acertem dentro do alvo."
+
+### A Tabela que Todo Black Belt Conhece
+
+| Nível Sigma | Defeitos por Milhão (DPMO) | % Sem Defeito | Na prática |
+|-------------|---------------------------|---------------|------------|
+| 2σ          | 308.538                   | 69,1%         | Caótico — 1 em 3 produtos falha |
+| 3σ          | 66.807                    | 93,3%         | Comum em PMEs — parece bom, mas são 67 mil falhas por milhão |
+| 4σ          | 6.210                     | 99,4%         | Bom — indústria organizada |
+| 5σ          | 233                       | 99,98%        | Muito bom — poucos defeitos |
+| 6σ          | 3,4                       | 99,99966%     | Classe mundial — aviação, chips, cirurgias |
+
+> 💡 **Colocando em perspectiva:** Se uma companhia aérea operasse a 3σ, haveria **dois pousos de emergência por dia** em um aeroporto grande. A 6σ, seriam **dois por década**. Essa é a diferença real.
+
+---
+
+## Os 5 Princípios que Guiam Tudo
+
+1. **Foco no Cliente** — "Qualidade" é definida pelo cliente, não por você. Se o cliente não percebe valor, não importa o quanto seu processo é tecnicamente perfeito.
+
+2. **Decisões Baseadas em Dados** — Intuição é ponto de partida, nunca conclusão. Toda melhoria precisa de evidência estatística.
+
+3. **Processos são a Causa** — Se o resultado é ruim, o processo que o gera é o réu. Não as pessoas. As pessoas trabalham dentro do processo que alguém desenhou.
+
+4. **Variação é o Inimigo** — Processos previsíveis geram qualidade. Processos imprevisíveis (alta variação) geram defeitos, mesmo quando a média está no alvo.
+
+5. **Melhoria Contínua** — Não existe "pronto". O mercado muda, os clientes evoluem, e novos problemas surgem. O Six Sigma é um ciclo infinito.
+
+---
+
+## Six Sigma vs. Lean — São a Mesma Coisa?
+
+Não. São complementares, mas atacam problemas diferentes:
+
+| Aspecto      | Six Sigma                    | Lean                          |
+|-------------|------------------------------|-------------------------------|
+| **Foco**    | Reduzir variação e defeitos  | Eliminar desperdícios e acelerar o fluxo |
+| **Pergunta**| "Por que o processo produz defeitos?" | "Por que o processo demora tanto?" |
+| **Origem**  | Motorola (1986)              | Toyota (anos 1950)            |
+| **Ferramentas** | DMAIC, DOE, SPC, testes estatísticos | VSM, 5S, Kanban, Kaizen |
+| **Resultado** | Qualidade e previsibilidade | Velocidade e eficiência      |
+
+**Lean Six Sigma** combina os dois: elimina desperdícios (Lean) **E** reduz variabilidade (Six Sigma). Na prática, a maioria das empresas hoje usa essa combinação.
+
+> 💡 **Analogia:** Lean é como desentupir um cano — remove o que bloqueia o fluxo. Six Sigma é como calibrar a torneira — garante que a quantidade certa de água sai, sempre, sem variação.
       `
     },
     {
       id: "1.2",
-      title: "Cost of Poor Quality (COPQ)",
+      title: "A Hierarquia de Belts — Quem Faz o Quê",
       content: `
-# O Custo da Baixa Qualidade (COPQ)
+# A Hierarquia de Belts
 
-O **COPQ (Cost of Poor Quality)** é o idioma que os Black Belts usam para convencer a diretoria a aprovar projetos (Project Charters). Ele mensura financeiramente "quanto custa fazer errado hoje". Profissionais negligenciam que **15% a 30% da receita bruta** de indústrias ineficientes é fagocitada pelo COPQ silencioso.
+## Por que Existem "Faixas"?
 
-## As 4 Categorias de Custos da Qualidade ( PAF / Juran Model )
+O Six Sigma pegou emprestada a ideia das artes marciais: **diferentes níveis de conhecimento e responsabilidade**. Cada "belt" tem um papel claro no sistema.
 
-O modelo clássico se divide em **Custos de Conformidade** (Bons) e **Custos de Não Conformidade** (Ruins):
+> A ideia central é que **nem todo mundo precisa ser estatístico**. Alguns lideram projetos complexos (Black Belts), outros participam (Green Belts), e outros apenas precisam entender o básico para apoiar (Yellow/White Belts).
 
-### 1. Custos de Prevenção (Prevention Costs) - *Conformidade*
-Custos investidos intensamente **antes** do produto/serviço nascer, visando mitigar a raiz das falhas preventivamente.
-* Exemplos: Treinamentos Master Black Belt, Poka-Yokes mecânicos de segurança, Design for Six Sigma (DFSS), Manutenção Produtiva Total (TPM), Auditorias de fornecedores N1.
-* *Impacto:* Cada $1 investido aqui salva historicamente $10 nas outras categorias.
+---
 
-### 2. Custos de Avaliação/Inspeção (Appraisal Costs) - *Conformidade*
-Custos de manter inspetores para "separar o joio do trigo" antes de entregar o lote. 
-* Exemplos: Setup de testadores eletrônicos, auditores de linha no chão de fábrica, sistemas de visão computacional de triagem, testes destrutivos de tração em peças de aço.
-* *Atenção:* O Lean Six Sigma combate a dependência crônica da inspeção. Qualidade se **fabrica**, não se **inspeciona**.
+## Os Papéis, do Topo à Base
 
-### 3. Custos de Falha Interna (Internal Failure Costs) - *Não Conformidade*
-Defeitos descobertos e contidos **dentro da sua base**, antes do cliente ver. Doí na margem, mas salva a reputação.
-* Exemplos: Sucata (Scrap), re-trabalho demorado nas chapas de pedra, downtime de linha parada para corrigir problema sistêmico de injeção, overtime (hora-extra) forçado por retrabalho.
+### 🎯 Champion / Sponsor
+- **Quem é:** Membro da alta liderança (Diretor, VP, C-Level)
+- **O que faz:** Escolhe quais problemas valem um projeto Six Sigma, destrava recursos, remove barreiras políticas
+- **Analogia:** É o "dono do hospital" — não opera, mas decide quais cirurgias são prioridade e garante que o cirurgião tenha tudo que precisa
 
-### 4. Custos de Falha Externa (External Failure Costs) - *A Morte Corporativa*
-Defeitos que escaparam do seu portão e **chegaram no bolso e nos olhos do cliente**. A categoria mais destrutiva por magnitudes logarítmicas.
-* Exemplos: Custos severos de Recall de concessionárias, multas contratuais astronômicas de SLA em B2B, processos judiciais civis, perda intangível grave do "Market Share e Brand Reputation", cancelamentos raivosos em SaaS.
+### ⚫ Master Black Belt (MBB)
+- **Quem é:** O maior especialista técnico em Six Sigma na organização
+- **O que faz:** Treina e certifica Black Belts, supervisiona múltiplos projetos, conecta o portfólio de projetos à estratégia da empresa
+- **Habilidades:** Estatística avançada (DOE, RSM, Monte Carlo, Weibull), mentoria, gestão de portfólio
+- **Na prática:** É o "professor e arquiteto". Não lidera projetos no dia a dia — ele garante que os BBs estejam liderando corretamente
 
-## A Dinâmica do Custo com Nível Sigma
+### ⚫ Black Belt (BB)
+- **Quem é:** Líder de projeto Six Sigma, dedicação integral (100% do tempo)
+- **O que faz:** Conduz projetos DMAIC de alto impacto do início ao fim
+- **Meta típica:** Cada projeto deve gerar US$ 250k–1M em economia documentada
+- **Habilidades:** Testes de hipótese, análise de regressão, DOE, cartas de controle, facilitação de equipes
+- **Analogia:** É o "cirurgião" — recebe o caso, diagnostica, opera e acompanha a recuperação
 
-Enquanto empresas subem de **Maturidade (3 Sigma para 6 Sigma)**:
-1. O *COPQ Total* cai massivamente como % de faturamento;
-2. Os drásticos *Custos de Falha Externa* são esmagados;
-3. O budget transfere ligeiramente para *Custos de Prevenção*, invertendo o modelo de "Reação ao Fogo" para "Planejamento DFSS de Prancheta".
+### 🟢 Green Belt (GB)
+- **Quem é:** Profissional que dedica ~25% do tempo a projetos Six Sigma (o resto é seu trabalho normal)
+- **O que faz:** Lidera projetos de escopo menor, apoia Black Belts em projetos complexos
+- **Analogia:** É o "médico generalista" — resolve casos de menor complexidade e encaminha os graves para o especialista
+
+### 🟡 Yellow Belt
+- **O que faz:** Conhece os conceitos fundamentais, participa de equipes de projeto, ajuda na coleta de dados
+
+### ⬜ White Belt
+- **O que faz:** Tem consciência básica sobre Six Sigma, entende o vocabulário, apoia quando necessário
+
+---
+
+## A Estrutura na Empresa
+
+\`\`\`
+Diretoria / C-Suite
+    └── Champions (1 por área de negócio)
+          └── Master Black Belts (1-2 por empresa)
+                └── Black Belts (1 para cada 100 funcionários)
+                      └── Green Belts (10 para cada 100 funcionários)
+                            └── Yellow / White Belts (toda a equipe)
+\`\`\`
+
+> 💡 **Regra prática:** Para cada **100 funcionários**, uma organização madura em Six Sigma tem **1 Black Belt** e **10 Green Belts**. O MBB geralmente é corporativo, atendendo toda a empresa.
       `
     },
     {
       id: "1.3",
-      title: "Arquitetura e Governança de Belts",
+      title: "O Framework DMAIC — O Roteiro de 5 Fases",
       content: `
-# Arquitetura Estratégica Organizacional Belt
+# O Framework DMAIC
 
-A implantação bem-sucedida do Six Sigma em corporações Globais (Fortune 500) jamais foca exclusivamente no ensino estatístico, mas recai fortemente no **Deployment e Change Management** humano na governança.
+## A Ideia Central
 
-## A Hierarquia Estratégica Executiva
+> **DMAIC é o GPS do Six Sigma.** Ele diz exatamente quais passos seguir para transformar um problema vago em uma solução comprovada — e garantir que a solução não desapareça depois.
 
-### 🏦 Executive Leadership / Steering Committee
-* **Papel**: São C-Levels (CEO, CFO, COO) que alinham diretamente os vetores do programa LSS à DRE e visões do Balance Scorecard (BSC). Eles cobram as metas monetárias Hard Savings no final do trimestre fiscal.
+Sem DMAIC, resolver problemas é como navegar sem mapa: você pode até chegar ao destino, mas vai demorar, errar o caminho e provavelmente acabar em outro lugar.
 
-### 🎯 Champion / Project Sponsor
-* **Papel**: Diretor tático proprietário de uma grande Verba Monetária.
-* **Características**: Ele *patrocina* o projeto do Black Belt. Destrava empecilhos burocráticos, intercede quando os gestores de área blindam seus silos departamentais e bloqueiam dados de acesso do BB. É ele quem rubrica e aceita os Soft/Hard Savings prometidos no Charter no final.
+---
 
-## A Hierarquia Tática e Operacional
+## As 5 Fases — Cada Uma com Uma Pergunta
 
-### ⚫ Master Black Belt (MBB)
-* **Status**: 100% Full-time. O arquiteto sênior das metodologias analíticas avançadas.
-* **Função**: Responde pelo corpo de conhecimento. Ele que treina (Coach de coaches), certifica e orienta o pipeline técnico de *Black Belts e Green Belts*. Mentora análises não-lineares severas (Taguchi, Regressão Logística, Teoria de Restrições multi-nodes) e reporta progresso ao Champion.
+### D — DEFINE (Definir)
+**Pergunta:** "Qual é exatamente o problema, e por que ele importa?"
 
-### 🥋 Black Belt (BB)
-* **Status**: 100% Full-time dedicado e focado em projetos Cross-functional Críticos Multiplicados.
-* **Função**: Conduz 4 a 6 robustos projetos anuais. Domina o Minitab, estatística descritivo-inferencial, ANOVA iterativa multivariável, Design de Experimentos em 3 etapas e Análise Crítica dos gargalos do Value Stream. Lidera e guia times subordinados. Expectativa C-Level: Retorno Financeiro Massivo ($500k a $1M+ Savings Validados por Ano).
+Aqui você transforma uma queixa vaga ("os clientes reclamam muito") em um problema preciso e mensurável ("o prazo médio de entrega é 12 dias, enquanto o cliente espera no máximo 5").
 
-### 🟢 Green Belt (GB)
-* **Status**: Part-time (~20 a 30% do tempo em processos LSS, restante na sua função natural corporativa - ex: Gestor de Turno, Engenheiro N2).
-* **Função**: Lideram pequenos projetos ou sub-braços DMAIC dos projetos capitaneados pelo Black Belt dentro da própria área setorial de conforto deles. Utilizam estatística fundamental, Run Charts e Gráficos de Pareto.
+**O que se produz:**
+- **Project Charter** — O "contrato" do projeto: problema, meta, escopo, equipe, prazo
+- **SIPOC** — Mapa de alto nível do processo (Suppliers → Inputs → Process → Outputs → Customers)
+- **VOC / CTQ** — Voz do Cliente traduzida em requisitos mensuráveis
 
-### 🟡 Yellow Belt e ⚪ White Belt
-* **Status**: Membros Pontuais da Equipe Operacional
-* **Função**: Conhecem a linguagem básica e suportam a Coleta Extrema de Dados Limpos, identificam anomalias na causa-raiz vivenciada diretamente no Gemba. São os pilares de onde partem os Brainstormings valiosos (como mecânicos de voo suportando os engenheiros de design).
+### M — MEASURE (Medir)
+**Pergunta:** "Como o processo está se comportando hoje?"
+
+Antes de melhorar qualquer coisa, você precisa saber o estado atual com dados confiáveis. Isso inclui validar que seus instrumentos de medição são bons (MSA) e calcular a capacidade do processo (Cp, Cpk).
+
+**O que se produz:**
+- Sistema de medição validado (Gage R&R)
+- Baseline do processo (dados de pelo menos 30 dias)
+- Cálculo de capacidade (Cp, Cpk, DPMO, Nível Sigma)
+
+### A — ANALYZE (Analisar)
+**Pergunta:** "Quais são as causas reais do problema?"
+
+Aqui é onde a mágica estatística acontece. Você gera hipóteses sobre o que causa o problema (Fishbone, 5 Porquês) e depois **prova ou derruba** cada hipótese com dados (ANOVA, testes t, Chi-quadrado, regressão).
+
+**O que se produz:**
+- Lista de causas-raiz **confirmadas estatisticamente** (não "achismos")
+- Quantificação do impacto de cada causa
+
+### I — IMPROVE (Melhorar)
+**Pergunta:** "Qual é a melhor solução, e como provamos que funciona?"
+
+Aqui você projeta a solução, otimiza com DOE (Design of Experiments) e valida em um piloto antes de implementar em escala total.
+
+**O que se produz:**
+- Soluções testadas em piloto
+- Configuração ótima dos parâmetros do processo
+- Resultados comparados ao baseline
+
+### C — CONTROL (Controlar)
+**Pergunta:** "Como garantimos que a melhoria se sustenta para sempre?"
+
+A fase mais negligenciada — e a mais importante. Sem controle, o processo volta ao estado antigo em semanas.
+
+**O que se produz:**
+- Plano de Controle (quem monitora o quê, com que frequência)
+- Cartas de Controle (SPC) para detectar problemas em tempo real
+- Documentação e treinamento para o "dono do processo"
+
+---
+
+## DMAIC vs. DMADV — Quando Usar Cada Um?
+
+| Situação | Use |
+|----------|-----|
+| O processo já existe e tem problemas | **DMAIC** (Melhorar o existente) |
+| O processo não existe ou precisa ser criado do zero | **DMADV** (Design for Six Sigma) |
+
+> 💡 **Regra simples:** Se você está "consertando", use DMAIC. Se está "criando", use DMADV.
+
+---
+
+## Analogia Final: DMAIC como uma Investigação Policial
+
+1. **Define:** A delegacia recebe a denúncia e registra o caso (Charter)
+2. **Measure:** Os peritos vão à cena do crime e coletam evidências (dados)
+3. **Analyze:** Os detetives cruzam as evidências e identificam os suspeitos (causas-raiz)
+4. **Improve:** O plano de captura é executado e o criminoso é preso (solução implementada)
+5. **Control:** O programa de vigilância previne que o crime volte a acontecer (sustentabilidade)
       `
     }
   ]
@@ -133,110 +254,236 @@ A implantação bem-sucedida do Six Sigma em corporações Globais (Fortune 500)
 // ── MÓDULO 2 ─────────────────────────────────────────────
 {
   id: 2,
-  title: "Fase DEFINE — Engenharia de Requisitos",
-  description: "Tradução Matemática do VOC (QFD), Kano Model, Formulação do Charter Financeiro e SIPOC Limits.",
-  difficulty: "Avançado",
+  title: "Fase DEFINE — Definindo o Problema",
+  description: "Voice of Customer, Project Charter, SIPOC, CTQ Tree — como transformar uma queixa vaga em um projeto estruturado.",
+  difficulty: "Básico",
   lessons: [
     {
       id: "2.1",
-      title: "Modelagem Matemática do Cliente",
+      title: "Voice of the Customer (VOC) — Ouvindo o que Importa",
       content: `
-# Engenharia da Voz do Cliente (VOC)
+# Voice of the Customer (VOC)
 
-Capturar a Voz do Cliente não é aplicar uma simples pesquisa de satisfação (NPS). É um processo de engenharia reversa para descobrir necessidades empíricas e transformá-las em especificações toleranciadas de engenharia.
+## A Ideia Central
 
-> "A Qualidade é entendida no Lado D (Demanda) e Fabricada no Lado S (Supply)."
+> **O cliente define o que é qualidade. Não você, não o engenheiro, não o gerente. O cliente.**
 
-## O Modelo de Kano (Kano Model)
+Se o seu processo entrega algo que o cliente não pediu, ou não entrega o que ele pediu, você tem um problema de qualidade — mesmo que tecnicamente o produto esteja "perfeito".
 
-Criado por Noriaki Kano, este modelo bidimensional plota a **Satisfação do Cliente (Y)** contra a **Execução Funcional (X)**, estratificando requisitos em três vetores não-lineares:
+---
 
-### 1. Requisitos Básicos (Must-Be)
-* **Dinâmica**: Se ausentes, geram fúria profunda. Se perfeitamente presentes, geram no máximo neutralidade (ninguém elogia um hotel por ter água no chuveiro).
-* **Estrutura Six Sigma**: Estes são os *Critical to Safety (CTS)* e *Critical to Quality (CTQ)* mandatórios. Têm tolerâncias estatísticas rígidas.
+## Por que Isso é Tão Importante?
 
-### 2. Requisitos de Performance (One-Dimensional)
-* **Dinâmica**: Correlação linear. Quanto mais, melhor (ex: vida útil da bateria de um celular, redução de preço, velocidade da internet).
-* **Estrutura Six Sigma**: É aqui que o Black Belt trava suas guerras de regressão e benchmarks do mercado.
+Pense em um restaurante que serve pratos sofisticados, mas demora 90 minutos para entregar o primeiro prato. O chef pode achar que está fazendo arte. O cliente está faminto e frustrado. **A voz do cliente diz: "Eu quero comida boa em tempo razoável."** Se o restaurante não escuta isso, vai perder clientes — não por falta de qualidade culinária, mas por não entender o que "qualidade" significa para quem paga.
 
-### 3. Delighters / Excitement (Atrativos)
-* **Dinâmica**: Se não existirem, o cliente não sente falta pois não os esperava. Se existirem, causam *Wow Effect* e disparos de receita não linear. (ex: Câmera com IA que apaga objetos no fundo em 2020).
-* **A Armadilha do Tempo**: Delighters de hoje são os Must-Be de amanhã. Ar Condicionado em carros já foi Delighter nos anos 90, e hoje é Must-Be.
+---
 
-## QFD: Quality Function Deployment (A Casa da Qualidade)
+## Métodos para Capturar o VOC
 
-A Casa da Qualidade é uma matriz gigantesca que atua como tradutora bilíngue entre o Cliente e o Engenheiro. Sem o QFD, as equipes otimizam os Xs errados.
+### 1. Entrevistas Diretas
+- Conversas 1-a-1 com clientes reais
+- Perguntas abertas: "O que mais te frustra no nosso serviço?"
+- **Vantagem:** Respostas ricas, com contexto e emoção
+- **Quando usar:** Sempre — é o método mais valioso
 
-**Como funciona a Matriz QFD Nível 1:**
-1. **Parede Esquerda (Os 'WHATs')**: Lista as demandas puras do Kano Model pontuadas por Importância (1 a 10). Ex: *A porta do carro não pode fazer barulho ao fechar.*
-2. **Teto (Os 'HOWs')**: Requisitos Técnicos de Engenharia independentes. Ex: *Pressão da Borda de Eva, Torque da Dobradiça do pino C, Peso da Folha da Porta.*
-3. **Sala Central (A Matriz de Relacionamento)**: Qual a força da relação entre "Barulho" e "Torque"? (0=Nenhum, 1=Fraco, 3=Médio, 9=Forte). 
-4. **O Telhado Triangular (Matriz de Correlação)**: Os engenheiros mapeiam antagonismos. Se eu aumentar o "Peso da Porta" para reduzir o "Barulho", eu pioro o HOW de "Ergonomia de abertura". (Trade-offs negativos).
-5. **Fundação**: Resulta num peso de importância técnico quantificado absoluto e relativo. Revela imediatamente em qual parte da máquina o Black Belt deve colocar seu foco analítico estatístico.
+### 2. Surveys / Pesquisas
+- Escala grande, dados quantitativos
+- **NPS (Net Promoter Score):** "De 0 a 10, você nos recomendaria?"
+  - Promotores (9-10), Neutros (7-8), Detratores (0-6)
+  - NPS = % Promotores − % Detratores
+- **CSAT (Customer Satisfaction):** "De 1 a 5, quão satisfeito você está?"
+
+### 3. Reclamações e Tickets de Suporte
+- Dados que **já existem** — não custam nada a mais para coletar
+- Analise por categoria e frequência: quais reclamações aparecem mais?
+
+### 4. Observação Direta (Gemba Walk)
+- "Gemba" é japonês para "o lugar real" — vá onde o cliente usa seu produto
+- Observe **sem interferir**: como ele usa? Onde tem dificuldade? O que ele improvisa?
+
+### 5. Focus Groups
+- Grupos de 6-10 clientes discutindo suas experiências
+- Útil para descobrir necessidades que o cliente **nem sabe que tem**
+
+---
+
+## CTQ Tree — De "Queixa Vaga" a "Métrica Clara"
+
+O CTQ Tree (Critical to Quality) é a ponte entre o que o cliente sente e o que você pode medir.
+
+### Como funciona:
+
+\`\`\`
+Necessidade do cliente (vaga e emocional)
+    └── Drivers (o que causa satisfação ou insatisfação)
+          └── CTQs (métricas específicas e mensuráveis)
+\`\`\`
+
+### Exemplo Prático:
+
+O cliente diz: **"Quero entrega rápida"**
+
+- **Driver 1:** Tempo total do pedido ao recebimento
+  - **CTQ:** ≤ 5 dias úteis após confirmação de pagamento
+- **Driver 2:** Visibilidade do status da entrega
+  - **CTQ:** Notificação automática em ≤ 2h após cada mudança de status
+
+> Note como "entrega rápida" virou duas métricas concretas. Agora você pode **medir**, **monitorar** e **melhorar** cada uma delas.
+
+---
+
+## Modelo de Kano — Nem Tudo que o Cliente Quer é Igual
+
+O modelo de Kano separa os atributos do seu produto/serviço em 3 tipos:
+
+| Tipo | O que é | Exemplo | O que acontece se faltar |
+|------|---------|---------|--------------------------|
+| **Básico** | O mínimo esperado | Entrega no prazo, produto sem defeito | Cliente fica MUITO insatisfeito |
+| **Linear** | Mais = melhor | Velocidade de resposta, opções de personalização | Satisfação aumenta proporcionalmente |
+| **Atrativo** | Surpresa positiva inesperada | Embalagem premium, brinde, experiência encantadora | Sem efeito negativo — o cliente não esperava |
+
+> 💡 **Insight prático:** Muitas empresas investem em "atrativos" antes de garantir os "básicos". Isso é como decorar um bolo que está cru por dentro. **Garanta os básicos primeiro.**
+
+> ⚠️ **Armadilha comum:** "O que o cliente diz que quer" nem sempre é "o que realmente importa". Às vezes o cliente diz "quero preço mais baixo" quando na verdade o problema é "o processo de cotação é tão demorado que eu compro do concorrente que responde mais rápido".
       `
     },
     {
       id: "2.2",
-      title: "O P&L Project Charter",
+      title: "Project Charter — O Contrato do Projeto",
       content: `
-# Project Charter Financeiro (P&L)
+# Project Charter
 
-Em nível Master Black Belt, o Project Charter não é um formulário Word para formalizar uma reunião; é um contrato de alocação de capital e fluxo de caixa contábil (P&L - Profit and Loss). Se não der lucro/Ebitda ou não mitigar perdas ativas (Avoidance), o projeto não passa no comitê.
+## O que é, e Por que é Inegociável?
 
-## Problem Statement (A Declaração Implacável do Problema)
+> **O Project Charter é o documento que transforma "temos um problema" em "temos um projeto".**
 
-Uma declaração pífia assassina um projeto no primeiro dia. Ela deve conter 5 engrenagens (Os 5 W's):
-- **What (Qual a métrica doente?)**: Taxa de Scrap do Polimento de Granitos Super Exóticos.
-- **Where (Onde ela ocorre físicamente?)**: Na Linha de Politriz 4, Setor Norte.
-- **When (Desde quando/Qual a janela de amostragem?)**: Medido entre Q1 e Q3 do ano corrente.
-- **Magnitude (Quão ruim é o defeito matematicamente?)**: A média de descarte pulou da baseline histórica de 2.1% para 6.8% (\u03c3 = 1.3%).
-- **Financial Pain (Qual a dor financeira DRE?)**: Este delta gerou perda acumulada de R$ 1.450.320 em lucros cessantes reportados pela Controladoria.
+Sem Charter, o projeto não existe oficialmente. É como começar uma obra sem planta — você pode até levantar paredes, mas a chance de desmoronar é enorme.
 
-## O VPL (Valor Presente Líquido) de um Projeto
+O Charter faz três coisas essenciais:
+1. **Define o problema com precisão** (não como "quero melhorar as coisas")
+2. **Alinha expectativas** entre equipe, patrocinador e liderança
+3. **Serve de referência** durante todo o projeto — quando alguém quiser mudar o escopo, você aponta para o Charter
 
-Antes de aprovar as horas da equipe, o Black Belt tem que defender o **ROI (Return on Investment)** com a Controladoria usando *Hard Savings* versus o *Custo do Projeto*:
+---
 
-**Inputs do VPL:**
-1. Fluxo de Caixa Futuro (Savings em $/mês após o 'Control').
-2. Vida útil da melhoria (ex: 24 a 36 meses). O LSS raramente projeta além de 3 anos por entropia corporativa.
-3. WACC (Weighted Average Cost of Capital) como a Taxa Mínima de Atratividade (ex: 12% a.a).
-4. Capex e Opex de Rampa (Custo do software, tempo faturado das 4 pessoas num Kaizen Blitz, peças de adequação IoT).
+## Os 7 Componentes do Charter
 
-**Regra Dourada MBB:** Projetos de otimização de DMAIC quase sempre possuem Altíssimo VPL porque o Capex de implementação é irrisório num processo já existente quando comparado com construir uma linha nova inteira. 
+### 1. Título do Projeto
+Descritivo, específico, orientado a resultado.
+- ❌ Ruim: "Melhoria do processo de vendas"
+- ✅ Bom: "Redução do Lead Time comercial de 12 para 3 dias na PBA Stones"
 
-## Definição de Escopo e "Fronteiras Sangrentas"
+### 2. Business Case
+Responde: "Por que a empresa deveria investir tempo e dinheiro nisso?"
+- Impacto financeiro estimado (saving, receita adicional)
+- Alinhamento com objetivos estratégicos da empresa
 
-Uma falha primária de Green Belts é o **Scope Creep** (inchaço invisível). Para evitar isso:
-* **In Scope**: Apenas Pás Eólicas do Modelo XA-90 fabricadas em Resina Expóxi N-4.
-* **Out of Scope**: Modelos antigos, Pás fabricadas no exterior, Redesenho Químico da Resina (não será abordado DFSS, apenas o método de cura da fábrica local).
+### 3. Problem Statement (Declaração do Problema)
+A parte mais importante. Use a estrutura **SMART**:
+- **S**pecífico — o quê e onde
+- **M**ensurável — com números
+- **A**lcançável — meta realista
+- **R**elevante — importa para o negócio
+- **T**empo — com prazo definido
+
+> **Exemplo:** "O processo de propostas comerciais leva em média 8,3 dias (σ = 4,1 dias), causando perda de 23% das oportunidades por demora. Meta: reduzir para ≤ 3 dias em 90 dias."
+
+### 4. Escopo (In/Out of Scope)
+O que está incluído e — tão importante quanto — o que **não está**.
+- Evita que o projeto cresça sem controle ("scope creep")
+- Exemplo: "IN: linha de polimento Unidade 2. OUT: linhas das Unidades 1 e 3"
+
+### 5. Metas do Projeto
+- **Métrica primária (Y):** O que você quer melhorar
+- **Baseline:** Onde estamos hoje
+- **Meta:** Onde queremos chegar
+- Exemplo: Baseline 18,3% defeitos → Meta ≤ 5%
+
+### 6. Equipe
+- **Champion:** Patrocinador executivo
+- **Black Belt:** Líder técnico do projeto
+- **Green Belts e membros:** Equipe de apoio
+- **Process Owner:** Quem recebe o processo ao final
+
+### 7. Cronograma de Alto Nível
+
+| Fase    | Semana  | Entregável Principal       |
+|---------|---------|----------------------------|
+| Define  | 1–2     | Charter aprovado           |
+| Measure | 3–6     | Baseline confiável         |
+| Analyze | 7–10    | Causas-raiz confirmadas    |
+| Improve | 11–16   | Piloto validado            |
+| Control | 17–20   | Plano de controle ativo    |
+
+---
+
+> ⚠️ **Erro mais comum de iniciantes:** Colocar a SOLUÇÃO no Charter. Na fase Define, você **não sabe** a solução — ela será descoberta nas fases Analyze e Improve. Incluir a solução no Charter é como um médico prescrever remédio antes de fazer os exames.
       `
     },
     {
       id: "2.3",
-      title: "O Boundary SIPOC",
+      title: "SIPOC — O Mapa em 5 Minutos do Processo",
       content: `
-# Construindo os Muros com o SIPOC
+# SIPOC — Mapeando o Processo em Alto Nível
 
-A transição entre o Define e a mergulho abismal dos dados no Measure exige a construção de um muro (boundaries) que delimite onde o projeto *Mata e Nasce*. Essa parede é o **SIPOC (Supplier, Input, Process, Output, Customer)**.
+## O que é o SIPOC?
 
-## Por que 30.000 pés de altitude?
+> **SIPOC é uma fotografia panorâmica do seu processo: mostra quem fornece o quê, o que acontece, o que sai, e quem recebe.**
 
-Se você tentar desenhar o fluxograma detalhado (Activity Process Map com losangos de decisão, swimlanes, sub-rotinas) na fase Define, o time levará três meses e o projeto perderá o Momentum C-Level. 
+Pense como uma foto aérea de drone — você vê o terreno todo, mas não os detalhes de cada casa. O SIPOC dá a visão geral; o detalhamento vem depois.
 
-O SIPOC obriga a equipe a focar nos **5 a 7 Macro Passos** que compõem a caixa preta do processo.
+| Letra | Significa | Pergunta |
+|-------|-----------|----------|
+| **S** | Suppliers (Fornecedores) | Quem alimenta o processo? |
+| **I** | Inputs (Entradas) | O que entra no processo? |
+| **P** | Process (Processo) | Quais são as 5–7 etapas principais? |
+| **O** | Outputs (Saídas) | O que o processo produz? |
+| **C** | Customers (Clientes) | Quem recebe as saídas? |
 
-## A Dinâmica Operacional Inversa do SIPOC (COPIS)
+---
 
-O método mais eficiente em workshops Black Belt é não preencher da esquerda para a direita, mas sim do fim (Customer) ao início (Supplier):
+## Quando Usar?
 
-1. **Customers (C)**: Quem sãos os recebedores internos (Próxima Máquina) ou externos (Mercado C-Level) que ditam a fronteira direita? (Ex: Gerente da Logística).
-2. **Outputs (O)**: O que sai efetivamente na fronteira para eles? (Ex: Relatório Fiscal validado sob norma SOX; Peça embalada e paletizada em <40°C).
-3. **Process (P)**: Quais as 5 a 7 etapas caixas contendo [Verbo + Substantivo]? (Ex: Misturar Químico, Assar Resina, Arrefecer Bloco). Evite condicionais "Se/Então".
-4. **Inputs (I)**: Qual matéria prima pura, dado de ERP não formatado ou sinal eletrônico precisa entrar nos 7 macro processos? (Ex: Ficha técnica do cliente importada do TOTVS).
-5. **Suppliers (S)**: Quem ou qual sistema assina a autoria e produz esse Input limpo na fronteira inicial? (Ex: Inside Sales Agent, Motor de Cotação Algorítmico).
+- **No início de todo projeto** Six Sigma (fase Define)
+- Quando ninguém concorda sobre como o processo funciona
+- Para definir as fronteiras do projeto (onde começa e onde termina)
+- Para identificar quem são os clientes reais das saídas
 
-## Validação de Entradas no Charter
-Após preencher o SIPOC, olhe do Output(O) para os Inputs(I): O Defeito/Dor quantificado na Declaração do Problema está contido entre esses muros? Se sim, você mapeou o território certo. Se não, o escopo está errado ou o problema é herdado fatalmente do Supplier e o DMAIC tem de rolar uma unidade fabril para trás na Supply Chain.
+---
+
+## Como Construir em 5 Passos
+
+> **Dica:** Comece pelo meio (Processo), não pela ponta. É mais fácil.
+
+1. **P — Processo:** Liste as 5–7 etapas macro (verbos de ação: "Receber", "Qualificar", "Enviar"...)
+2. **O — Outputs:** Para cada etapa, o que é produzido?
+3. **C — Customers:** Quem recebe cada output?
+4. **I — Inputs:** O que precisa entrar para o processo funcionar?
+5. **S — Suppliers:** Quem fornece cada input?
+
+---
+
+## Exemplo: Processo Comercial B2B
+
+| Suppliers | Inputs | Process | Outputs | Customers |
+|-----------|--------|---------|---------|-----------|
+| Marketing | Leads qualificados | 1. Receber e qualificar lead | Proposta comercial | Comprador |
+| Estoque | Tabela de preços | 2. Fazer primeiro contato | Contrato assinado | Jurídico |
+| Financeiro | Crédito aprovado | 3. Elaborar proposta | Pedido de compra | Logística |
+| Jurídico | Contrato padrão | 4. Negociar e fechar | Nota fiscal | Faturamento |
+| CRM | Histórico do cliente | 5. Registrar no CRM | Registro atualizado | Pós-venda |
+
+---
+
+## SIPOC vs. Value Stream Map (VSM)
+
+| SIPOC | Value Stream Map |
+|-------|------------------|
+| Alto nível (5–7 passos) | Detalhado (cada micro-etapa com tempos) |
+| Usado na fase Define | Usado na fase Measure/Analyze |
+| Responde "o quê" | Responde "quanto tempo" |
+
+> 💡 **O SIPOC é o primeiro mapa. O VSM vem depois, quando você precisa ir mais fundo.**
       `
     }
   ]
@@ -245,125 +492,298 @@ Após preencher o SIPOC, olhe do Output(O) para os Inputs(I): O Defeito/Dor quan
 // ── MÓDULO 3 ─────────────────────────────────────────────
 {
   id: 3,
-  title: "Fase MEASURE — Fundamentos Estatísticos",
-  description: "Teorema do Limite Central, MSA (Gage R&R) Avançado e Índices de Capacidade (Cp, Cpk, Pp, Ppk).",
-  difficulty: "Avançado",
+  title: "Fase MEASURE — Medindo a Realidade",
+  description: "Tipos de dados, amostragem, MSA/Gage R&R, Cp/Cpk, Nível Sigma — como medir o processo corretamente.",
+  difficulty: "Intermediário",
   lessons: [
     {
       id: "3.1",
-      title: "Tipologia e Normalidade de Dados",
+      title: "Tipos de Dados e Escalas de Medição",
       content: `
-# A Anatomia e Tipologia dos Dados
+# Tipos de Dados — A Base de Tudo
 
-No Six Sigma, antes de abrir o Minitab ou calcular qualquer desvio padrão, o Master Black Belt deve diagnosticar a matriz de dados. **Lixo que entra, Lixo que sai (GIGO).** A tipologia dita qual arsenal de testes de hipótese será utilizado no Analyze.
+## Por que Isso Importa?
 
-## 1. Dados Contínuos (Variáveis)
-* **Natureza**: São medidos numa escala infinita fracionável. Aumenta a resolução do seu décimo e a precisão do micrômetro, o número ganha mais casas decimais.
-* **Exemplos**: Tempo de ciclo (12.45s), Temperatura (98.6°C), Torque (45.3 Nm), Faturamento ($4.532,10).
-* **Vantagem MBB**: São o CÁLICE SAGRADO estatístico. Requerem amostras minúsculas (n=30) para provar teoremas cruciais com alto *P-Value* de confiança. Você sempre deve lutar para converter um dado discreto em contínuo (ex: em vez de anotar "Atrasado/No Prazo", anote "Delta de horas da entrega").
+> **O tipo de dado que você tem define qual ferramenta estatística pode usar.** Usar a ferramenta errada no dado errado é como usar chave de fenda para apertar um parafuso Allen — não funciona.
 
-## 2. Dados Discretos (Atributos)
-* **Natureza**: São categorias contadas. Não aceitam frações verdadeiras no mundo real.
-* **Exemplos**: Número de arranhões na porta (3), Passou/Reprovou (Binário), Contagem de Clientes na Fila (12).
-* **Desvantagem MBB**: São cegos à magnitude do erro. Se uma peça passou 0.01mm fora da tolerância ou 10 metros fora da tolerância, o dado discreto anota "1 falha" e ponto final. Demandam amostras massivas (n=400, n=10.000) para provar mudanças (Testes Qui-Quadrado, Regressão Logística Binária).
+---
 
-## O Teste de Normalidade (Anderson-Darling)
-A Natureza odeia o caos; ela tende à Distribuição Normal (A Curva do Sino de Gauss). Entretanto, se você assumir cegamente que seus dados são normais e usar um Teste-T para duas amostras (T-Test), mas a curva for Weibull (Caudas esticadas), você cometerá genocídio estatístico e aprovará alterações nocivas na fábrica.
+## Os 2 Grandes Grupos
 
-**A Regra do Valor-P (P-Value) para Normalidade:**
-* No teste de Anderson-Darling, elaboramos a Hipótese Nula ($H_0$): "Os dados SÃO normais".
-* Se **P-Value > 0.05**: Falhamos em rejeitar $H_0$. Celebre, a curva é normal matemática e linear.
-* Se **P-Value < 0.05**: Rejeitamos $H_0$. Temos dados Não-Normais. Teremos de usar estátisca pesada e turva como *Box-Cox Transformation*, *Johnson Transformation* ou migrar para Testes Não-Paramétricos (Kruskal-Wallis, Mann-Whitney).
+### 📊 Dados Contínuos (Variáveis)
+Podem assumir **qualquer valor** dentro de um intervalo. Você pode medir com casas decimais.
+
+**Exemplos:** Peso (72,3 kg), Temperatura (36,8°C), Tempo (4,7 minutos), Diâmetro (12,05 mm)
+
+**Por que são melhores:** Carregam mais informação estatística. Com 30 medições contínuas, você já consegue calcular o nível sigma com confiança.
+
+### 📋 Dados Discretos (Atributos)
+Só podem assumir **valores específicos**, geralmente contagens ou categorias.
+
+4 tipos de escalas:
+| Escala | Descrição | Exemplo | Operações Possíveis |
+|--------|-----------|---------|---------------------|
+| **Nominal** | Apenas categorias, sem ordem | Cor (azul, verde), Tipo (A, B, C) | Contar, calcular % |
+| **Ordinal** | Categorias com ordem, sem intervalo fixo | Satisfação (ruim, médio, bom), Tamanho (P, M, G) | Contar, ordenar |
+| **Intervalar** | Ordem com intervalos iguais, sem zero absoluto | Temperatura °C (0°C não é "sem temperatura") | Somar, subtrair |
+| **Razão** | Intervalar com zero absoluto | Peso, Altura, Renda (0 kg = sem peso) | Todas as operações |
+
+---
+
+## A Regra de Ouro
+
+> 💡 **Sempre que possível, colete dados contínuos.** Um dado contínuo equivale a ~10 dados discretos em poder estatístico.
+
+Exemplo: Em vez de anotar "a peça passou ou não" (discreto), meça o diâmetro exato da peça (contínuo). Com o diâmetro, você sabe não apenas se passou, mas **por quanto** — isso permite prever quando o processo vai começar a falhar.
+
+---
+
+## Operacionalizar a Medição
+
+Antes de sair coletando dados, defina:
+1. **O que medir** (precisa se conectar diretamente ao CTQ definido na fase Define)
+2. **Como medir** (instrumento, método, unidade)
+3. **Quem mede** (padronizar entre operadores)
+4. **Quando medir** (frequência e período)
+5. **Onde registrar** (planilha? sistema? papel?)
+
+> ⚠️ **Erro clássico:** Coletar dados que "estão disponíveis" em vez de dados que "são necessários". Dados fáceis de obter nem sempre respondem à pergunta certa.
       `
     },
     {
       id: "3.2",
-      title: "MSA — Análise do Sistema de Medição",
+      title: "Amostragem — Quanto Coletar e Como?",
       content: `
-# MSA: A Prova dos Nove (Measurement System Analysis)
+# Amostragem Estatística
 
-"Como você sabe que o furo do cilindro mede 12.5mm? Porque o paquímetro disse? E quem mediu a verdade do paquímetro?"
-Se a sua medição possui variação inerente igual ou maior que a variação real do processo que você está tentando consertar, você está **Consertando Fantasmas**.
+## A Ideia Central
 
-O MSA esmaga estatisticamente o erro do aparelho ou do inspetor antes do projeto continuar. Se o MSA falhar (Gage R&R > 30%), o projeto é congelado brutalmente até comprarem uma trena melhor ou calibrarem o sensor eletrônico.
+> **Você não precisa medir TODAS as peças para entender o processo. Uma amostra bem feita diz praticamente a mesma coisa que a população inteira.**
 
-## Os 5 Erros de Medição 
+A diferença: medir tudo é caro e demorado. Uma amostra inteligente é rápida, barata e estatisticamente válida.
 
-A variação de medição se divide em Exatidão (Acurácia) e Precisão:
+---
 
-### Acurácia (Onde o Tiro Acerta na Média)
-1. **Bias (Viés / Tendência)**: O aparelho mede consistentemente 2kg acima do padrão mestre de platina do laboratório de metrologia. Solução simples via calibração de software offset.
-2. **Lineariedade**: O erro do sensor piora dependendo do tamanho da peça? Ele pode ser exato pesando algodões de 10g, mas desvia 10% violento se pesar blocos de 1 tonelada.
-3. **Estabilidade**: O termômetro acusa 30°C lendo uma pedra padrão no inverno, e 32°C a mesma pedra no auge do verão? É o erro em função do desgaste do tempo ou clima no equipamento.
+## Tipos de Amostragem
 
-### Precisão (A Dispersão Inflexível do Tiro)
-4. **Repetibilidade (Repeatability - Equipamento Viciado)**: O *mesmo* operário de medição (João), mede a *mesma* peça de carro, sequencialmente com o *mesmo* paquímetro, 10 vezes cegas. Se nas 10 vezes os dados oscilarem, **A Culpa é do Aparelho (Equipamento Var)**.
-5. **Reprodutibilidade (Reproducibility - Operador Viciado)**: A Maria e o João medem a *mesma* peça com o *mesmo* paquímetro, mas seus braços seguram com força elástica diferente (Delta de Destreza). A discrepância entre ambos é a **Variação de Avaliador (Appraiser Var)**.
+### 🎲 Aleatória Simples
+Cada item tem a **mesma chance** de ser selecionado. É o padrão.
+- **Como fazer:** Numere os itens, use gerador aleatório ou Excel (=ALEATÓRIO.ENTRE)
+- **Quando usar:** Quando a população é relativamente homogênea
 
-## O Gage R&R (Repeatability & Reproducibility)
+### 📊 Estratificada
+Divide a população em grupos (estratos) e amostra de cada um.
+- **Por que:** Se você tem 3 turnos na fábrica e quer garantir que cada turno esteja representado
+- **Exemplo:** 200 peças do turno A, 200 do turno B, 200 do turno C
 
-O Gage R&R combina via ANOVA as variâncias das partes 4 e 5 acima.
-**Critérios Aceitos da Indústria e IATF-16949:**
-* **< 10% de Gage R&R**: Sistema de Medição Perfeito. Confie nos dados cegamente.
-* **10% a 30%**: Sistema marginal ou "Borda do Penhasco". Aceitável dependendo do custo da régua substituta comparado ao risco monetário.
-* **> 30% de Gage R&R**: PARE O PROJETO. O Sistema é lixo puro. Você tem uma chance enorme de Aprovar Peças Ruins (Risco do Cliente / Falso Positivo) ou Reprovar Peças Boas (Risco do Produtor / Scrapar ouro).
+### ⏱️ Sistemática
+Seleciona um item a cada N intervalos (ex: a cada 10ª peça na esteira).
+- **Vantagem:** Prática e fácil de executar na linha de produção
+- **Cuidado:** Se o processo tem um ciclo natural que coincide com N, você pode criar um viés
+
+---
+
+## Calculando o Tamanho da Amostra
+
+### Para Dados Contínuos (Média)
+
+\`\`\`
+n = (Z × σ / E)²
+\`\`\`
+
+Onde:
+- **Z** = valor da confiança (1,96 para 95%)
+- **σ** = desvio padrão estimado da população
+- **E** = margem de erro aceitável
+
+**Exemplo passo a passo:**
+Queremos estimar o tempo médio de atendimento. Sabemos por experiência que σ ≈ 5 minutos. Queremos margem de erro de ±1 minuto com 95% de confiança.
+
+n = (1,96 × 5 / 1)² = (9,8)² = 96,04 → **Arredonde para 97 amostras**
+
+### Para Dados Discretos (Proporção)
+
+\`\`\`
+n = Z² × p × (1 − p) / E²
+\`\`\`
+
+Onde **p** = proporção estimada. Se você não sabe, use p = 0,5 (o pior caso, que dá o n máximo).
+
+**Exemplo passo a passo:**
+Queremos estimar a % de peças defeituosas. Não temos ideia da taxa, então p = 0,5. Queremos margem de erro de ±5% com 95% de confiança.
+
+n = (1,96)² × 0,5 × 0,5 / (0,05)² = 3,84 × 0,25 / 0,0025 = **385 amostras**
+
+---
+
+## Erros de Amostragem que Destroem Projetos
+
+1. **Amostra de Conveniência** — Pegar só o que é fácil (ex: medir só peças do turno da manhã porque é quando você está na fábrica)
+2. **Amostra Muito Pequena** — "Medimos 5 peças e a média ficou ok" → Com 5 dados, você não sabe praticamente nada
+3. **Período Insuficiente** — Coletar dados de 1 dia e achar que representa o processo do mês inteiro
+
+> 💡 **Regra prática:** Para dados contínuos, **mínimo de 30 observações** para ter uma base confiável. Para dados discretos, costuma-se precisar de centenas.
       `
     },
     {
       id: "3.3",
-      title: "Análise de Capacidade (Cp, Cpk, Pp, Ppk)",
+      title: "MSA e Gage R&R — Seu Instrumento de Medição é Confiável?",
       content: `
-# A Capacitação Matemática do Processo
+# MSA — Análise do Sistema de Medição
 
-Após confirmar através do MS que conseguimos extrair amostras confiaveis, traçamos a Curva Normal dos seus dados. Mas e se a Normal couber, se espremer ou estufar fora das paredes desenhadas pelo cliente na fase Define?
-Isso é o Capibility Analysis: A guerra entre o LSE (Limite Superior de Especificação) vs LIE (Limite Inferior) VS LSC (Limite Sistêmico de Controle do Seu Chão de Fábrica).
+## A Ideia Central
 
-## Cp e Cpk (Capacidade de Curto Prazo - Potencial)
+> **Antes de confiar nos dados, você precisa confiar no instrumento que os gerou.**
 
-Analisa se o seu processo, hoje de manhã, limpo e sem desgastes e fadiga, cabe no túnel de tolerância do cliente. Usa o **Desvio Padrão Within (Subgrupo)**.
+Se sua régua está torta, não importa quantas vezes você meça — o resultado será errado. O MSA responde à pergunta: **"A variação que estou vendo é real (do processo) ou é fantasma (do meu sistema de medição)?"**
 
-### Cp (Capability ratio) - "O Carro cabe na Garagem?"
-Calcula a Freq. total dividindo a Tolerância Pura do Cliente pelos 6 Desvios Padrões Internos.
-* Se a garagem tiver 3 metros, e o carro (seu 6-sigma variation) também 3 metros, Cp = 1.
-* A exigência de Qualidade 6-Sigma pede que seu carro seja minúsculo e caiba sobrando muito, então Cp **deve ser > 2.0**.
-* **O Limite do Cp**: Ele assume (ingenuamente) que o carro está perfeitamente centralizado na porta da garagem! Se a sua máquina descalibrou e o centro de injeção plástica andou pra direita, mesmo com carro fino ele ralará o vidro na pilastra direita do LSE.
+---
 
-### Cpk (Capability Index k) - "O Carro está batendo nas pilastras reais?"
-Diferente do Cp otimista, o Cpk calcula a distância letal média do Limite de Especificação *Mais Próximo* contra o limiar da sua perigosa cauda de sino média-shiftada ($Min[\frac{LSE-\mu}{3\sigma}, \frac{\mu-LIE}{3\sigma}]$).
+## Analogia: A Balança do Banheiro
 
-* **Regra Ouro MBA**: O Cp pode ser 2.0 (Fantástico), mas se o Cpk for < 0, a média do seu processo está *tão torta lateralmente* que ela flutua Fora dos Limites de Especificação. (Toda a peça está saindo pior do que o cliente solicitou, você fabrica defeitos a vapor).
-* **Alvo Clássico Cpk**: > 1.33 (Mínimo automotivo) | > 1.67 (Aeroespacial) | > 2.0 (Nirvana 6 Sigma).
+Você sobe na balança e marca 75 kg. Desce e sobe de novo: 76 kg. De novo: 74 kg.
 
-## Pp e Ppk (Performance de Longo Prazo - Global Realidade)
+Pergunta: Você mudou de peso, ou a balança é ruim?
 
-Medidos em meses/anos contínuos. Incorpora desgastes de máquinas antigas, turno da madrugada cansado, falhas na eletricidade, e sazonalidade de humidade no inverno. Usa o Desvio Padrão de Amostra Massiva Global ($\sigma_{overall}$).
+Essa é exatamente a pergunta do MSA — mas aplicada a micrômetros, paquímetros, software de análise, inspetores visuais, ou qualquer coisa que gere dados.
 
-* Como os subgrupos "pulos de lótus" entram e estouram as tolerâncias temporais, o desvio padrão de Pp é absurdamente maior (mais ineficiente) que do Cp.
-* A diferença entre o **Cpk (Potencial Laboratorial)** e o **Ppk (Realidade Agreste)** sinaliza severos problemas de *Manutenção no Processo*. Se Cpk > 1.5 e Ppk = 0.6, seu processo é biologicamente bom mas está pessimamente mantido (manutenções irregulares e variação de Matéria-Prima inter-lotes destruindo o Ppk meses afio).
+---
+
+## Os 5 Elementos que Causam Erro de Medição
+
+| Elemento | O que é | Exemplo |
+|----------|---------|---------|
+| **Viés (Bias)** | A medição está sistematicamente acima ou abaixo do valor real | Sua balança sempre marca 1 kg a mais |
+| **Linearidade** | O viés muda ao longo da escala de medição | A balança é precisa em 50 kg, mas erra em 100 kg |
+| **Estabilidade** | A medição muda ao longo do tempo | A balança dá valores diferentes de manhã e à noite |
+| **Repetibilidade** | O mesmo operador mede a mesma peça e obtém resultados diferentes | Você sobe na balança 3 vezes e ela marca 75, 76, 74 |
+| **Reprodutibilidade** | Operadores diferentes medem a mesma peça e obtêm resultados diferentes | Você marca 75, seu colega marca 73 na mesma balança |
+
+---
+
+## Gage R&R — O Teste Prático
+
+R&R = **Repeatability (Repetibilidade)** + **Reproducibility (Reprodutibilidade)**
+
+### Como Funciona:
+1. Selecione **10 peças** que cubram o range do processo
+2. Escolha **3 operadores** diferentes
+3. Cada operador mede cada peça **3 vezes** (total: 90 medições)
+4. Calcule a variação devida ao instrumento e aos operadores vs. a variação real das peças
+
+### Interpretando os Resultados:
+
+| %GRR (% da tolerância) | Classificação | Ação |
+|------------------------|---------------|------|
+| **< 10%** | Excelente | Sistema de medição aceito |
+| **10% – 30%** | Aceitável | Aceitar com ressalvas, planejar melhoria |
+| **> 30%** | Inaceitável | NÃO USE esses dados! Corrija o sistema antes de continuar |
+
+### Número de Categorias Distintas (ndc):
+\`\`\`
+ndc = (σ_peças / σ_gage) × 1,41
+\`\`\`
+- **ndc ≥ 5:** O sistema consegue distinguir categorias suficientes de variação
+- **ndc < 5:** O sistema "enxerga borrado" — mistura peças boas com ruins
+
+---
+
+> ⚠️ **Erro fatal:** Pular o MSA e ir direto para análise. Se seu Gage R&R está acima de 30%, **TODOS os seus cálculos de Cp, Cpk e testes de hipótese estão contaminados**. Você está tomando decisões com base em ruído, não em sinal.
+
+> 💡 **Regra de ouro do Black Belt:** "Não confio em nenhum dado até que o sistema de medição prove que merece confiança."
       `
     },
     {
       id: "3.4",
-      title: "Amostragem Estatística e Power & Sample Size",
+      title: "Cp, Cpk e Nível Sigma — O Processo é Capaz?",
       content: `
-# A Matemática da Amostragem
+# Capacidade do Processo — Cp, Cpk e Nível Sigma
 
-Coletar dados não é uma atividade aleatória. Inspeção 100% de peças em fábricas de alto volume não apenas é inviável, mas é comprovadamente falha devido ao erro humano da inspeção de fadiga motora. O profissional Master Black Belt calcula o tamanho exato de amostra necessário para garantir \`95%\` de confiança estatística com o menor custo de captura possível.
+## A Pergunta que Todo Gerente Faz
 
-## Tamanho da Amostra Básico (Sample Size)
-A variável crítica é a **Margem de Erro Aceitável (E)**, o desvio padrão da população e o Nível de Confiança ($Z$).
-*   Para dados Contínuos: $n = ( \\frac{Z \\times s}{E} )^2$
-*   Se o desvio é altíssimo, você terá que puxar muito mais amostras da linha para ter confiança estatística da realidade.
+> **"O nosso processo é capaz de atender consistentemente o que o cliente exige?"**
 
-## Power and Sample Size (Poder do Teste)
-O poder descobre **a capacidade do seu Teste detectar uma diferença quando a diferença realmente existe** (Poder é o Complementar ao Erro Tipo II: $1 - \\beta$).
-Se você aprova uma resina barata, um Power Ratio ideal no software precisa estar parametrizado em **80% a 90%**.
-Se o Power de teste for muito baixo (ex: $20%$), significa que você está fazendo a pesquisa e amostrando tão poucas amostras que mesmo que o fornecedor envie algo estragado, o sino de Gauss do "status quo" mascarará a diferença real.
+Cp e Cpk respondem isso com um único número.
 
-## Modos de Amostragem
-1.  **Amostragem Aleatória Simples**: Sorteio cego (Random Number Generator).
-2.  **Amostragem Estratificada**: A fábrica de garrafas tem 3 turnos (Manhã = 50% produção, Tarde = 30%, Noite = 20%). A amostra DEVE retirar exatamente esses percentuais proporcionais. Se sortear aleatoriamente, um turno pode ser esquecido e o projeto fica enviesado.
-3.  **Amostragem Sistemática**: Tirar uma garrafa a cada hora cheia. O perigo mortal aqui é a **Sincronicidade de Frequência Oculta**. E se a máquina de extrusão dá um \`glitch\` de oscilação elétrica toda hora no ponteiro do relógio zero-zero? O Black Belt será perfeitamente enganado.
+---
+
+## Analogia: O Carro e a Garagem
+
+Pense numa garagem que tem **2 metros de largura** (isso são seus limites de especificação — LSL e USL). Seu carro tem **1,5 metros de largura** (isso é a variação do processo — 6σ).
+
+- **Cp** responde: "O carro cabe na garagem?"
+  - Carro (1,5m) < Garagem (2m) → Sim, cabe. Cp = 2/1,5 = 1,33 ✅
+  
+- **Cpk** responde: "O carro cabe **E** está centralizado?"
+  - Se o carro está encostado na parede esquerda, cabe, mas qualquer variação vai riscá-lo
+  - Cpk mede a distância até a parede MAIS PRÓXIMA
+
+---
+
+## As Fórmulas
+
+### Cp — Potencial do Processo (ignora centralização)
+\`\`\`
+Cp = (USL − LSL) / 6σ
+\`\`\`
+
+### Cpk — Capacidade Real (considera centralização)
+\`\`\`
+Cpk = min[(USL − μ) / 3σ, (μ − LSL) / 3σ]
+\`\`\`
+
+### Leitura dos Resultados:
+
+| Valor | Significado | Ação |
+|-------|-------------|------|
+| **Cp ou Cpk < 1,0** | Processo incapaz — produz defeitos regularmente | Ação urgente: reduzir variação ou negociar especificações |
+| **1,0 ≤ Cpk < 1,33** | Mal capaz — funciona no limite | Melhoria necessária |
+| **Cpk ≥ 1,33** | Capaz — padrão mínimo da indústria | Aceitável |
+| **Cpk ≥ 2,0** | Muito capaz — padrão Six Sigma | Excelente |
+
+---
+
+## Exemplo Completo Passo a Passo
+
+**Situação:** Uma linha de produção fabrica eixos com especificação de diâmetro: 10,0 ± 0,5 mm (ou seja, LSL = 9,5 mm, USL = 10,5 mm)
+
+Dados coletados (30 amostras):
+- Média (μ) = 10,1 mm
+- Desvio padrão (σ) = 0,12 mm
+
+**Cálculo do Cp:**
+Cp = (10,5 − 9,5) / (6 × 0,12) = 1,0 / 0,72 = **1,39** → O carro cabe na garagem ✅
+
+**Cálculo do Cpk:**
+- Lado superior: (10,5 − 10,1) / (3 × 0,12) = 0,4 / 0,36 = 1,11
+- Lado inferior: (10,1 − 9,5) / (3 × 0,12) = 0,6 / 0,36 = 1,67
+- Cpk = min(1,11 , 1,67) = **1,11** → O carro cabe, mas está deslocado para a direita ⚠️
+
+**Diagnóstico:** Cp é bom (1,39), mas Cpk é menor (1,11) porque o processo está descentralizado — a média (10,1) está acima do ponto médio (10,0). Ação: investigar por que o processo está desviando para cima.
+
+---
+
+## Pp e Ppk — A Versão de Longo Prazo
+
+| | Cp / Cpk | Pp / Ppk |
+|-|----------|----------|
+| **Usa** | σ de curto prazo (within) | σ de longo prazo (overall) |
+| **Representa** | Potencial se o processo fosse perfeitamente controlado | Realidade do dia a dia |
+| **Relação** | Sempre ≥ Ppk | Sempre ≤ Cpk |
+
+> 💡 **Se Cp é bom mas Pp é ruim**, significa que o processo tem capacidade, mas fora de controle — há "shifts" e "drifts" ao longo do tempo que degradam o desempenho real.
+
+---
+
+## Nível Sigma do Processo
+
+A conversão de DPMO para Nível Sigma segue a distribuição normal (com shift de 1,5σ):
+
+\`\`\`
+Nível Sigma ≈ 0,8406 + √(29,37 − 2,221 × ln(DPMO))
+\`\`\`
+
+Ou use a tabela de conversão na página de Fórmulas deste app.
       `
     }
   ]
@@ -372,81 +792,228 @@ Se o Power de teste for muito baixo (ex: $20%$), significa que você está fazen
 // ── MÓDULO 4 ─────────────────────────────────────────────
 {
   id: 4,
-  title: "Fase ANALYZE — Dinâmica Inferencial Avançada",
-  description: "ANOVA (One-Way/Two-Way), Regressão Múltipla (R-Sq, VIF) e Testes Não-Paramétricos.",
-  difficulty: "Avançado",
+  title: "Estatística Essencial para Black Belts",
+  description: "Distribuição Normal, Teste de Hipótese, Valor-P, ANOVA e Regressão — as ferramentas analíticas fundamentais.",
+  difficulty: "Intermediário",
   lessons: [
     {
       id: "4.1",
-      title: "ANOVA (Análise de Variância)",
+      title: "Distribuição Normal e Teorema Central do Limite",
       content: `
-# ANOVA: O Motor de Busca de Causas-Raiz (Y = f(x))
+# Distribuição Normal — A Curva que Governa Tudo
 
-No Analyze, o Black Belt parou de "achar" as coisas e começou a provar estatisticamente. A ferramenta máxima para comparar médias de múltiplos grupos simultaneamente é a **Análise de Variância (ANOVA)**.
+## A Ideia Central
 
-## Por que não usar o T-Test 8 vezes?
-Se você tem 4 fornecedores de resina e quer saber qual fornece o material mais resistente, você não pode parear "A com B, A com C, A com D...". Isso inflaria o **Erro Tipo I** exponencialmente (Você juraria que há diferença onde não há). A ANOVA resolve isso testando todos contra o centro de massa.
+> **A distribuição Normal (curva de sino) descreve como a maioria dos processos naturais e industriais se comporta: muitos resultados concentrados no centro, poucos nos extremos.**
 
-## A Matemática da Dispersão (The F-Statistic)
+---
 
-A ANOVA divide a variância em duas engrenagens:
-1. **SS Factor (Between)**: A variância de resistência *ENTRE* os barris dos diferentes fornecedores.
-2. **SS Error (Within)**: A variância de resistência inerente *DENTRO* do barril do mesmo fornecedor (ruído natural).
+## Por que a Normal é Tão Importante?
 
-Se o *Ruído Entre (Between)* for violentamente maior que o *Ruído Dentro (Within)*, a Estatística F (F-Value) dispara, o P-Value cai para perto de Zero (< 0.05), e o Black Belt **Rejeita $H_0$**. Conclusão Financeira: O Fornecedor DITA SIM a resistência da resina (Y depende de X).
+Imagine que você mede a altura de 10.000 pessoas adultas no Brasil. Quando plota os dados em um gráfico:
+- A maioria estará entre 1,60m e 1,80m (o centro)
+- Poucos terão menos de 1,50m ou mais de 1,95m (as extremidades)
+- O formato será uma curva simétrica de sino
 
-## One-Way vs Two-Way ANOVA
-* **One-Way**: Apenas 1 Fator controlável em níveis discretos. Ex: Avaliar Média de Vendas (Y) bloqueado apenas pelo Fator [Turno da Loja: Manhã, Tarde, Noite].
-* **Two-Way (General Linear Model)**: 2+ Fatores controláveis interagindo. Ex: Avaliar Porosidade do Aço (Y) em função do [Fornecedor: A, B] e da [Temperatura de Forja: Alta, Baixa].
-* **O P-Value de Interação (X1 * X2)**: Na Two-Way, às vezes descobrir que Fornecedor não afeta, nem Temperatura afeta isoladamente, mas a combinação *Aço Fornecedor B na Temperatura Alta* destrói o forno. Isso é interação.
+Essa forma aparece em quase tudo: peso de peças fabricadas, tempo de atendimento, temperatura de um forno, diâmetro de parafusos. Por isso ela é o alicerce do Six Sigma.
+
+---
+
+## Regra Empírica — O "68-95-99,7"
+
+Se os dados seguem distribuição Normal:
+
+| Distância da Média | % dos Dados Contidos | Na prática |
+|--------------------|---------------------|------------|
+| μ ± 1σ | 68,27% | 2 em cada 3 resultados |
+| μ ± 2σ | 95,45% | 19 em cada 20 |
+| μ ± 3σ | 99,73% | 997 em cada 1.000 |
+| μ ± 6σ | 99,99966% | Apenas 3,4 fora de cada 1.000.000 |
+
+> 💡 **Isso é o "Six Sigma" literal:** O processo está tão apertado que o limite de especificação do cliente fica a 6 desvios padrão da média. Praticamente nenhum resultado sai fora do aceitável.
+
+---
+
+## Teorema Central do Limite (TCL)
+
+> **Mesmo que os dados individuais NÃO sigam distribuição Normal, a média de amostras desses dados segue Normal — desde que a amostra seja grande o suficiente.**
+
+### Por que isso é revolucionário?
+
+Porque libera você para usar todas as ferramentas da Normal (testes t, ANOVA, regressão) mesmo quando os dados não são perfeitamente normais, **desde que trabalhe com médias de amostras de tamanho ≥ 30.**
+
+### Analogia do Dado
+
+Um dado de 6 faces dá resultados uniformes (1 a 6, cada um com ~16,7%). Nada de curva de sino.
+
+Mas se você jogar 30 dados e calcular a **média** dos 30, e repetir isso 1.000 vezes — o gráfico dessas 1.000 médias forma uma curva de sino perfeita! Esse é o TCL em ação.
+
+---
+
+## Testando se Seus Dados são Normais
+
+### Teste de Anderson-Darling
+- **H₀:** Os dados seguem distribuição Normal
+- **H₁:** Os dados NÃO seguem distribuição Normal
+- **Se p-value > 0,05:** Aceite a normalidade (dados são Normais) ✅
+- **Se p-value ≤ 0,05:** Rejeite a normalidade ❌
+
+> ⚠️ **E se os dados não são Normais?** Três opções:
+> 1. Transformar os dados (Box-Cox, log, raiz quadrada)
+> 2. Usar testes não-paramétricos (Mann-Whitney, Kruskal-Wallis)
+> 3. Se n ≥ 30, usar o TCL e trabalhar com médias
       `
     },
     {
       id: "4.2",
-      title: "Regressão Logística e Múltipla",
+      title: "Testes de Hipótese — Provando com Dados",
       content: `
-# A Arte Oculta das Regressões
+# Testes de Hipótese
 
-Enquanto a ANOVA aceita Fatores Discretos/Categóricos no Eixo X (Cor, Turno, Fornecedor), a Regressão Linear Simples e Múltipla engole **Fatores Contínuos** no Eixo X contra um Y Contínuo (Múltipla) ou Y Categórico (Logística).
+## A Ideia Central
 
-## Regressão Múltipla (Ordinary Least Squares - OLS)
-Equação: $Y = \beta_0 + \beta_1X_1 + \beta_2X_2 + ... + \epsilon$
-Exemplo: Desperdício de Tinta em Litros ($Y$) em função da Viscosidade ($X_1$), Pressão do Ar ($X_2$) e Umidade Relativa ($X_3$).
+> **Um teste de hipótese é como um julgamento: o processo é "inocente" (está funcionando bem) até que os dados provem "culpa" (há um problema real).**
 
-### Métricas MBB em Regressão Múltipla
-1. **R-Sq (R-Quadrado Ajustado)**: A prova da utilidade. Se o Adjusted $R^2$ = 86%, significa que 86% de todo o desperdício de tinta na fábrica é explicado matematicamente pelos três fatores que você colocou no modelo OLS. Sobra apenas 14% de "acaso de Deus".
-2. **P-Value Individual dos Coeficientes ($\beta$)**: Cada X entra no corredor polonês estatístico. A Pressão do Ar ($X_2$) pode ter estourado um P-Value de 0.88. O Black Belt então a remove do modelo matemático, provando que essa variável nunca teve impacto causal, desmitificando crendices de 30 anos da fábrica.
-3. **VIF (Variance Inflation Factor)**: Teste crucial de Multicolinearidade. Se dois fatores $X$ explicam a exata mesma coisa juntos (Se o modelo já tem '$X_1$: Quantidade de Clientes na Loja' e você adiciona '$X_2$: Vendas Totais'), eles causam entropia no cálculo de P-Value. O VIF > 10 exige extermínio da variável colinear duplicada.
+Você nunca pode ter 100% de certeza — mas pode ter 95% ou 99% de confiança.
 
-## Regressão Logística (Binary / Ordinal Logistic Regression)
-Seu cliente não tem paciência com dados contínuos. Ele diz: "Deu Certo (1) ou Falhou (0)". O $Y$ virou pass/fail (Binário).
-Como os resíduos da tentativa $Y$ não formam uma curva de Gauss natural, não podemos usar Correlação de Pearson, usamos a probabilística de "Log-Odds" (Curva em "S").
-A Regressão Logística diz qual fator eleva a razão de risco de Evento acontecer. Ex: "Aumentar a Idade do Motor do Caminhão em +1 ano aumenta a chance Log-Odds de Quebra da Correia em 43%".
+---
+
+## A Estrutura de Todo Teste
+
+### Passo 1: Formule as Hipóteses
+- **H₀ (Hipótese Nula):** "Não há diferença" ou "O processo está ok"
+- **H₁ (Hipótese Alternativa):** "Existe diferença" ou "O processo mudou"
+
+### Passo 2: Escolha o Nível de Significância (α)
+- Geralmente **α = 0,05** (5% de chance de cometer erro tipo I)
+- Isso significa que você aceita 5% de risco de "condenar um inocente"
+
+### Passo 3: Colete dados e calcule a estatística do teste (t, Z, F, χ²)
+
+### Passo 4: Compare com o p-value
+- **Se p-value ≤ α:** REJEITE H₀ — há evidência estatística de diferença
+- **Se p-value > α:** NÃO REJEITE H₀ — não há evidência suficiente
+
+---
+
+## Entendendo o P-Value
+
+> **O p-value responde: "Se H₀ fosse verdade, qual a chance de eu observar um resultado tão extremo quanto o que observei?"**
+
+### Analogia do Tribunal
+
+O p-value é como a "força da evidência":
+- **p = 0,001:** Evidência muito forte contra o réu (há 0,1% de chance de ele ser inocente dado o que vimos)
+- **p = 0,03:** Evidência moderada (3% de chance)
+- **p = 0,15:** Evidência fraca — não dá para condenar
+- **p = 0,87:** Quase nenhuma evidência — o réu é "liberado"
+
+---
+
+## Os 2 Tipos de Erro
+
+| | H₀ é Verdadeira (Processo OK) | H₀ é Falsa (Processo com Problema) |
+|-|-------------------------------|-------------------------------------|
+| **Rejeitar H₀** | Erro Tipo I (α) — Falso alarme | ✅ Decisão correta (Power) |
+| **Não Rejeitar H₀** | ✅ Decisão correta | Erro Tipo II (β) — Deixou o problema escapar |
+
+- **α (Tipo I):** Você viu um problema que não existia. "Chamou os bombeiros sem incêndio."
+- **β (Tipo II):** Você não viu um problema que existia. "A casa estava pegando fogo e você não percebeu."
+- **Power = 1 − β:** A capacidade do teste de detectar um problema real quando ele existe (meta ≥ 80%)
+
+---
+
+## Qual Teste Usar?
+
+| Situação | Teste |
+|----------|-------|
+| 1 grupo vs. valor alvo, dados normais | **1-Sample t-test** |
+| 1 grupo vs. valor alvo, dados não-normais | **1-Sample Wilcoxon** |
+| 2 grupos independentes, dados normais | **2-Sample t-test** |
+| 2 grupos independentes, dados não-normais | **Mann-Whitney U** |
+| Antes e depois (pareado) | **Paired t-test** |
+| 3+ grupos, dados normais | **One-Way ANOVA** |
+| 3+ grupos, dados não-normais | **Kruskal-Wallis** |
+| Proporções | **Teste de Proporção / Chi-quadrado** |
+
+> 💡 **Use o Fluxograma de Decisão na página de Fórmulas deste app** — ele guia você passo a passo até o teste correto.
       `
     },
     {
       id: "4.3",
-      title: "Testes Não-Paramétricos (Quando Gauss Falha)",
+      title: "Regressão e Correlação — Descobrindo Relações entre Variáveis",
       content: `
-# Sobrevivência em Caos Não-Normal (Testes Não Paramétricos)
+# Regressão e Correlação
 
-Os Testes-T (T-Test) e a ANOVA pressupõem fortemente (Assumptions) que seus resíduos de dados formam o Sino de Gauss. Quando você submete a tabela ao gráfico QQ-Plot ou executa o teste de normalidade Anderson-Darling e recebe P-Value < 0.05, você tem uma matriz caótica e violenta.
+## A Ideia Central
 
-Embora possamos apelar para transformações matemáticas esotéricas (Box-Cox com $\lambda = 0.5$, Transformação de Johnson), frequentemente o melhor caminho em amostragens pequenas é amputar a necessidade do sino e atacar as **Medianas Ordinais**. É aqui que brilham os testes não-paramétricos.
+> **Correlação pergunta: "Essas duas variáveis andam juntas?" Regressão responde: "Se eu mudar X, quanto Y vai mudar?"**
 
-Atenção MBB: O Poder Estatístico (P) de encontrar uma diferença verdadeira usando não-paramétricos (onde Teste-T acertaria em cheio 80% das vezes) cai drasticamente. Para compensar essa menor precisão de radar, os Não-Paramétricos exigem deltas de evidências absurdamente altos ou "Amostras Gigantes" para liberar P-Value < 0.05.
+---
 
-## O Arsenal de Resgate
+## Correlação — Medindo a Força da Relação
 
-### 1. Kruskal-Wallis (O Substituto da One-Way ANOVA)
-* **Caso**: Você quer comparar os salários entre 3 pólos estaduais de programação (SP, RJ, SC), mas uma elite de seniores enviesou todas as caudas de normalização.
-* **Técnica**: Ele oblitera a magnitude. Se alguém ganha R$ 2k ou R$ 500k, o Kruskal-Wallis muda todos os dados para "Rank Ordinal". O salário mais baixo da tabela inteira vira o Rank #1, o mais alto vira o Rank #348. Ele compara se um galpão dominou os 'Ranks'.
+### Coeficiente de Correlação de Pearson (r)
 
-### 2. 1-Sample Sign / Wilcoxon (O Substituto do 1-Sample T)
-* **Caso**: Verificar se o tempo de atendimento mediano logístico da sua frota ultrapassa o limite promissório contratual com a Amazon de "Mediana em 4 horas".
+| Valor de r | Significado | O que você vê no gráfico |
+|-----------|-------------|---------------------------|
+| r = +1,0 | Correlação positiva perfeita | Pontos alinhados subindo ↗ |
+| r = +0,7 | Forte positiva | Tendência clara de subida |
+| r = +0,3 | Fraca positiva | Tendência sutil, muito espalhado |
+| r = 0 | Sem correlação linear | Nuvem de pontos sem padrão |
+| r = −0,7 | Forte negativa | Tendência clara de descida ↘ |
+| r = −1,0 | Correlação negativa perfeita | Pontos alinhados descendo |
 
-### 3. Mann-Whitney (O Substituto do 2-Sample T)
-* **Caso**: Comparar o delta de tempo de secagem de cimento de dois tambores estocados com químicas não-gaussianas independentes. Se o rank estourar de forma desparelha entre os grupos, o P-Value afunda e a dependência temporal da nova tática de cura de cimento da concorrência é comprovada, ditando a compra ou cancelamento da adoção gerencial do cimento novo.
+> ⚠️ **Correlação NÃO é causação!** O consumo de sorvete e afogamentos são altamente correlacionados (ambos aumentam no verão). Mas sorvete não causa afogamento. A causa real é o calor.
+
+---
+
+## Regressão Linear — Prevendo Y a partir de X
+
+\`\`\`
+Y = β₀ + β₁X + ε
+\`\`\`
+
+- **β₀ (intercepto):** Valor de Y quando X = 0
+- **β₁ (inclinação):** Quanto Y muda para cada unidade adicional de X
+- **ε (erro):** A variação que o modelo não explica
+
+### Exemplo Prático
+
+**Pergunta:** "A temperatura do forno (X) afeta a dureza da peça (Y)?"
+
+Após coletar 40 dados e rodar a regressão:
+\`\`\`
+Dureza = 12,3 + 0,45 × Temperatura
+\`\`\`
+
+**Leitura:** Para cada 1°C adicional na temperatura, a dureza aumenta 0,45 unidades. Se a temperatura for 200°C: Dureza prevista = 12,3 + 0,45 × 200 = **102,3**
+
+---
+
+## R² — Quanto o Modelo Explica?
+
+\`\`\`
+R² = 1 − (SS_Residual / SS_Total)
+\`\`\`
+
+- **R² = 0,85:** O modelo explica 85% da variação em Y. Os outros 15% são ruído ou outras variáveis não incluídas
+- **R² = 0,30:** O modelo só explica 30% — as variáveis preditoras não são suficientes
+
+> 💡 **Para regressão múltipla**, use o **R² Ajustado** em vez do R². O R² sempre sobe ao adicionar variáveis — mesmo inúteis. O R² Ajustado penaliza a adição de variáveis que não melhoram o modelo de verdade.
+
+---
+
+## Verificando se a Regressão é Válida (Resíduos)
+
+Uma regressão só é confiável se os resíduos (erros) forem:
+
+1. **Normais** — Histogram dos resíduos deve parecer uma curva de sino
+2. **Independentes** — Sem padrão ao longo do tempo
+3. **Homocedasticidade** — A dispersão dos resíduos é constante (não aumenta em forma de funil)
+4. **Média zero** — Devem flutuar ao redor de zero, sem tendência
+
+Se qualquer uma dessas condições falha, o modelo pode estar dando previsões enganosas.
       `
     }
   ]
@@ -455,169 +1022,247 @@ Atenção MBB: O Poder Estatístico (P) de encontrar uma diferença verdadeira u
 // ── MÓDULO 5 ─────────────────────────────────────────────
 {
   id: 5,
-  title: "Fase ANALYZE — Encontrando as Causas",
-  description: "Fishbone, 5 Porquês, Pareto, FMEA e testes de hipótese aplicados.",
+  title: "Fase ANALYZE — Encontrando as Causas-Raiz",
+  description: "Diagrama de Ishikawa, 5 Porquês, Multi-Vari, ANOVA e FMEA — provando as causas reais com dados.",
   difficulty: "Intermediário",
   lessons: [
     {
       id: "5.1",
-      title: "Diagrama de Ishikawa (Fishbone)",
+      title: "Ferramentas de Geração de Hipóteses",
       content: `
-# Diagrama de Ishikawa (Causa e Efeito)
+# Ferramentas para Gerar Hipóteses
 
-## O que é?
+## A Ideia Central
 
-O Diagrama de Ishikawa (ou Espinha de Peixe / Fishbone) é uma ferramenta visual para **organizar e categorizar causas potenciais** de um problema.
+> **Antes de provar qualquer coisa com dados, você precisa ter candidatos a culpados. As ferramentas de geração de hipóteses são o "brainstorming estruturado" que lista todos os suspeitos.**
 
-Criado pelo Dr. Kaoru Ishikawa em 1968, ele é o ponto de partida para qualquer análise de causa-raiz.
+---
 
-## Estrutura
+## 🐟 Diagrama de Ishikawa (Espinha de Peixe)
 
-\`\`\`
-                    CAUSAS                    EFEITO
-[Máquinas]  ──────────┐
-[Métodos]   ───────── │ ──────────────────→ [PROBLEMA / DEFEITO]
-[Mão de Obra] ─────── │
-[Material]  ──────────┘
-[Meio Ambiente]
-[Medição]
-\`\`\`
+### O que é?
+Um diagrama visual que organiza possíveis causas em categorias, partindo do efeito (o problema) que fica na "cabeça do peixe".
 
-## Os 6M (Categorias Clássicas para Manufatura)
+### Os 6M — As Categorias Padrão
 
-| M             | O que inclui                                    |
-|---------------|-------------------------------------------------|
-| **Máquinas**  | Equipamentos, ferramentas, tecnologia           |
-| **Métodos**   | Procedimentos, instruções, fluxos de trabalho  |
-| **Mão de Obra**| Habilidades, treinamento, motivação, rotatividade |
-| **Material**  | Matéria-prima, componentes, fornecedores       |
-| **Meio Ambiente** | Temperatura, umidade, layout, ruído        |
-| **Medição**   | Acurácia, calibração, sistema de medição       |
+| Categoria | O que investiga | Exemplo |
+|-----------|----------------|---------|
+| **Máquina** | Equipamento, ferramenta, software | Máquina desalinhada, sensor descalibrado |
+| **Método** | Procedimento, processo, instrução de trabalho | Procedimento ambíguo, falta de padronização |
+| **Material** | Matéria-prima, insumo, informação de entrada | Lote de fornecedor com impurezas |
+| **Mão de Obra** | Treinamento, experiência, fadiga | Operador novo sem treinamento adequado |
+| **Medição** | Sistema de medição, instrumentos, critérios | Paquímetro fora de calibração |
+| **Meio Ambiente** | Temperatura, umidade, iluminação, turno | Umidade excessiva no turno da noite |
 
-## As 8P (Para Processos de Serviço)
+### Como Conduzir
 
-Pessoas, Procedimentos, Políticas, Produto (serviço), Preço, Praça, Promoção, Produtividade.
+1. Escreva o **problema** na cabeça do peixe (ex: "Taxa de defeito = 12%")
+2. Desenhe as 6 espinhas (categorias 6M)
+3. Para cada categoria, pergunte ao time: **"O que nesta categoria pode estar causando o problema?"**
+4. Anote cada possível causa como uma "sub-espinha"
+5. Vote nas **3-5 causas mais prováveis** para investigar com dados
 
-## Como Conduzir uma Sessão de Fishbone
+---
 
-1. **Escreva o problema** (efeito) na cabeça do peixe — seja específico
-2. **Desenhe as espinhas** com as categorias
-3. **Brainstorm em time** — use post-its, sem julgamento
-4. **Organize as causas** nas categorias corretas
-5. **Aprofunde com "Por quê?"** — adicione sub-espinhas
-6. **Vote nas causas mais prováveis** para priorizar análise
-7. **Valide com dados** — não aceite causas sem evidência
+## ❓ 5 Porquês
 
-> ⚠️ **Armadilha:** O fishbone é geração de hipóteses, não prova de causa. Toda causa identificada precisa ser **validada com dados** na sequência.
+### A Ideia
+Pergunte "por quê?" repetidamente até chegar à **causa-raiz**, não ao sintoma.
+
+### Exemplo Prático
+
+**Problema:** O cliente reclamou que a entrega atrasou.
+
+1. **Por quê?** Porque o pedido saiu do armazém 2 dias depois do prazo.
+2. **Por quê?** Porque o setor de separação não recebeu a ordem a tempo.
+3. **Por quê?** Porque o sistema de vendas só gera ordem após aprovação de crédito.
+4. **Por quê?** Porque a aprovação de crédito leva 3 dias.
+5. **Por quê?** Porque o analista de crédito atende sozinho 200 pedidos por dia sem critério de priorização.
+
+**Causa-raiz:** Falta de priorização na análise de crédito, não "atraso no armazém".
+
+> 💡 **A beleza dos 5 Porquês:** Cada "por quê" te move de um sintoma para uma causa mais profunda. O erro mais comum é parar cedo — resolver o "pedido atrasou no armazém" sem investigar o que causou o atraso.
+
+> ⚠️ **Limitação:** O método é subjetivo. Pessoas diferentes podem seguir cadeias causais diferentes. Use-o para GERAR hipóteses, não para PROVAR causas. A prova vem com dados (testes estatísticos).
+
+---
+
+## 📊 Análise Multi-Vari
+
+### O que é?
+Um estudo visual que ajuda a identificar **onde está a maior variação** no processo — é entre posições? entre peças? entre turnos? entre dias?
+
+### Os 3 Níveis de Variação
+
+| Nível | O que é | Exemplo | Causa típica |
+|-------|---------|---------|--------------|
+| **Within** (dentro da peça) | Variação entre pontos de medição na mesma peça | Diâmetro varia entre topo e base do cilindro | Desgaste da ferramenta |
+| **Between** (entre peças) | Variação entre peças consecutivas | Cada peça sai com diâmetro diferente | Ajuste da máquina, material |
+| **Temporal** | Variação ao longo do tempo (turno, dia, semana) | Peças ficam maiores à tarde | Dilatação térmica, fadiga do operador |
+
+### Por que usar?
+Antes de rodar ANOVA ou testes sofisticados, o Multi-Vari dá uma **pista visual** rápida de onde investir a investigação estatística.
+
+> 💡 **Regra prática:** Se a maior variação é "within", o problema é na peça/máquina. Se é "between", é entre unidades (material, setup). Se é "temporal", é ambiental ou humano.
       `
     },
     {
       id: "5.2",
-      title: "Análise de Pareto",
+      title: "ANOVA — Testando Diferenças entre Grupos",
       content: `
-# Análise de Pareto
+# ANOVA — Análise de Variância
 
-## O Princípio de Pareto (80/20)
+## A Ideia Central
 
-Vilfredo Pareto, economista italiano, observou no século XIX que 80% da riqueza da Itália estava concentrada em 20% da população.
+> **ANOVA responde: "Existe diferença significativa entre os grupos, ou a variação que eu vejo é apenas ruído aleatório?"**
 
-Aplicado à qualidade: **80% dos problemas são causados por 20% das causas**.
+### Analogia: O Professor e as 3 Turmas
 
-> Joseph Juran traduziu isso para a indústria como "separar os poucos vitais dos muitos triviais".
+Um professor aplica a mesma prova em 3 turmas. As médias são: Turma A = 7,2, Turma B = 6,8, Turma C = 7,5.
 
-## O Diagrama de Pareto
+**Pergunta:** Essas diferenças são reais (algo nas turmas é diferente) ou são apenas variação normal entre alunos?
 
-Um gráfico de barras onde:
-- As barras são ordenadas da maior para a menor frequência
-- A linha de curva acumulada mostra o percentual cumulativo
-- O foco vai para as barras que chegam a ~80% da curva
+ANOVA responde isso. Ela compara a **variação entre grupos** (as turmas) com a **variação dentro dos grupos** (os alunos dentro de cada turma).
 
-## Como Construir
+---
 
-1. Listar todas as categorias de defeitos/problemas
-2. Contar a frequência de cada categoria
-3. Calcular porcentagem de cada uma
-4. Calcular porcentagem acumulada
-5. Ordenar da maior para menor
-6. Plotar barras + linha cumulativa
+## Como Funciona
 
-## Exemplo: Defeitos em Chapas de Granito
+### A Estatística F
 
-| Defeito                  | Qtd  | %     | % Acum |
-|--------------------------|------|-------|--------|
-| Trinca durante polimento | 145  | 38,5% | 38,5%  |
-| Cor fora do padrão       | 98   | 26,0% | 64,5%  |
-| Espessura irregular      | 67   | 17,8% | 82,3%  |
-| Borda lascada            | 38   | 10,1% | 92,3%  |
-| Outros                   | 29   | 7,7%  | 100%   |
-| **Total**                | **377** |       |        |
+\`\`\`
+F = Variação ENTRE os grupos / Variação DENTRO dos grupos
+    = MS_Between / MS_Within
+\`\`\`
 
-**Conclusão:** Eliminando apenas as 3 primeiras causas, resolvemos 82% de todos os defeitos.
+| Resultado | Interpretação |
+|-----------|---------------|
+| **F ≈ 1** | A variação entre grupos é similar à variação dentro dos grupos → as diferenças são provavelmente ruído |
+| **F >> 1** | A variação entre grupos é MUITO maior que a dentro → há diferença real |
 
-## Pareto Estratificado
+---
 
-Para ir mais fundo, aplique Pareto em múltiplas camadas:
-1. Por tipo de defeito
-2. Por turno de produção
-3. Por máquina
-4. Por operador
-5. Por lote de matéria-prima
+## Tipos de ANOVA
 
-Cada nível de estratificação revela novas informações sobre as causas.
+| Tipo | Quando usar | Exemplo |
+|------|-------------|---------|
+| **One-Way ANOVA** | 1 fator, 3+ níveis | "Os 3 turnos produzem com a mesma qualidade?" |
+| **Two-Way ANOVA** | 2 fatores | "Turno E tipo de material afetam a qualidade?" |
+| **ANOVA com Blocos** | 1 fator controlando outra fonte de variação | "Turnos diferem se eu controlar a máquina?" |
+
+---
+
+## Exemplo Passo a Passo
+
+**Pergunta:** "O turno de produção (A, B, C) afeta o peso médio da peça?"
+
+### Dados:
+- Turno A: média = 500,2 g (n=25)
+- Turno B: média = 498,7 g (n=25)
+- Turno C: média = 501,5 g (n=25)
+
+### Resultado da ANOVA:
+
+| Fonte de Variação | SS | gl | MS | F | p-value |
+|--------------------|-----|----|----|---|---------|
+| Entre Turnos | 98,4 | 2 | 49,2 | 6,83 | 0,002 |
+| Dentro dos Turnos | 518,7 | 72 | 7,2 | | |
+| Total | 617,1 | 74 | | | |
+
+**p-value = 0,002 < 0,05 → REJEITA H₀**
+
+**Conclusão:** Pelo menos um turno produz peças com peso significativamente diferente dos outros.
+
+### E agora? — Post-Hoc (Tukey)
+ANOVA diz que "alguém é diferente", mas não diz quem. Para isso, use o **teste de Tukey HSD**:
+- A vs. B: p = 0,35 → Sem diferença
+- A vs. C: p = 0,21 → Sem diferença
+- **B vs. C: p = 0,001** → Turno B e C são significativamente diferentes!
+
+> 💡 **ANOVA é o "radar". Tukey é a "mira que mostra o alvo exato."**
       `
     },
     {
       id: "5.3",
-      title: "Análise Causal Multi-Fatorial (Além do Fishbone)",
+      title: "FMEA — Mapeando Riscos Antes que Aconteçam",
       content: `
-# A Ilusão do Ishikawa Clássico
+# FMEA — Failure Mode and Effects Analysis
 
-O Diagrama de Ishikawa (Espinha de Peixe) clássico e o 5 Porquês (5 Whys) são armadilhas letais para Black Belts inexperientes se usados isoladamente. Eles frequentemente geram um "Brainstorming de Opiniões" onde os engenheiros culpam "Falta de Treinamento" ou "Erro Humano" para todos os problemas.
+## A Ideia Central
 
-## O Framework Causal MBB
-No nível Master, hipóteses nascidas no Fishbone **NÃO** entram na matriz de soluções até passarem pelo purgatório estatístico:
-1. **Brainstorm Causal (Fishbone / 6 Ms)**: Gera 50+ causas potenciais (O quê?).
-2. **Matriz de Causa e Efeito (C&E Matrix)**: Corta as 50 causas para as 10 mais matematicamente correlacionadas com os CTQs do cliente (Priorização Cruzada).
-3. **Análise Inferencial**: As 10 causas sobreviventes são jogadas no Minitab (ANOVA, Regressão, Qui-Quadrado).
-4. **O Veredito**: Somente as causas com *P-Value < 0.05* são oficialmente declaradas **Causas Raiz (Vital Few)**. O resto é Ruído (Trivial Many).
+> **FMEA é uma abordagem proativa: em vez de esperar o problema acontecer e investigar depois, você ANTECIPA as falhas possíveis e age preventivamente.**
 
-## O Erro Humano Nunca é a Raiz
-Se o 5º Porquê terminar em "Operador esqueceu", o método falhou. O ser humano é biologicamente projetado para esquecer após 4 horas de turno noturno. A causa raiz real é "O sistema permitiu matematicamente que a falha mnemônica humana avançasse para o próximo estágio".
-      `
-    },
-    {
-      id: "5.4",
-      title: "FMEA e FMEA Reverso (R-FMEA)",
-      content: `
-# Análise de Modo e Efeitos de Falha (FMEA) Avançada
+---
 
-O FMEA clássico calcula o **RPN (Risk Priority Number) = Severidade x Ocorrência x Detecção**.
-Projetos param no FMEA tradicional de prancheta, preenchido no Excel em salas de reunião com ar condicionado. No longo prazo, a Ocorrência nunca cai, porque o documento morre no servidor.
+## As 3 Perguntas do FMEA
 
-## O R-FMEA (FMEA Reverso)
-Uma tática agressiva de montadoras europeias e aviação (Stellantis, Airbus).
-No R-FMEA, o Black Belt **não** tenta prever o que pode dar errado. Ele pega o FMEA antigo aprovado e vai fisicamente para o chão de fábrica (Gemba) para tentar ativamente **fraudá-lo**:
-* Se o FMEA diz: "Detecção = Nível 1 (Sensor Optico barrará peça com 100% de certeza)".
-* O Black Belt pega uma peça deliberadamente sucateada (Red Rabbit) e a joga disfarçadamente na esteira. Se o sensor piscar e a peça passar, a "Detecção 1" vira uma mentira criminal e vai para "Detecção 10" (Cega), o RPN estoura e a linha é parada.
+Para cada etapa do processo, pergunte:
 
-## Fatores de Criticalidade Subestimada
-Se a **Severidade = 10** (Risco de Morte ou Recall Total), o valor algébrico do RPN não importa. Mesmo que Ocorrência e Detecção sejam = 1 ($RPN = 10 \\times 1 \\times 1 = 10$), uma Severidade Massiva aciona obrigatoriedade de Poka-Yoke Direto Nível 3. Você não aceita risco 1 em 1-bilhão para explosão de motores comerciais.
-      `
-    },
-    {
-      id: "5.5",
-      title: "Simulação de Monte Carlo no Analyze",
-      content: `
-# A Previsibilidade do Caos via Monte Carlo
+1. **O que pode falhar?** → Modo de Falha
+2. **O que acontece quando falha?** → Efeito da Falha
+3. **Por que falha?** → Causa da Falha
 
-No mundo real, variáveis de entrada ($X$) não sofrem variação paradas, elas oscilam *juntas e dinamicamente*. Se você descobre que o Tempo de Forja ($X_1$) e a Qualidade do Aço ($X_2$) ditam a Força da Peça ($Y$), calcular o Y apenas com a Média do $X_1$ e Média do $X_2$ é amadorismo linear.
+---
 
-## A Dinâmica Multi-Estocástica
-A Simulação de Monte Carlo processa a equação de transferência inferida no Analyze ($Y = f(X_i)$) iterando **100.000 ou 1 Milhão de cenários aleatórios** em 1 minuto usando distribuições probabilísticas (Gauss, Weibull, Lognormal) para criar o "Espaço do Caos" de cada variável X de entrada.
+## Os 3 Componentes do RPN
 
-## Para que serve?
-1. **DPMO Futuro Preditivo**: Ele prediz qual será sua exata Taxa de Defeitos se você tolerar a distribuição atual de compras do fornecedor no ano que vem.
-2. **Robust Allocation**: Se o Monte Carlo provar que apertar o fornecedor e exigir 99,99% de linearidade do Aço ($X_2$) custar US$ 5 Milhões, e diminuir o Tempo de Forja ($X_1$) custar apenas US$ 10 Mil, e no final o Limite de Elasticidade ($Y$) fica estável em ambos os casos, a Equipe Financeira escolhe a rota mais barata do $X_1$. Otimização Paramétrica Pura.
+**RPN (Risk Priority Number) = Severidade × Ocorrência × Detecção**
+
+### Severidade (S) — escala 1 a 10
+> "Se essa falha acontecer, quão grave é para o cliente?"
+
+| Faixa | Significado | Exemplo |
+|-------|-------------|---------|
+| 1–3 | Menor — cliente quase não percebe | Embalagem com um risco estético |
+| 4–6 | Moderado — causa insatisfação | Produto entregue com atraso de 1 dia |
+| 7–8 | Alto — defeito funcional | Peça não encaixa no produto final |
+| 9–10 | Crítico — risco de segurança | Freio de carro falha em uso normal |
+
+### Ocorrência (O) — escala 1 a 10
+> "Com que frequência essa causa acontece?"
+
+| Faixa | Frequência | Probabilidade |
+|-------|-----------|---------------|
+| 1–2 | Muito rara | < 1 em 1.000.000 |
+| 3–4 | Baixa | 1 em 100.000 |
+| 5–6 | Moderada | 1 em 1.000 |
+| 7–8 | Alta | 1 em 100 |
+| 9–10 | Muito alta | > 1 em 10 |
+
+### Detecção (D) — escala 1 a 10
+> "Se a falha estiver acontecendo, os controles atuais vão detectar A TEMPO?"
+
+**Atenção: A escala é INVERTIDA — 1 = fácil de detectar, 10 = impossível.**
+
+| Faixa | Capacidade de Detecção |
+|-------|------------------------|
+| 1–2 | Quase certo de detectar (sensores automáticos) |
+| 3–4 | Alta probabilidade (inspeção 100%) |
+| 5–6 | Moderada (amostragem periódica) |
+| 7–8 | Baixa (inspeção visual esporádica) |
+| 9–10 | Praticamente impossível detectar antes de chegar ao cliente |
+
+---
+
+## Interpretando o RPN
+
+| RPN | Prioridade | Ação |
+|-----|-----------|------|
+| **> 200** | Crítica | Ação imediata — não pode esperar |
+| **100–200** | Alta | Planejar ação em até 30 dias |
+| **50–100** | Média | Incluir no próximo ciclo de melhoria |
+| **< 50** | Baixa | Monitorar |
+
+> ⚠️ **Regra de ouro do FMEA:** Se a Severidade é 9 ou 10, **tome ação independentemente do RPN total.** Risco de segurança ou risco regulatório nunca pode ser ignorado, mesmo que a ocorrência seja baixa.
+
+---
+
+## FMEA de Processo vs. FMEA de Design
+
+| Tipo | Foco | Quando usar |
+|------|------|-------------|
+| **PFMEA** | Falhas nas etapas do processo de produção | Fases Analyze e Control |
+| **DFMEA** | Falhas no design do produto antes da fabricação | Design for Six Sigma (DMADV) |
       `
     }
   ]
@@ -626,62 +1271,87 @@ A Simulação de Monte Carlo processa a equação de transferência inferida no 
 // ── MÓDULO 6 ─────────────────────────────────────────────
 {
   id: 6,
-  title: "Fase IMPROVE — Engenharia de Soluções",
-  description: "DOE, Fractional Factorial, Superfície de Resposta (RSM) e Poka-Yokes Level 3.",
+  title: "Fase IMPROVE — Projetando Soluções",
+  description: "DOE (Design of Experiments), brainstorming estruturado, piloto e validação — como encontrar e provar a melhor solução.",
   difficulty: "Avançado",
   lessons: [
     {
       id: "6.1",
-      title: "DOE — Desenho de Experimentos Massivos",
+      title: "Design of Experiments (DOE) — Testando com Inteligência",
       content: `
-# DOE (Design of Experiments) - A Arma Nuclear do Six Sigma
+# Design of Experiments — DOE
 
-Enquanto A ANOVA e Regressão *observam* o processo caótico trabalhando e tentam achar correlações passivas, o DOE entra chutando a porta. O Black Belt ativamente **manipula e força** a fábrica a rodar configurações extremas programadas ($X_i$) para extrair a alma (Equação Ótima) do Processo de Resposta ($Y$).
+## A Ideia Central
 
-## O Crime do OFAT (One Factor at a Time)
-O senso comum de engenharia é "Muda um fator, testa. Depois segura ele, muda o próximo". O OFAT é criminoso porque é matematicamente cego à **Interação Fatorial Cruzada**. O DOE altera os 3 ou 5 fatores de uma vez só em uma matriz ortogonal. Ele revela, por exemplo, que Alta Pressão só aumenta a Velocidade SE (E SOMENTE SE) a Temperatura estiver Baixa ao mesmo tempo. OFAT jamais veria isso.
+> **DOE é o método mais eficiente para descobrir quais fatores realmente importam e qual é a melhor configuração — testando tudo de forma simultânea e organizada, em vez de mudar um fator de cada vez.**
 
-## Fractional Factorial (Resolução III, IV, V)
-Se você tem 7 Fatores X para testar em 2 níveis (Alto +1, Baixo -1), um DOE Fatorial Completo exigiria $2^7 = 128$ experimentos brutais cruzados de fábrica inteira (Custo Infinito).
-O **DOE Fracionado** roda apenas $\\frac{1}{4}$ dos testes ($2^{7-2} = 32$), "Confundindo" propositalmente efeitos principais com Interações de Ordem 4 (que raramente existem na física planetária). Com 32 forjadas, o MBB mapeia a fábrica e desliga 4 fatores estúpidos, matando custos instantaneamente.
-      `
-    },
-    {
-      id: "6.2",
-      title: "Método RSM e Design de Taguchi",
-      content: `
-# O Topo da Montanha Matemática
+---
 
-Quando o DOE Fatorial localiza onde está o "ouro" (as configurações que maximizam ou minimizam o Y), ele estaciona nas vizinhanças planas. Para realmente atingir o cume preciso da montanha do processo, entramos na Superfície de Resposta.
+## O Problema do "Um de Cada Vez" (OFAT)
 
-## RSM (Response Surface Methodology) - Central Composite Design
-A RSM eleva o modelo DOE 2-Level adicionando "Star Points" e "Center Points" na matriz geométrica do experimento estatístico. Ele abandona as correntes lineares ($y = ax + b$) e mapeia a **Curvatura Quadrática** ($y = ax^2 + bx + c$). Ele literalmente desenha um mapa topográfico 3D na tela do Minitab para o CEO apontar o dedo no cume perfeito (O Ponto de Sela Ótimo) minimizando custos de resina X minMaxando resistência mecânica.
+Na maioria das fábricas e escritórios, quando algo não funciona, o operador muda **um fator por vez** e observa o resultado. Isso é chamado de OFAT (One Factor At a Time) e tem 3 problemas graves:
 
-## Design Robusto de Genichi Taguchi
-DOE Max-Min tradicional foca em manter a peça perfeitamente no Alvo ($\\mu$). Taguchi chuta essa lógica e diz: 
-*"Não me importo se o processo desviar da média. Eu quero achar uma combinação estrutural interna na qual a Variação Climática Externa ou Variação Barata de Compra de Estoque (Fatores de Ruído) não importem de forma alguma."*
+1. **Demora muito:** 4 fatores × 2 níveis = 8 experimentos isolados, sem garantia de sucesso
+2. **Não detecta interações:** Às vezes o efeito do fator A depende do nível do fator B — OFAT nunca descobre isso
+3. **Pode levar à solução errada:** Você encontra o "melhor A" com B fixo, mas o "melhor A" muda quando B muda
 
-Através da matriz Sinal-Ruído (S/N Ratio), Taguchi parametriza um amortecedor matemático processual. Em carros japoneses, essa é a diferença de construir um limpador de parabrisa perfeitamente liso (Americano/Europeu clássico) contra construir um que não emperre *MESMO COM* neve congelante na mola (Robusto/Japonês).
-      `
-    },
-    {
-      id: "6.3",
-      title: "Defesas Invulneráveis: Mistake Proofing C-Level",
-      content: `
-# Engavetando o Defeito: Poka-Yoke Níveis I, II e III
+### Analogia: Cozinhando um Bolo
 
-Após achar os X vitais no DOE, confiar em "Treinamento, Manuais Novos de POP ou Placas Visuais na parede" para sustentar isso na fase Improve é garantia de fracasso (Slide-Show Savings). A entropia derruba papéis em 6 meses.
-A equipe exige Poka-Yoke, mas a hierarquia de barreira é dramática:
+Você quer o bolo perfeito. OFAT diz: "teste primeiro a temperatura, depois o tempo, depois a quantidade de fermento." Mas e se o fermento funciona diferente em temperaturas altas vs. baixas? OFAT não descobre. **DOE testa combinações**, revelando essas interações.
 
-### Nível 1: Mitigação Informativa (Pífio)
-O sistema bipa ou acende luz vermelha se o operador tentar conectar o cabo errado no painel. Assumo que o operador é atento e vai parar o que está fazendo (Ele vai ignorar o beep por estar de fones). Risco Residual: Extremamente Alto.
+---
 
-### Nível 2: Detecção Condicional de Erro Interceptável
-O operador insere o cabo errado, o erro temporalmente acontece, mas um CLP logistico congela e trava a porta pneumática impedindo o reboque ou fechamento do módulo final. O defeito nasceu na estação de trabalho, mas morre na estação de trabalho e impede a máquina de cuspir o lote.
+## Terminologia Essencial
 
-### Nível 3: Prevenção Pura do Ato Falho (Design Zero-Defect)
-O *Bujão* (plug) do cabo tem forma hexagonal assimétrica. O buraco da placa errada é circular. Pela pura manifestação da física em 3a Dimensão, um primata ou um operador vendado sob efeito de stress não consegue mecanicamente inserir o pólo positivo no negativo. 
-Este nível **Mata a Medição e o Controle Estatístico e Erradica a Categoria COPQ Externa.** Não há mais o que medir no Phase Control. O Processo alcançou 8 Sigma Naturais.
+| Termo | O que é | Exemplo |
+|-------|---------|---------|
+| **Fator (X)** | Variável de entrada que você controla | Temperatura, Pressão, Velocidade |
+| **Nível** | Valores que o fator assume no experimento | Temperatura: 150°C (baixo) e 200°C (alto) |
+| **Resposta (Y)** | O resultado que você mede | Dureza, Brilho, Tempo de ciclo |
+| **Rodada (Run)** | Uma combinação específica de níveis dos fatores | T=150°C, P=2 bar, V=800 rpm |
+| **Replicação** | Repetir a mesma rodada para medir a variação natural | 3 réplicas de cada rodada |
+| **Interação** | O efeito de um fator DEPENDE do nível de outro | Velocidade alta é boa com grão 400, mas ruim com grão 200 |
+
+---
+
+## Fatorial Completo (2ᵏ)
+
+Para k fatores, cada um com 2 níveis (baixo e alto), testa **todas** as 2ᵏ combinações:
+
+| k fatores | Rodadas (sem réplica) |
+|-----------|----------------------|
+| 2 | 2² = 4 |
+| 3 | 2³ = 8 |
+| 4 | 2⁴ = 16 |
+| 5 | 2⁵ = 32 |
+
+### Exemplo: 3 Fatores (8 Rodadas)
+
+| Rodada | Velocidade | Pressão | Grão | Brilho (Y) |
+|--------|-----------|---------|------|------------|
+| 1 | Baixa | Baixa | Fino | 62 |
+| 2 | Alta | Baixa | Fino | 71 |
+| 3 | Baixa | Alta | Fino | 65 |
+| 4 | Alta | Alta | Fino | 78 |
+| 5 | Baixa | Baixa | Grosso | 55 |
+| 6 | Alta | Baixa | Grosso | 60 |
+| 7 | Baixa | Alta | Grosso | 58 |
+| 8 | Alta | Alta | Grosso | 63 |
+
+**Resultado da análise:** Velocidade × Grão tem interação significativa — o efeito da velocidade é maior com grão fino (melhora 9 pontos) do que com grão grosso (melhora apenas 5).
+
+---
+
+## Fatorial Fracionário
+
+Quando há muitos fatores (5+), o fatorial completo exige rodadas demais. O **fatorial fracionário** testa apenas uma fração, assumindo que interações de 3+ vias são desprezíveis.
+
+| Design | Rodadas | Uso |
+|--------|---------|-----|
+| 2⁵⁻¹ | 16 (em vez de 32) | Screening: identificar fatores importantes |
+| 2⁶⁻² | 16 (em vez de 64) | Screening com muitos fatores |
+
+> 💡 **Estratégia em 2 etapas:** 1) Use fatorial fracionário para descobrir quais fatores importam (screening). 2) Use fatorial completo 2² ou 2³ apenas com os fatores importantes para otimizar.
       `
     }
   ]
@@ -690,73 +1360,99 @@ Este nível **Mata a Medição e o Controle Estatístico e Erradica a Categoria 
 // ── MÓDULO 7 ─────────────────────────────────────────────
 {
   id: 7,
-  title: "Fase CONTROL — Sustentabilidade Autônoma",
-  description: "CEP Preditivo (CUSUM, EWMA), Planos de Controle Dinâmicos e Automação de Resposta.",
-  difficulty: "Avançado",
+  title: "Fase CONTROL — Sustentando a Melhoria",
+  description: "SPC, Cartas de Controle, Plano de Controle e Gestão Visual — como garantir que o problema não volte.",
+  difficulty: "Intermediário",
   lessons: [
     {
       id: "7.1",
-      title: "Além do CEP Clássico (Shewhart)",
+      title: "SPC — Controle Estatístico do Processo",
       content: `
-# A Lerdeza do CEP Tradicional
+# SPC — Controle Estatístico do Processo
 
-O Controle Estatístico de Processo Clássico (Cartas de Shewhart como X-Bar R ou P-Chart) foi criado em 1924. Ele é excelente para detectar falhas massivas, mas sofre de **Inércia Estatística**: ele exige que o processo fuja muito do centro (3 Sigmas) para disparar o alarme vermelho.
+## A Ideia Central
 
-Se a sua máquina envasadora comercial começar a vazar meros 2ml a mais de líquido por garrafa (um desvio sutil de 0.5 Sigma da média), a Carta X-Bar R vai considerar "Normalidade Aleatória" e não vai avisar ninguém. O Black Belt então perde US$ 2 milhões em líquido derramado em 6 meses.
+> **SPC é o sistema de alarme do processo: monitora continuamente o comportamento e avisa quando algo sai do normal — ANTES que o defeito chegue ao cliente.**
 
-## As Cartas de Memória (CUSUM e EWMA)
-No nível MBA, você não abandona o SPC, você o artilha com memória matemática.
+Walter Shewhart criou as primeiras cartas de controle na Bell Labs em 1924. Desde então, nenhuma fábrica séria opera sem elas.
 
-### 1. CUSUM (Cumulative Sum Control Chart)
-Ao invés de plotar a medição atual no gráfico, o CUSUM plota o **Acúmulo do Erro**. Ele age como uma lupa financeira. Se a máquina envasadora errar 2ml a mais todo dia, o CUSUM soma esses 2ml ($2, 4, 6, 8, 10...$) e a linha do gráfico decola exponencialmente cruzando o limite de alerta em 48 horas, não em 6 meses. Ele detecta micro-turnos com eficiência implacável.
+---
 
-### 2. EWMA (Exponentially Weighted Moving Average)
-Excelente para indústrias químicas contínuas. O EWMA pondera os dados: ele dá 80% de importância para a temperatura da caldeira aferida hoje, e decai a importância das medições da semana passada exponencialmente. Ele não sofre da inércia dos limites estáticos.
-      `
-    },
-    {
-      id: "7.2",
-      title: "Planos de Controle Responsivos",
-      content: `
-# O Fim do Documento Morto
+## Os 2 Tipos de Variação
 
-Planos de Controle normais (Control Plans) frequentemente viram documentos engavetados na ISO-9001. A transição do Master Black Belt converte esse Excel em OCAPs dinâmicos.
+### ✅ Variação Comum (Aleatória)
+- É **inerente** ao processo — sempre vai existir
+- Resultado de MUITAS causas pequenas interagindo: vibração da máquina, umidade do ar, mão ligeiramente diferente do operador
+- **Não pode ser eliminada sem mudar o processo inteiro** (redesenho)
+- Na carta de controle: pontos flutuando normalmente dentro dos limites
 
-## OCAP (Out-of-Control Action Plan)
-Um OCAP não diz: "Se a máquina quebrar, avise a manutenção". Um OCAP de classe mundial é um fluxograma enraizado na mente (ou no tablet) do operador.
-* **Sintoma Limitador Cruzado**: Se a Carta EWMA estourar a linha superior E a pressão do tubo estiver < 2 Bar, a ação é: "Gire a Válvula 4x e aguarde 10 min".
-* **Autoridade de Corte**: O operador DEVE ter autonomia para desligar a central sem pedir permissão ao diretor se a restrição Z for violada. Esse é o empoderamento real do Lean.
+### ❌ Variação Especial (Causas Atribuíveis)
+- Tem uma **causa identificável específica**: troca de fornecedor, quebra de ferramenta, novo operador
+- Sinaliza que algo **mudou** no processo
+- Na carta de controle: pontos fora dos limites ou padrões anormais
 
-## Controle C-Level: Dashboards de Governança
-Como Black Belt, você entregou a linha para o supervisor no "Hand-Off", mas você pendurou os dados em PowerBI reportando para a Diretoria. O Projeto Six Sigma não tira férias. Se a governança apitar vermelho 1 ano depois, o sponsor cancela o bônus do gerente da área (Ownership processual garantido).
-      `
-    },
-    {
-      id: "7.3",
-      title: "As 8 Regras de Nelson e Seleção de Cartas SPC",
-      content: `
-# Interpretando Subliminares: Regras de Nelson
+### Analogia: Frequência Cardíaca
 
-Se um inspetor acha que um ponto precisa sair fora da Zona de Controle ($\u00b1 3\\sigma$) para o processo estar \`Fora de Controle\`, ele não sabe SPC. As tendências matemáticas e físicas denunciam a falha de máquina antes da destruição real de um lote.
-As 8 Regras Western Electric (Regras de Nelson):
-1.  **Regra 1**: 1 ponto a mais de 3 desvios da linha central. (Explosão súbita).
-2.  **Regra 2**: 9 pontos consecutivos no mesmo lado do Centro. (A média deslocou sutilmente permanentemente, indicando mudança na temperatura fria da sala).
-3.  **Regra 3**: 6 pontos estritamente crescentes ou decrescentes seguidos. (A ferramenta do Torno ou a agulha está sofrendo **Desgaste / Wear** gradual por fricção temporal).
-4.  **Regra 4**: 14 pontos oscilantes (up-down-up-down) (Válvula solta oscilando a mola em over-compensation cíclica mecânica).
-5.  **Regra 5**: 2 de 3 pontos seguidos entre $2\\sigma$ e $3\\sigma$ (Sinalizador primário).
-6.  **Regra 6**: 4 de 5 pontos consecutivos no mesmo lado entre $1\\sigma$ e $2\\sigma$.
-7.  **Regra 7**: 15 pontos amontoados muito juntos dentro de $1\\sigma$ contínuo (A régua de medição travou, ou o operador com medo de erro está \`fabricando a ata de medição no papel\` inventando números e fraudando a auditoria).
-8.  **Regra 8**: 8 pontos, nenhum caindo em $1\\sigma$ do meio. Processo saltando violentamente entre limites superiores e inferiores como estilhaço da Mistura Dupla (Over-correção de turnos, dois fornecedores alimentando o túnel caoticamente sem fusão).
+Seu coração bate entre 60 e 80 bpm em repouso (variação comum). Se de repente marca 120 em repouso, algo mudou — estresse, doença, café demais (variação especial). A carta de controle é o "monitor cardíaco" do processo.
 
-## Seleção Correta de Qual Carta Usar
-Usar a carta errada para o Dado errado cria Falsos Positivos e Alarmes Falsos:
-*   **Contínuo n=1** (Produção lenta, peças massivas como Aviões): **I-MR** (Individual & Moving Range).
-*   **Contínuo n=2 a n=8** (Puxa subgrupos frequentes num lote de pregos): **X-Bar R** (Média e Amplitude).
-*   **Contínuo n > 9** ou alto volume: **X-Bar S** (Média e Desvio Padrão Real subgrupo).
-*   **Atributo (Defeituosa Unitária Inteira)** com Lote Fixo (ex: caixas de 500): **np-Chart**.
-*   **Atributo Varável Lote**: **p-Chart**.
-*   **Contagem de Arranhões (Defeitos Multiplos em mesma peça)** com área Fixa: **c-Chart**.
-*   **Defeitos Múltiplos com áreas Varáveis**: **u-Chart**.
+---
+
+## Limites de Controle vs. Limites de Especificação
+
+| | Limites de Controle (UCL/LCL) | Limites de Especificação (USL/LSL) |
+|-|-------------------------------|-------------------------------------|
+| **Quem define** | O próprio processo (calculados pelos dados) | O cliente ou a engenharia |
+| **Baseado em** | μ ± 3σ (dados históricos) | Requisito de qualidade |
+| **O que significam** | "Até onde o processo naturalmente varia" | "O que o cliente aceita" |
+
+> ⚠️ **Confusão mais comum:** Achar que "dentro dos limites de controle" = "dentro da especificação". Não! Um processo pode estar estatisticamente sob controle (previsível) mas ser **incapaz** (produzir fora das especificações).
+
+---
+
+## Tipos de Cartas de Controle
+
+### Para Dados Contínuos
+
+| Carta | Quando usar | Subgrupo |
+|-------|-------------|----------|
+| **X̄-R** | Subgrupos de 2 a 9 amostras | Monitora média e amplitude juntas |
+| **X̄-S** | Subgrupos de 10+ amostras | Monitora média e desvio padrão |
+| **I-MR (Individuais)** | Medição individual (1 por vez) | Quando cada peça é única ou cara |
+
+### Para Dados Discretos (Atributos)
+
+| Carta | O que monitora | Quando usar |
+|-------|---------------|-------------|
+| **p** | Proporção defeituosa (%) | Amostras de tamanho variável |
+| **np** | Número de defeituosos | Amostras de tamanho fixo |
+| **c** | Contagem de defeitos | Área de oportunidade constante |
+| **u** | Defeitos por unidade | Área de oportunidade variável |
+
+---
+
+## Regras de Detecção de Causa Especial (Nelson)
+
+Estas são as regras que disparam o "alarme" na carta de controle:
+
+| Regra | Descrição | O que indica |
+|-------|-----------|--------------|
+| **1** | 1 ponto além de ±3σ | Instabilidade clara |
+| **2** | 9 pontos consecutivos do mesmo lado da média | Shift (deslocamento da média) |
+| **3** | 6 pontos consecutivos subindo ou descendo | Tendência (trend) |
+| **5** | 2 de 3 pontos além de ±2σ (mesmo lado) | Provável shift em formação |
+
+> 💡 **Na prática do dia a dia:** As regras 1, 2 e 3 são as mais usadas. Comece por elas e adicione as outras conforme a maturidade do processo.
+
+---
+
+## Plano de Controle — O Documento que Sustenta Tudo
+
+Com o que ficou claro o "O quê monitorar", crie o Plano de Controle:
+
+| O que medir | Como medir | Frequência | Quem | Limite de Ação | O que fazer se sair do limite |
+|-------------|-----------|------------|------|----------------|-------------------------------|
+
+> O plano de controle é o **"legado"** do projeto Six Sigma — é ele que garante que a melhoria sobreviva depois que o Black Belt for embora.
       `
     }
   ]
@@ -765,64 +1461,96 @@ Usar a carta errada para o Dado errado cria Falsos Positivos e Alarmes Falsos:
 // ── MÓDULO 8 ─────────────────────────────────────────────
 {
   id: 8,
-  title: "Lean Expert & Fluxo de Valor Contínuo",
-  description: "VSM Dinâmico, Heijunka (Nivelamento), TPM e a Física de Filas (A Lei de Little).",
-  difficulty: "Avançado",
+  title: "Lean e Eliminação de Desperdícios",
+  description: "Os 8 desperdícios (TIMWOODS), Value Stream Map, 5S, Kaizen, Kanban — as ferramentas para fluxo e velocidade.",
+  difficulty: "Intermediário",
   lessons: [
     {
       id: "8.1",
-      title: "VSM - Arquitetura de Redes Lógicas",
+      title: "Os 8 Desperdícios (TIMWOODS)",
       content: `
-# Value Stream Mapping: A Radiografia do Sangramento
+# Os 8 Desperdícios do Lean (TIMWOODS)
 
-Engenheiros amadores mapeiam o "Processo" desenhando caixinhas e setinhas. O VSM (Mapeamento do Fluxo de Valor) cruza três dimensões brutais simultaneamente:
-1. **O Fluxo do Produto** (Do Aço até a Roda Finalizada).
-2. **O Fluxo da Informação** (O ping-pong eterno de e-mails ERP dizendo pro operador quanto fabricar).
-3. **A Linha do Tempo Fictícia (Takt Time vs Lead Time)**.
+## A Filosofia Lean
 
-## Eficiência de Ciclo de Processo (PCE)
-Você divide o *Value-Added Time* (3 minutos que o robô levou para soldar a porta) pelo *Process Lead Time* (30 dias que a porta passou esperando num palete). Você descobrirá que fábricas "eficientes" tem um PCE vergonhoso de 2%. O resto é TIMWOODS (Tempo apodrecendo, Movimentação estúpida, Estoque).
+> **O Lean nasceu no Sistema Toyota de Produção (TPS). Seu objetivo é simples: criar o máximo de valor para o cliente usando o mínimo de recursos.**
 
-## A Lei de Little (Teoria das Filas)
-Fórmula de Boston MIT: $Lead Time = \\frac{Work In Process}{Throughput Rate}$.
-Se o seu TI leva 1 ano para entregar um software (Lead Time), e programa 2 por mês (Throughput), é porque o diretor forçou os programadores a trabalharem em 24 softwares paralelos de uma vez ($WIP$). Matemática inquebrável. Quer softwares rápidos? Corte os projetos paralelos pela metade.
-      `
-    },
-    {
-      id: "8.2",
-      title: "TPM e Nivelamento (Heijunka)",
-      content: `
-# Heijunka: A Morte do 'Batch & Queue'
+**Valor** = o que o cliente está disposto a pagar.
+**Desperdício (Muda)** = qualquer atividade que consome recursos mas NÃO agrega valor para o cliente.
 
-Na época da Revolução Industrial Americana (Ford), produzia-se Lotes Gigantes (Batch) de carros pretos para ganhar 'Economia de Escala' no setup da pintura (Setup Time).
-O Sistema Toyota (TPS/Lean) pulverizou isso através do SMED (Single Minute Exchange of Die), trocando as tintas e matrizes de aço em menos de 10 minutos.
+### Analogia: O Supermercado
 
-Com Setup quase gratuito, habilitou-se a **Heijunka Box**: Em vez de fazer 1000 Corollas e depois 1000 Camrys (Gerando estoque morto e bullwhip effect), o Lean nivela a fábrica para fazer um Corolla, depois um Camry, depois um Corolla... Exatamente no Takt Time (Pulsação do consumo da loja na rua). 100% Flow Sincronizado.
+Quando você vai ao supermercado comprar leite:
+- **Valor:** Pegar o leite da prateleira e pagar → é o que você "veio fazer"
+- **Desperdício:** Procurar vaga, caminhar até o corredor, esperar na fila do caixa → tudo isso consome seu tempo mas não é o motivo pelo qual você foi lá
 
-## TPM (Total Productive Maintenance)
-Manutenção Preventiva é jogar óleo na máquina quebrada. TPM é a "Manutenção Empoderada". O operador limpa, ouve o ranger da engrenagem, relata anomalias sônicas 3 meses antes da correia arrebentar, e lubrifica o eixo. A **OEE (Overall Equipment Effectiveness)** passa de 50% para 85% de Classe Mundial.
-$OEE = Disponibilidade \\times Performance \\times Qualidade$.
-      `
-    },
-    {
-      id: "8.3",
-      title: "5S, SMED e Kanban Detalhado",
-      content: `
-# As Armas Táticas do Lean 
+---
 
-Enquanto a arquitetura Lean dita fluxo, os soldados físicos na fábrica executam o Just-in-Time usando a trindade da estabilização:
+## Os 8 Desperdícios — TIMWOODS
 
-## 5S (Organização Visual e Disciplina)
-Não se trata de uma "faxina". O 5S expõe a ineficiência do operador de ter que procurar chaves combinadas sumidas. Desviou os olhos 10 segundos da bancada para achar a chave 14mm = Tempo de Valor Não-Adicionado (NVA). Se a chave está desenhada fisicamente e fixada na parede (Set in Order), um desvio instantaneamente relata falta visual à coordenação de 30 metros de distância. O 5S Pavimentou a fundação mental de um Lean Sustentável.
+| Letra | Desperdício | O que é | Exemplo Prático |
+|-------|------------|---------|-----------------|
+| **T** | Transport (Transporte) | Movimentação desnecessária de material ou informação | Documento eletrônico que passa por 5 e-mails antes de chegar a quem precisa |
+| **I** | Inventory (Estoque) | Mais do que o necessário esperando processamento | 300 leads no funil de vendas sem contato há 30 dias |
+| **M** | Motion (Movimento) | Movimentação desnecessária de pessoas | Operador andando 50m para buscar ferramenta em cada setup |
+| **W** | Waiting (Espera) | Tempo parado esperando a próxima etapa | Proposta comercial esperando aprovação por 3 dias |
+| **O** | Overproduction (Superprodução) | Produzir mais ou antes do necessário | Relatórios semanais que ninguém lê |
+| **O** | Overprocessing (Superprocessamento) | Mais processo do que o necessário | Proposta de 30 slides para uma venda simples |
+| **D** | Defects (Defeitos) | Retrabalho, erros, correções | Proposta enviada com preço errado → refazer, desculpar-se, reenviar |
+| **S** | Skills (Talentos subutilizados) | Não usar o talento e capacidade das pessoas | Engenheiro sênior fazendo input de dados em planilha |
 
-## SMED (Single Minute Exchange of Die) - Setup Rápido
-É a ciência cirúrgica de alterar calibrações de máquinas durante tryouts reduzidas a menos de 10 minutos para matar de vez a restrição financeira Lote OEA (Lote Econômico). 
-*   **Passo Vital**: Converter Setup Interno (ajustes feitos apenas com Prensas paradas) em Setup Externo (Ajuste ou rosqueamento e esquadrejamento feito COM o robô ainda soldando e funcionando ativamente com molde sobressalente offline para encaixe futuro).
+> 💡 **Dica de memorização:** TIMWOODS = "Tim Woods" — um nome de pessoa. Lembre-se do Tim e você lembra dos 8 desperdícios.
 
-## Kanban e Filas Lineares (Supermercados de Produção)
-As indústrias operam em ritmo de cascata destrutiva Empurrada (Push). O centro comercial dita a fabricação para injetar blocos indiscriminadamente baseados em palpites de ERP (MRP 2) de meses à frente (Overproduction - O pai dos desperdícios).
-A Metodologia **Puxada (Pull / Just In Time)** via Kanban impõe que Nada Flui na Célula A até a Célula C entregar para o Operador D da ponta de Lote. Todo palete de chão ou prateleira deve virar um "Supermercado Limitado".
-*   Os cartões lógicos controlam o tráfego aéreo das docas, exigindo abastecimento reverso exato da quantidade consumida pela baia, forçando zero oxigênio físico sem lote em chao de fabrica.
+---
+
+## Value Stream Map (VSM)
+
+### O que é?
+> **Um mapa que mostra TODA a cadeia de valor do seu processo, desde o pedido do cliente até a entrega final, incluindo todos os tempos de espera e processamento.**
+
+### O que ele revela:
+- **Tempo VA (Value Added):** Tempo em que realmente se agrega valor
+- **Tempo NVA (Non-Value Added):** Tempo de espera, transporte, fila
+- **Lead Time Total:** Tempo total do início ao fim
+
+### Eficiência do Ciclo (PCE):
+\`\`\`
+PCE = Tempo VA / Lead Time Total × 100%
+\`\`\`
+
+| PCE | O que significa |
+|-----|-----------------|
+| 1–5% | Típico em processos de serviço (escritórios) |
+| 5–15% | Típico em manufatura |
+| > 25% | Classe mundial |
+
+> ⚠️ **A revelação mais chocante do VSM:** Na maioria dos processos, o produto ou documento fica **parado** (esperando) por 85-95% do tempo total. Apenas 5-15% é trabalho real. É como um avião que fica 18 horas no hangar para cada 2 horas que voa.
+
+---
+
+## Little's Law — A Fórmula Universal
+
+\`\`\`
+WIP = Throughput × Lead Time
+\`\`\`
+
+Onde:
+- **WIP** = Work in Process (itens sendo processados agora)
+- **Throughput** = Taxa de saída (itens completados por hora/dia)
+- **Lead Time** = Tempo total que um item leva no sistema
+
+### A Revelação Prática:
+
+Se o WIP sobe e o throughput é constante, o lead time **sempre** aumenta.
+
+**Exemplo:** Uma fila de banco com 20 pessoas (WIP). O caixa atende 2 pessoas/minuto (throughput).
+
+WIP = Throughput × Lead Time
+20 = 2 × Lead Time → **Lead Time = 10 minutos**
+
+Se entrarem mais 10 pessoas (WIP = 30): Lead Time = 15 minutos.
+
+> 💡 **A lição:** Para reduzir o lead time, a maneira mais rápida é **reduzir o WIP** (limitar o trabalho em progresso). Isso é exatamente o princípio do Kanban.
       `
     }
   ]
@@ -831,168 +1559,357 @@ A Metodologia **Puxada (Pull / Just In Time)** via Kanban impõe que Nada Flui n
 // ── MÓDULO 9 ─────────────────────────────────────────────
 {
   id: 9,
-  title: "DFSS — Design for Six Sigma (DMADV)",
-  description: "QFD Dinâmico, Tolerance Allocation, Reliability Engineering e Triz.",
+  title: "DFSS — Design for Six Sigma",
+  description: "DMADV, QFD (Casa da Qualidade), Simulação Monte Carlo e confiabilidade — quando criar algo do zero.",
   difficulty: "Avançado",
   lessons: [
     {
       id: "9.1",
-      title: "A Frustração do DMAIC vs O Poder do DFSS",
+      title: "DMADV — Projetando para a Excelência",
       content: `
-# A Impossibilidade Causal
+# DMADV — Design for Six Sigma
 
-Você rodou 12 Projetos Black Belt na sua bomba injetora. Fez Poka-Yoke, DOE, Monte Carlo, TPM. A Capacidade do Processo ($Cpk$) está travada em 1.2 (3 a 4 Sigmas). Não sobe mais. Você atingiu a **Barreira Entrópica do Limite Físico de Design**.
+## Quando Usar DMADV em vez de DMAIC?
 
-O DMAIC corrige Processos. Quando o Processo é geometricamente doentio de nascença (Design falho dita gargalo de fricção térmico que nenhuma automação conserta), você joga o projeto no LIXO e convoca o **DFSS (Design for Six Sigma)**.
+| Situação | Metodologia |
+|----------|-------------|
+| O processo existe e tem problemas | **DMAIC** (Melhorar o existente) |
+| O processo não existe — precisa ser criado do zero | **DMADV** (Criar novo) |
+| O processo existente é tão ruim que não vale consertar | **DMADV** (Recomeçar) |
+| Novo produto ou serviço | **DMADV** |
 
-## DMADV: Define, Measure, Analyze, DESIGN, Verify
-Enquanto o DMAIC salva a margem de lucro corrigindo defeitos, o DFSS cria faturamento com novos produtos Imparáveis. As Fases Design e Verify destroem o muro entre Pesquisa e Desenvolvimento (P&D) e Manufatura.
+> **Analogia:** DMAIC é reformar uma casa. DMADV é construir uma casa nova. Às vezes a reforma custa mais do que derrubar e reconstruir.
 
-## A Casa da Qualidade (QFD - Níveis de Cascata)
-No MBA de Qualidade, o QFD não é um quadrado bonito. Ele entra na técnica de *Cascading*:
-1. **QFD Piso 1**: CTQs de mercado vs. Requisitos do Veículo Inteiro.
-2. **QFD Piso 2**: Requisitos do Veículo vs. Design do Freio.
-3. **QFD Piso 3**: Design do Freio vs. Processo da Máquina Torno CNC.
-O que o Motorista pensou, virou RPM e força de prensa de 30 toneladas na fábrica sem ruído de comunicação.
-      `
-    },
-    {
-      id: "9.2",
-      title: "Reliability & Tolerancing",
-      content: `
-# Engenharia de Confiabilidade (Reliability) e Curva da Banheira
+---
 
-DFSS garante que o Carro não quebre no Dia 1 de uso na concessionária, mas como garantir que ele durará 5 anos sem o radiador explodir sob calor do Arizona? 
+## As 5 Fases do DMADV
 
-## A Curva da Banheira (Bathtub Curve)
-Qualquer ativo físico no universo (Hardware, humanos) segue três taxas de falha sistêmicas na linha do tempo:
-1. **Mortalidade Infantil (Decrescente)**: Erros de fabricação do DMAIC. Se passar pela revisão dos 1.000km, o carro tá seguro.
-2. **Vida Útil / Falha Aleatória (Plana)**: Um raio atinge o carro, acidentes. Nível de confiabilidade máxima.
-3. **Desgaste Final (Crescente)**: Fricção da caixa de marcha estourou a física do metal (80.000km+).
-O DFSS através de cálculos Weibull empurra brutalmente a 'Era do Desgaste' para mais longe que o período de garantia financeira exigido pelos acionistas.
+### D — Define (Definir)
+- Quem é o cliente desse novo processo/produto?
+- Quais são as CTQs (características críticas para qualidade)?
+- Business case: por que investir nisso?
 
-## O Design Robusto Revisitado (Tolerâncias Estocásticas)
-Soma de Empilhamento (Stack Up Tolerance). Se a Fábrica Tolarizar $+/-1mm$ o pistão, e $+/-1mm$ o anel, e o engenheiro júnior somar ambos, vai prever 2mm de gap no motor e estragar o projeto alegando impossibilidade.
-O Master Black Belt aplica a *Transferência RSS (Root Sum Square)*: Os erros normais não estouram o limite ao mesmo tempo. $\\sqrt{(1^2 + 1^2)} = 1.41mm$. A fábrica é mais apertada do que os engenheiros civis assumem linearmente, poupando bilhões em usinagem absurda.
+### M — Measure (Medir)
+- Benchmark: como os concorrentes ou processos similares funcionam?
+- Traduzir VOC em requisitos técnicos usando **QFD**
+- Definir metas mensuráveis de desempenho
+
+### A — Analyze (Analisar)
+- Gerar conceitos alternativos de design
+- Avaliar cada conceito (matriz de Pugh)
+- Selecionar o conceito mais promissor
+
+### D — Design (Projetar)
+- Desenvolver o design detalhado
+- Simular desempenho (Monte Carlo, DFMEA)
+- Prototipar e testar
+
+### V — Verify (Verificar)
+- Piloto: testar em escala reduzida
+- Validar contra as CTQs definidas na fase D
+- Aprovar e fazer handoff para operações
+
+---
+
+## QFD — Casa da Qualidade
+
+### O que é?
+Uma matriz que traduz **o que o cliente quer** (WHATs) em **como a engenharia deve projetar** (HOWs), garantindo que nenhuma necessidade do cliente seja esquecida.
+
+### Estrutura Visual:
+\`\`\`
+┌──────────────────────────────────────┐
+│     CORRELAÇÕES TÉCNICAS (teto)      │
+├─────────────┬────────────────────────┤
+│   WHATs     │   HOWs (Requisitos     │
+│   (VOC)     │     Técnicos)          │
+├─────────────┼────────────────────────┤
+│Necessidade 1│  ● forte  ○ médio     │
+│Necessidade 2│  ○ médio  ● forte     │
+├─────────────┼────────────────────────┤
+│ Importância │  Priorização           │
+│ técnica     │  Técnica               │
+└──────────────────────────────────────┘
+\`\`\`
+
+> 💡 **O QFD garante que a "voz do engenheiro" não abafe a "voz do cliente".** Muitos produtos falham porque os engenheiros projetaram algo tecnicamente elegante que o cliente não queria.
       `
     }
   ]
 },
 
+// ── MÓDULO 10 ─────────────────────────────────────────────
 {
   id: 10,
-  title: "Liderança MBB e Change Management",
-  description: "Modelo ADKAR, Influência Lateral em Estrutura Matricial e Resolução de Conflitos.",
-  difficulty: "Avançado",
+  title: "Gestão de Equipes e Liderança de Projetos",
+  description: "Modelo de Tuckman, gestão de stakeholders, resistência à mudança e comunicação eficaz — o lado humano do Six Sigma.",
+  difficulty: "Intermediário",
   lessons: [
     {
       id: "10.1",
-      title: "Change Management (A Barreira Humana)",
+      title: "Estágios de Desenvolvimento de Equipe (Tuckman)",
       content: `
-# A Ilusão da Planilha Perfeita
+# Modelo de Tuckman — Como as Equipes Evoluem
 
-A Equação Fundamental do Six Sigma é **$E = Q \\times A$** (Eficácia = Qualidade Técnica $\\times$ Aceitação da Equipe). Se você desenhar o Minitab perfeito ($Q = 10$) mas o chão de fábrica odiar a solução ($A = 0$), o resultado do seu projeto é zero.
+## A Ideia Central
 
-## O Modelo ADKAR (Prosci)
-MBBs não torcem para as pessoas aceitarem mudanças. Eles estruturam a aceitação usando o framework ADKAR:
-1. **Awareness (Consciência)**: A equipe Sabe por que a máquina velha vai sair? O Sponsor comunicou o risco de falência?
-2. **Desire (Desejo)**: O que o operador ganha com a máquina nova? (Se a resposta for "ele perde horas extras porque a máquina é mais rápida", ele vai sabotar o robô).
-3. **Knowledge (Conhecimento)**: Treinamento prático.
-4. **Ability (Habilidade)**: O operador treinou *o suficiente* para adquirir memória muscular?
-5. **Reinforcement (Reforço)**: Auditoria Kamikaze de 30, 60 e 90 dias após o projeto para evitar que a equipe volte a usar o Excel oculto antigo.
-      `
-    },
-    {
-      id: "10.2",
-      title: "Influência Lateral e Estruturação Matricial",
-      content: `
-# O Paradoxo do Black Belt
+> **Toda equipe passa por fases previsíveis, do caos inicial à alta performance. Saber em qual fase sua equipe está permite liderar de forma adequada.**
 
-Por definição de RH, um Master Black Belt lidera projetos multimilionários de escopo cruzado (Produção $\\rightarrow$ Qualidade $\\rightarrow$ Logística $\\rightarrow$ Compras). Mas ele **NÃO** tem cargo hierárquico sobre o gerente da Produção ou o diretor de Compras. 
+Bruce Tuckman identificou em 1965 os 5 estágios que toda equipe atravessa:
 
-## A Matriz de Stakeholders (C-Level)
-O MBB mapeia a energia política da sala.
-* **Sponsor (Campeão)**: O VP que banca financeiramente seu projeto. Se ele é fraco, The Project is Dead on Arrival (DOA). O Sponsor derruba as paredes funcionais para o BB passar.
-* **Gatekeepers (Sabotadores)**: Gerentes que perdem poder (budget ou headcounts) com a otimização lean que você aprovou. O MBB deve identificar se a resistência é Tecnológica (acham que n vai dar certo) ou Política (eles odeiam você). Se for Política, o Sponsor tem que intervir de C-Level para C-Level.
+---
+
+### 1. 🤝 Forming (Formação)
+A equipe recém-formada. Todos são educados, polidos, evitam conflito.
+- **Comportamento:** Entusiasmo misturado com ansiedade. "O que esperam de mim?"
+- **Papel do Black Belt:** Clarificar papéis e responsabilidades, estabelecer o Charter, criar regras básicas de trabalho
+- **Analogia:** Primeiro dia de aula — todo mundo quieto, observando
+
+### 2. ⚡ Storming (Conflito)
+As divergências surgem. Personalidades colidem. Subgrupos se formam.
+- **Comportamento:** Questionamento de liderança e direção. Tensão. "Por que estamos fazendo assim?"
+- **Papel do BB:** Facilitar discussões construtivas, não evitar conflito — canalizá-lo
+- **Analogia:** Semana 3 de um reality show — os "vilões" aparecem
+
+> ⚠️ **Muitas equipes ficam presas nesta fase.** Se o líder evita o conflito em vez de gerenciá-lo, a equipe nunca amadurece.
+
+### 3. 📋 Norming (Normalização)
+A equipe encontra seu ritmo. Regras são aceitas, papéis são claros, confiança cresce.
+- **Comportamento:** Colaboração genuína. "Estamos começando a funcionar!"
+- **Papel do BB:** Delegar mais, confiar na equipe, manter o foco no problema
+
+### 4. 🚀 Performing (Alta Performance)
+A equipe é autônoma, produtiva e alinhada. O líder quase não precisa intervir.
+- **Comportamento:** Conflitos são construtivos e resolvidos rapidamente. Foco total no problema.
+- **Papel do BB:** Suporte estratégico, remover obstáculos externos
+
+### 5. 🏁 Adjourning (Encerramento)
+O projeto terminou. Capture as lições aprendidas e reconheça as contribuições.
+
+---
+
+## Gestão de Stakeholders
+
+### Matriz Poder × Interesse
+
+| | Alto Interesse | Baixo Interesse |
+|-|---------------|-----------------|
+| **Alto Poder** | Gerencie de perto (Champion, Diretor) | Mantenha satisfeito (CFO, VP) |
+| **Baixo Poder** | Mantenha informado (operadores, clientes internos) | Monitore (departamentos não afetados) |
+
+---
+
+## 8 Passos de Kotter para Gestão de Mudança
+
+Toda melhoria de processo encontra resistência. O modelo de Kotter funciona:
+
+1. **Criar urgência** — "Se não mudarmos, perdemos 500k por mês"
+2. **Formar coalizão** — Identificar aliados com poder e influência
+3. **Criar visão** — Uma visão clara do futuro desejado
+4. **Comunicar** — Repetir a visão 10x mais do que você acha necessário
+5. **Empoderar** — Remover barreiras (sistemas, políticas, pessoas)
+6. **Gerar vitórias rápidas** — Resultados visíveis em 30-60 dias
+7. **Consolidar** — Usar as vitórias para impulsionar mais mudança
+8. **Ancorar na cultura** — "É assim que fazemos as coisas aqui"
+
+> 💡 **O passo mais negligenciado é o 6.** As pessoas precisam ver resultados rápidos para acreditar que a mudança é real, não mais um "projeto do mês".
       `
     }
   ]
 },
 
+// ── MÓDULO 11 ─────────────────────────────────────────────
 {
   id: 11,
-  title: "Finanças e Hoshin Kanri (Visão Executiva)",
-  description: "Desdobramento Estratégico, Valuation de Projetos (VPL/ROI) e Custos Baseline.",
+  title: "Master Black Belt — Visão Estratégica",
+  description: "Hoshin Kanri, gestão de portfólio, mentoria de Black Belts e estatística avançada — o nível executivo do Six Sigma.",
   difficulty: "Avançado",
   lessons: [
     {
       id: "11.1",
-      title: "Hoshin Kanri — A Matriz-X",
+      title: "Hoshin Kanri — Alinhamento Estratégico",
       content: `
-# Hoshin Kanri — O Bússola Estratégica
-Enquanto Gerentes focam em KPIs operacionais, o MBB trabalha no **Hoshin Kanri (Desdobramento Estratégico)**.
-A Diretoria define metas de 5 anos ("Tornar-se a usina mais verde da Europa"). O Hoshin pega essa visão microscópica e desenha a Matriz-X para conectar essa meta ao "Projeto Belt Trimestral de Redução de Gás Carbônico no Forno 4".
+# Hoshin Kanri — Planejamento Estratégico Lean
 
-Nenhum Green Belt deve iniciar um projeto se o escopo não estiver atrelado ao Hoshin Matrix do CEO do ano fiscal. Do contrário, o projeto será cancelado no meio por falta de CAPEX.
-      `
-    },
-    {
-      id: "11.2",
-      title: "Valuation Ouro: Hard Savings vs Soft Savings",
-      content: `
-# A Matemática do Project-Charter
+## A Ideia Central
 
-O Controller Financeiro odeia "Dinheiro de Monopoly" (Soft Savings).
-1. **Hard Savings**: O projeto do Black Belt reduziu a conta de energia da fábrica em US$ 20.000 mensais provados em fatura, ou cortou a compra de matéria prima. Impacto direto no *P&L (EBITDA)* no mês seguinte.
-2. **Soft Savings**: "Salvei 400 horas dos analistas melhorando o ERP". O Controller pergunta: "Você demitiu analistas? Eles geraram novos lucros com essas horas? Não? Então o gasto da folha pagadora continuou o mesmo. Isso é Cost Avoidance, não Hard Saving."
+> **Hoshin Kanri garante que a estratégia da diretoria se transforme em ações concretas em todos os níveis da organização — do C-Suite ao chão de fábrica.**
 
-## Engenharia Financeira de CAPEX/OPEX
-O MBB não aprova o Improve Phase sem calcular a TIR (Taxa Interna de Retorno) e o VPL (Valor Presente Líquido).
-Seu robô de melhoria custa US$ 2 milhões. Ele economiza US$ 500 mil ao ano. O VPL com taxa de desconto (WACC) de 14% prova se o VP deve colocar esse dinheiro no seu robô (que envelhece) ou no Tesouro Direto americano (Risco zero). Se o VPL for negativo, Triz ou Poka-Yoke mecânico são as únicas saídas.
+"Hoshin Kanri" (方針管理) é japonês para "gestão de políticas/diretrizes". Também chamado de "Policy Deployment" ou "X-Matrix Planning".
+
+---
+
+## O Problema que Resolve
+
+**Sem Hoshin Kanri:**
+- A diretoria define uma estratégia
+- A gerência cria sua própria agenda (diferente)
+- A operação faz o que sempre fez (indiferente)
+- Resultado: cada nível rema para um lado diferente
+
+**Com Hoshin Kanri:**
+- Objetivos de 3–5 anos → Metas anuais → Projetos trimestrais → Tarefas semanais
+- Cada pessoa sabe **como** seu trabalho contribui para a estratégia
+
+### Analogia: O GPS da Empresa
+
+O Hoshin é como programar o GPS antes de uma viagem longa:
+- **Destino** = Objetivo estratégico de 5 anos
+- **Rota** = Estratégia anual
+- **Pontos de parada** = Metas trimestrais
+- **Próxima curva** = Ação da semana
+
+---
+
+## O Papel do MBB no Hoshin
+
+O Master Black Belt é o **arquiteto da conexão entre estratégia e projetos Six Sigma**:
+
+1. Participa do planejamento estratégico com a liderança
+2. Identifica quais objetivos podem ser alcançados via melhoria de processos
+3. Seleciona, prioriza e aloca recursos para os projetos certos
+4. Gerencia o portfólio de projetos como um todo
+5. Reporta o progresso consolidado para a diretoria
+
+---
+
+## Gestão de Portfólio de Projetos
+
+O MBB gerencia o funil de projetos como um investidor gerencia um fundo:
+
+\`\`\`
+Identificados → Qualificados → Charterizados → Em Andamento → Concluídos
+  (50-100)        (20-30)         (10-15)         (5-8)        (histórico)
+\`\`\`
+
+### Critérios de Priorização:
+
+| Critério | Peso |
+|----------|------|
+| Impacto financeiro (saving estimado) | Alto |
+| Alinhamento estratégico | Alto |
+| Viabilidade técnica | Médio |
+| Recursos disponíveis | Médio |
+| Prazo de retorno (payback) | Médio |
+
+> 💡 **Regra do MBB:** "O melhor projeto não é o que economiza mais dinheiro. É o que economiza mais dinheiro **alinhado à estratégia** e com **recursos disponíveis para executar**."
+
+---
+
+## Estatística Avançada para MBB
+
+O Master Black Belt domina ferramentas que vão além do DMAIC padrão:
+
+| Ferramenta | Quando usar |
+|-----------|-------------|
+| **RSM (Response Surface Methodology)** | Otimização de múltiplos fatores além do DOE 2ᵏ |
+| **Simulação Monte Carlo** | Prever risco e variabilidade em sistemas complexos |
+| **Análise Weibull** | Confiabilidade — prever quando algo vai falhar |
+| **DOE com Blocos e Covariáveis** | Controlar fontes de ruído em experimentos |
+| **SPC Multivariado (T² de Hotelling)** | Monitorar múltiplas variáveis de resposta simultaneamente |
       `
     }
   ]
 },
 
+// ── MÓDULO 12 ─────────────────────────────────────────────
 {
   id: 12,
-  title: "A Banca MBB — Carreira e Mentoria",
-  description: "Liderando Portfólios, Mentoria de Belts e Defesa do Board Certification.",
+  title: "Certificação e Carreira",
+  description: "Preparação para o exame CSSBB e CMBB da ASQ — estrutura do exame, estratégia de estudo e desenvolvimento de carreira.",
   difficulty: "Básico",
   lessons: [
     {
       id: "12.1",
-      title: "Tollgate Review e a Mentoria do MBB",
+      title: "Guia de Preparação para o Exame CSSBB",
       content: `
-# A Hierarquia do Cinturão Funcional
+# Preparação para o Exame CSSBB (ASQ)
 
-O **Master Black Belt (MBB)** não executa projetos sozinho o tempo todo. Ele é o Arquiteto do Portfólio.
-* **Yellow Belts**: SME (Subject Matter Experts) do chão de fábrica que participam dos Kaizens.
-* **Green Belts**: Gerentes que resolvem problemas locais nas horas vagas (15% do tempo).
-* **Black Belts**: Assassinos em tempo integral (100%). Cuidam dos projetos Cross-Funcionais e Milionários de Estatística Avançada.
-* **Master Black Belts**: Escolhem a dedo quais projetos vão para quais Black Belts. Orientam a aplicação de DOE complexo e negociam os Tollgates com os Sponsors VPs.
+## Visão Geral do Exame
 
-## O Tollgate Review
-A cada transição de fase (D $\\rightarrow$ M $\\rightarrow$ A $\\rightarrow$ I $\\rightarrow$ C), o projeto para. O BB se apresenta ao **Board Tollgate** (Sponsor, Process Owner, Controller, MBB).
-Apenas com o "Go" as chaves financeiras do Capex da próxima fase são destravadas.
-      `
-    },
-    {
-      id: "12.2",
-      title: "Preparação para o Board (CMBB / CSSBB)",
-      content: `
-# A Defesa Final da Tese Executiva
+| Aspecto | Detalhe |
+|---------|---------|
+| **Questões** | 165 de múltipla escolha (150 pontuadas + 15 não-pontuadas) |
+| **Duração** | 4 horas e 18 minutos |
+| **Formato** | Open book — você leva seu próprio material |
+| **Plataforma** | Computadorizado via Prometric |
+| **Idioma** | Inglês |
 
-Diferente do PMP ou CSM, onde você marca respostas ABC e se certifica, para virar **Black Belt Certificado Oficialmente** (pela ASQ, IASSC, ou C-Level Fortune 500), marcar a alternativa correta do Chi-Quadrado é apenas a Fase 1.
+---
 
-## O Portfólio de Case Real (Fase 2)
-Ninguém é Black Belt se não entregou lucro real auditado pela tesouraria da empresa. Você precisa submeter um a dois projetos finalizados (DMAIC comprovado). As multinacionais e institutos exigem a carta do Controller Financeiro assinada, atestando os US$ 100K+ salvos em *Hard Savings*.
+## Distribuição de Questões por Seção
 
-## A Banca de Defesa (MBB Defense)
-Para virar Master, você não faz mais prova de regressão. Você defende seu Painel perante 3 MBBs sêniores (Mestrado de Negócios).
-Eles destruirão sua análise de normalidade no Measure. Dirão que seu VIF do Analyze foi fraco. Perguntarão por que você não escolheu uma Weibull. Argumentarão que o Sponsor OCAP do Control não estava no Hoshin Estratégico da empresa.
+| Seção | Questões | % |
+|-------|----------|---|
+| I. Organization Planning & Deployment | 12 | 8% |
+| II. Process Management & Measures | 12 | 8% |
+| III. Team Management | 14 | 9% |
+| IV. Define | 22 | 15% |
+| V. Measure | 25 | 17% |
+| VI. Analyze | 22 | 15% |
+| VII. Improve | 18 | 12% |
+| VIII. Control | 16 | 11% |
+| IX. DFSS | 9 | 6% |
+| **Total** | **150** | **100%** |
 
-Você sai dessa sala não com um título acadêmico, mas com uma armadura de Aço Executivo. Bem-vindo à Excelência.
+> 💡 **A grande revelação:** As seções Measure + Analyze + Improve juntas representam **44% do exame**. Se você dominar estatística (testes, DOE, regressão, SPC), já tem quase metade da prova garantida.
+
+---
+
+## Estratégia de Estudo — 6 Meses
+
+### Mese 1–2: Fundamentos
+- Estudar os módulos 1 a 4 deste curso
+- Ler o ASQ CSSBB Handbook (capítulos 1–5)
+- Fazer 50 questões práticas por semana
+
+### Meses 3–4: Núcleo Estatístico
+- Estudar módulos 5–8 (Analyze, Improve, Control, Lean)
+- **Foco especial:** Testes de hipótese, ANOVA, DOE, SPC — maior volume de questões
+- Fazer 100 questões por semana, cronometradas
+
+### Mês 5: Avançado
+- Estudar módulos 9–12 (DFSS, Gestão de Equipes, MBB)
+- Simular exame completo (150 questões em 4h18min)
+- Identificar e revisar pontos fracos
+
+### Mês 6: Revisão Final
+- 3 simulados completos em condições de prova
+- Montar material de referência pessoal para levar no exame
+- Foco total nos tópicos com menor desempenho
+
+---
+
+## Material para Levar no Dia do Exame
+
+O CSSBB é **open book**. Prepare um binder organizado:
+
+1. Tabelas de distribuição (Normal, t, F, Chi-quadrado)
+2. Fórmulas de capacidade (Cp, Cpk, Pp, Ppk)
+3. Critérios de seleção de testes estatísticos (o fluxograma deste app!)
+4. Interpretação do Gage R&R
+5. Tipos de cartas de controle e quando usar cada uma
+6. Fórmulas de DOE e tabela ANOVA
+7. Constantes para cartas de controle (A₂, d₂, D₃, D₄)
+
+---
+
+## Para o CMBB — Além do Exame
+
+O título de Master Black Belt exige:
+
+1. ✅ Ser CSSBB certificado
+2. ✅ Submeter portfólio de projetos para avaliação
+3. ✅ Ter portfólio aprovado por painel de MBBs
+4. ✅ Evidenciar mentoria de Black Belts
+
+**O portfólio deve conter:**
+- Descrição detalhada de projetos liderados como BB
+- Evidências de treinamento realizado para outros
+- Resultados financeiros documentados
+- Cartas de recomendação do Champion/Sponsor
+
+> 💡 **A dica mais valiosa:** Comece a documentar seus projetos AGORA, mesmo antes de pensar no CMBB. Quando chegar a hora, você terá tudo pronto.
       `
     }
   ]
