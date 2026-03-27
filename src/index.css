@@ -11,8 +11,8 @@
   --color-cyan: #00D4FF;
   --color-success: #00FF88;
   --color-error: #FF4757;
-  --color-text-primary: #E8E8E8;
-  --color-text-secondary: #888888;
+  --color-text-primary: #D4D4D4;
+  --color-text-secondary: #A0A0A8;
   --color-text-muted: #666666;
   --color-streak: #FF8C00;
   --font-display: 'Bebas Neue', sans-serif;
@@ -83,13 +83,13 @@ body {
   margin-top: 1.25rem;
 }
 .lesson-content p {
-  color: var(--color-text-secondary);
-  line-height: 1.8;
+  color: #B0B0BA;
+  line-height: 1.85;
   margin-bottom: 1rem;
 }
 .lesson-content strong {
-  color: #D1D5DB; /* Off-white mais suave que o E8E8E8 */
-  font-weight: 600;
+  color: #D0D0DC;
+  font-weight: 700;
 }
 .lesson-content ul, .lesson-content ol {
   color: var(--color-text-secondary);
@@ -105,22 +105,31 @@ body {
   border-collapse: collapse;
   margin: 1.25rem 0;
   font-size: 0.875rem;
+  table-layout: auto;
 }
 .lesson-content th {
-  background: var(--color-dark-sidebar);
+  background: rgba(201, 168, 76, 0.08);
   color: var(--color-gold);
-  padding: 0.75rem 1rem;
+  padding: 0.7rem 1rem;
   text-align: left;
-  border-bottom: 1px solid var(--color-dark-border);
-  font-weight: 600;
+  border-bottom: 2px solid rgba(201, 168, 76, 0.3);
+  border-top: 1px solid rgba(201, 168, 76, 0.15);
+  font-weight: 700;
+  font-size: 0.8rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  white-space: nowrap;
 }
 .lesson-content td {
   padding: 0.65rem 1rem;
   border-bottom: 1px solid var(--color-dark-border);
-  color: var(--color-text-secondary);
+  color: #B0B0BA;
+  vertical-align: top;
 }
+.lesson-content tr:first-child th:first-child { border-radius: 6px 0 0 0; }
+.lesson-content tr:first-child th:last-child  { border-radius: 0 6px 0 0; }
 .lesson-content tr:hover td {
-  background: rgba(201, 168, 76, 0.03);
+  background: rgba(201, 168, 76, 0.04);
 }
 .lesson-content blockquote {
   border-left: 3px solid var(--color-gold);
@@ -179,10 +188,18 @@ body {
 /* --- RESPONSIVIDADE MOBILE --- */
 
 /* Tabelas scrolláveis no mobile */
-.lesson-content table {
+.lesson-content .table-wrap {
   display: block;
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
+  border-radius: 8px;
+  border: 1px solid var(--color-dark-border);
+}
+.lesson-content .table-wrap table {
+  display: table;
+  min-width: 100%;
+  border: none;
+  margin: 0;
 }
 
 @media (max-width: 640px) {

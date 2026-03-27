@@ -27,23 +27,59 @@ function renderMarkdown(text) {
     .replace(/^\d+\. (.*$)/gm, '<li>$1</li>')
     .replace(/`([^`]+)`/g, '<code>$1</code>');
 
-  // Tabelas: Identifica linhas de tabela e ignora o separador |---|
+  // ── Processamento de Tabelas ─────────────────────────────────────────────
+  // Divide por linhas, agrupa blocos de tabela e processa em conjunto
   const lines = html.split('\n');
-  const processedLines = lines.map(line => {
-    if (line.trim().startsWith('|') && line.trim().endsWith('|')) {
-      const cells = line.split('|').filter(c => c.trim() !== '');
-      if (cells.every(c => c.trim().match(/^[-:]+$/))) return '<!-- SEP -->';
-      return `<tr>${cells.map(c => `<td>${c.trim()}</td>`).join('')}</tr>`;
+  const tableBuffer = [];      // linhas brutas do bloco de tabela atual
+  const outputLines = [];       // linhas finais (mistura de table-html e conteúdo normal)
+
+  const flushTable = () => {
+    if (tableBuffer.length === 0) return;
+    
+    // Separa: linha 0 = cabeçalho, linha 1 = separador, demais = corpo
+    const rows = tableBuffer.map(row => {
+      const cells = row.trim().split('|').filter(c => c !== '');
+      return cells.map(c => c.trim());
+    });
+
+    const headerCells = rows[0];
+    const isSep = (r) => r.every(c => c.match(/^[-:]+$/));
+
+    let thead = '';
+    let tbody = '';
+    let bodyStart = 0;
+
+    if (rows.length >= 2 && isSep(rows[1])) {
+      // Padrão Markdown: linha 0 = header, linha 1 = sep, resto = body
+      thead = `<thead><tr>${headerCells.map(c => `<th>${c}</th>`).join('')}</tr></thead>`;
+      bodyStart = 2;
+    } else if (rows.length >= 1 && isSep(rows[0])) {
+      // Separador na primeira linha — pula
+      bodyStart = 1;
     }
-    return line;
-  });
 
-  html = processedLines.join('\n');
+    const bodyRows = rows.slice(bodyStart).filter(r => !isSep(r));
+    if (bodyRows.length > 0) {
+      tbody = `<tbody>${bodyRows.map(r => `<tr>${r.map(c => `<td>${c}</td>`).join('')}</tr>`).join('')}</tbody>`;
+    }
 
-  // Agrupa <tr> em <table>
-  html = html.replace(/(?:<tr>.*<\/tr>\n?)+/g, (match) => {
-    return `<table>${match.replace(/<!-- SEP -->/g, '')}</table>`;
-  });
+    outputLines.push(`<div class="table-wrap"><table>${thead}${tbody}</table></div>`);
+    tableBuffer.length = 0;
+  };
+
+  for (const line of lines) {
+    const trimmed = line.trim();
+    if (trimmed.startsWith('|') && trimmed.endsWith('|')) {
+      tableBuffer.push(trimmed);
+    } else {
+      flushTable();
+      outputLines.push(line);
+    }
+  }
+  flushTable(); // garante que o último bloco de tabela seja processado
+
+  html = outputLines.join('\n');
+  // ─────────────────────────────────────────────────────────────────────────
 
   // Agrupa <li> em <ul>
   html = html.replace(/(?:<li>.*<\/li>\n?)+/g, (match) => {
