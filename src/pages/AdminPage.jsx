@@ -13,6 +13,7 @@ export default function AdminPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [actionLoading, setActionLoading] = useState(null);
+  const [userToDelete, setUserToDelete] = useState(null);
 
   // Metrics
   const totalUsers = users.length;
@@ -72,8 +73,13 @@ export default function AdminPage() {
   };
 
   const handleDelete = (userId, userName) => {
-    if (window.confirm(`Tem certeza que deseja EXCLUIR PERMANENTEMENTE o usuário ${userName}? Esta ação não pode ser desfeita.`)) {
-      callAdminAction('DELETE_USER', userId);
+    setUserToDelete({ id: userId, name: userName });
+  };
+
+  const confirmDelete = () => {
+    if (userToDelete) {
+      callAdminAction('DELETE_USER', userToDelete.id);
+      setUserToDelete(null);
     }
   };
 
@@ -231,6 +237,58 @@ export default function AdminPage() {
           </table>
         </div>
       </motion.div>
+
+      {/* Delete Confirmation Modal */}
+      <AnimatePresence>
+        {userToDelete && (
+          <div className="fixed inset-0 z-50 flex items-center justify-center p-4">
+            <motion.div 
+              initial={{ opacity: 0 }} 
+              animate={{ opacity: 1 }} 
+              exit={{ opacity: 0 }}
+              className="absolute inset-0 bg-black/80 backdrop-blur-sm"
+              onClick={() => setUserToDelete(null)}
+            />
+            <motion.div
+              initial={{ opacity: 0, scale: 0.95, y: 20 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.95, y: 20 }}
+              className="relative w-full max-w-md p-6 rounded-2xl shadow-2xl overflow-hidden"
+              style={{ background: '#12121A', border: '1px solid #2E2E3E' }}
+            >
+              <div className="absolute top-0 left-0 w-full h-1" style={{ background: 'linear-gradient(90deg, #F87171, #EF4444)' }} />
+              
+              <div className="flex flex-col items-center text-center mt-4">
+                <div className="w-16 h-16 rounded-full flex items-center justify-center mb-4 shadow-lg shadow-red-500/10" style={{ background: '#2E0C0C', color: '#EF4444' }}>
+                  <Trash2 size={28} />
+                </div>
+                
+                <h3 className="text-xl font-bold mb-2 font-display uppercase tracking-wide" style={{ color: '#E8E8E8' }}>Excluir Usuário?</h3>
+                <p className="text-sm mb-6 leading-relaxed" style={{ color: '#888' }}>
+                  Você está prestes a deletar permanentemente a conta de <strong style={{ color: '#EF4444' }}>{userToDelete.name}</strong>. Todos os dados, XP e pontuações serão perdidos e esta ação <strong style={{ color: '#E8E8E8' }}>não pode ser desfeita</strong>.
+                </p>
+
+                <div className="flex w-full gap-3">
+                  <button
+                    onClick={() => setUserToDelete(null)}
+                    className="flex-1 py-3 rounded-lg text-xs font-bold tracking-widest transition-all hover:bg-[#1A1A24]"
+                    style={{ color: '#888', border: '1px solid #2E2E3E' }}
+                  >
+                    CANCELAR
+                  </button>
+                  <button
+                    onClick={confirmDelete}
+                    className="flex-1 py-3 rounded-lg text-xs font-bold tracking-widest transition-all shadow-lg hover:shadow-red-500/20 hover:scale-105 active:scale-95"
+                    style={{ background: '#EF4444', color: '#FFF' }}
+                  >
+                    EXCLUIR AGORA
+                  </button>
+                </div>
+              </div>
+            </motion.div>
+          </div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
