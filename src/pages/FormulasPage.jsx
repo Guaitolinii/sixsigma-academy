@@ -4,12 +4,18 @@ import { Calculator, Table2, GitBranch, ChevronDown, ChevronRight, Search, Info 
 
 // ─── FÓRMULAS ESSENCIAIS ───
 const FORMULAS = [
+  { cat: "Estatística Avançada (MBB)", items: [
+    { name: "Função Perda de Taguchi", formula: "L(y) = k(y − T)²", note: "Qualidade é atingir o alvo (T), não apenas estar dentro da especificação.", example: "Mesmo dentro da tolerância, se o motor vibra 1mm fora do centro, o custo de garantia sobe exponencialmente. k=coef. de custo, T=Alvo." },
+    { name: "S/N Ratio (Taguchi)", formula: "S/N = −10 log(MSD)", note: "Sinal/Ruído. Maximizar para robustez contra fatores incontroláveis.", example: "Em um processo de pintura, queremos que a cor seja estável mesmo que a umidade do ar mude (ruído). S/N alto = processo robusto." },
+    { name: "Modelo RSM (2ª Ordem)", formula: "y = β₀ + Σβᵢxᵢ + Σβᵢᵢxᵢ² + Σβᵢⱼxᵢxⱼ", note: "Surface Response — encontra o 'pico da montanha' da otimização.", example: "A temperatura afeta a resistência, mas o efeito é curvo (quadrático). O modelo RSM mapeia essa curvatura para achar o ponto exato de máxima força." },
+    { name: "Regressão Logística", formula: "Logit(P) = ln(P / (1−P)) = β₀ + β₁x", note: "Preveja a probabilidade de um evento binário (Passa/Falha).", example: "Qual a probabilidade de um cliente cancelar o contrato (Y=1) baseado no número de reclamações (X)? O Logit transforma a curva em S em uma reta." },
+    { name: "D-Optimality", formula: "det(X'X)", note: "Critério para escolher os melhores pontos em um experimento complexo.", example: "Quando você tem pouco orçamento, o critério D escolhe os 8 testes que dão o máximo de informação estatística possível." },
+  ]},
   { cat: "Capacidade", items: [
-    { name: "Cp", formula: "Cp = (USL − LSL) / 6σ", note: "Potencial máximo (ignora centralização). Goal ≥ 1,33.", example: "Se USL=10, LSL=4 e σ=0,5: Cp = (10 - 4) / (6 × 0,5) = 6 / 3 = 2,0 (Processo Capaz)" },
-    { name: "Cpk", formula: "Cpk = min[(USL−μ)/(3σ), (μ−LSL)/(3σ)]", note: "Capacidade real centrada. Cpk < 1,0 = incapaz.", example: "Para USL=10, LSL=4, μ=6 e σ=0,5: CpkL = (6-4)/1,5 = 1,33. CpkU = (10-6)/1,5 = 2,66. Cpk = 1,33." },
-    { name: "Pp / Ppk", formula: "Pp = (USL−LSL)/(6s_total) | Ppk = min[...]/(3s_total)", note: "Longo prazo (σ total). Sempre Ppk ≤ Cpk.", example: "Se s_total = 0,8 (maior que σ curto prazo=0,5): Pp = (10 - 4) / (6 × 0,8) = 6 / 4,8 = 1,25." },
-    { name: "Yield (Throughput)", formula: "Y = e^(−DPU)", note: "Rendimento de 1ª passagem. DPU=0,35 → Y=70,5%.", example: "Se DPU for 0,20: Y = e^(-0,20) = 0,8187 ou 81,87% de Rendimento." },
-    { name: "RTY", formula: "RTY = Y₁ × Y₂ × ... × Yₙ", note: "Rolled Throughput Yield — acumula ineficiências.", example: "Em 3 etapas com Yields de 95%, 90% e 99%: RTY = 0,95 × 0,90 × 0,99 = 0,846 ou 84,6%." },
+    { name: "Cp", formula: "Cp = (USL − LSL) / 6σ", note: "Potencial máximo (ignora centralização). Goal ≥ 1,33.", example: "Imagine um carro e uma garagem: o Cp diz se o carro (processo) CABE na garagem (especificação), ignorando se você está estacionando no meio ou batendo na pilastra." },
+    { name: "Cpk", formula: "Cpk = min[(USL−μ)/(3σ), (μ−LSL)/(3σ)]", note: "Capacidade real centrada. Cpk < 1,0 = incapaz.", example: "É o Cp 'pé no chão'. Se você tem um carro pequeno (baixo sigma) mas estaciona colado na parede, seu Cpk será baixo. Ele pune o descentramento." },
+    { name: "Pp / Ppk", formula: "Pp = (USL−LSL)/(6s_total) | Ppk = min[...]/(3s_total)", note: "Longo prazo (σ total). Considera 'o mundo real' e variações entre lotes.", example: "O Cpk é a foto de um dia bom; o Ppk é o filme do ano inteiro, incluindo segundas-feiras e trocas de turno." },
+    { name: "Yield (Throughput)", formula: "Y = e^(−DPU)", note: "Rendimento de 1ª passagem. DPU=0,35 → Y=70,5%.", example: "Se você tem 0,1 defeito por peça em média, 90,4% das suas peças passarão 'de primeira' sem retoque." },
   ]},
   { cat: "Métricas Sigma", items: [
     { name: "DPMO", formula: "DPMO = (Defeitos / (Unidades × Oportunidades)) × 10⁶", note: "3,4 DPMO = 6σ | 233 = 5σ | 6.210 = 4σ | 66.807 = 3σ", example: "Em 1.000 peças, cada uma com 5 oportunidades, houve 12 defeitos. DPMO = [12 / (1.000 × 5)] × 1.000.000 = 2.400." },

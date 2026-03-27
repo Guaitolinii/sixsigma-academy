@@ -284,24 +284,43 @@ const moduleOptions = [
 ];
 
 export default function QuizPage() {
-  const [selectedModule, setSelectedModule] = useState(null);
+  const [selectedModules, setSelectedModules] = useState([0]); // Default to "All" (0)
   const [started, setStarted] = useState(false);
   const { addXP } = useApp();
 
-  const filteredQuestions = selectedModule === null ? [] :
-    selectedModule === 0 ? quizQuestions :
-    selectedModule === 99 ? quizQuestions.filter(q => q.module === 0) :
-    quizQuestions.filter(q => q.module === selectedModule);
+  function toggleModule(id) {
+    if (id === 0) {
+      setSelectedModules([0]);
+      return;
+    }
+    
+    setSelectedModules(prev => {
+      let next = prev.filter(m => m !== 0); // Remove "All" if selecting specific
+      if (next.includes(id)) {
+        next = next.filter(m => m !== id);
+      } else {
+        next = [...next, id];
+      }
+      return next.length === 0 ? [0] : next;
+    });
+  }
+
+  const filteredQuestions = selectedModules.includes(0) 
+    ? quizQuestions 
+    : quizQuestions.filter(q => {
+        if (selectedModules.includes(99) && q.module === 0) return true;
+        return selectedModules.includes(q.module);
+      });
 
   if (started && filteredQuestions.length > 0) {
     return (
       <div>
         <button
-          onClick={() => { setStarted(false); setSelectedModule(null); }}
-          className="mb-6 px-4 py-2 rounded-lg text-[13px] cursor-pointer"
+          onClick={() => { setStarted(false); }}
+          className="mb-6 px-4 py-2 rounded-lg text-[13px] cursor-pointer hover:bg-[#333] transition-colors"
           style={{ background: '#1E1E2E', color: '#888', border: '1px solid #333' }}
         >
-          ← Voltar
+          ← Voltar para seleção
         </button>
         <QuizArena questions={filteredQuestions} onXP={addXP} />
       </div>
@@ -310,58 +329,80 @@ export default function QuizPage() {
 
   return (
     <div>
-      <motion.h1 initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-2xl font-extrabold mb-2" style={{ color: '#C9A84C' }}>
+      <motion.h1 initial={{ opacity: 0, y: -10 }} animate={{ opacity: 1, y: 0 }} className="text-2xl font-extrabold mb-2" style={{ color: '#C9A84C' }}>
         ⚡ Quiz Arena
       </motion.h1>
-      <p className="mb-8" style={{ color: '#666' }}>Teste seu conhecimento e ganhe XP. Estilo Anki/Duolingo.</p>
+      <p className="mb-8" style={{ color: '#666' }}>Determine seu desafio: selecione um ou mais módulos para treinar.</p>
 
       <div className="rounded-xl p-6 mb-6" style={{ background: '#12121A', border: '1px solid #1E1E2E' }}>
-        <h3 className="font-semibold mb-4" style={{ color: '#E8E8E8' }}>Selecione o módulo:</h3>
+        <div className="flex justify-between items-center mb-4">
+          <h3 className="font-semibold" style={{ color: '#E8E8E8' }}>Módulos Ativos:</h3>
+          <span className="text-[11px] font-bold" style={{ color: '#C9A84C' }}>
+            {selectedModules.includes(0) ? "Todos Disponíveis" : `${selectedModules.length} selecionado(s)`}
+          </span>
+        </div>
+        
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
-          {moduleOptions.map(m => (
-            <motion.button
-              key={m.id}
-              whileHover={{ scale: 1.02, backgroundColor: selectedModule === m.id ? '#C9A84C33' : '#1E1E2E' }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => setSelectedModule(selectedModule === m.id ? null : m.id)}
-              className="flex justify-between items-center px-4 py-3 rounded-lg text-[13px] text-left cursor-pointer transition-colors"
-              style={{
-                background: selectedModule === m.id ? '#C9A84C22' : '#0D0D18',
-                border: `1px solid ${selectedModule === m.id ? '#C9A84C' : '#1E1E2E'}`,
-                color: selectedModule === m.id ? '#C9A84C' : '#888',
-                fontWeight: selectedModule === m.id ? 700 : 400,
-              }}
-            >
-              {m.label}
-              <span className="text-[11px] opacity-60">
-                {m.id === 0 ? quizQuestions.length :
-                 m.id === 99 ? quizQuestions.filter(q => q.module === 0).length :
-                 quizQuestions.filter(q => q.module === m.id).length}q
-              </span>
-            </motion.button>
-          ))}
+          {moduleOptions.map(m => {
+            const isSelected = selectedModules.includes(m.id);
+            return (
+              <motion.button
+                key={m.id}
+                layout
+                whileHover={{ scale: 1.01 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => toggleModule(m.id)}
+                className="group flex justify-between items-center px-4 py-3 rounded-lg text-[13px] text-left cursor-pointer transition-all duration-300"
+                style={{
+                  background: isSelected ? 'rgba(201,168,76,0.15)' : '#0D0D18',
+                  border: `1px solid ${isSelected ? '#C9A84C' : '#1E1E2E'}`,
+                  color: isSelected ? '#C9A84C' : '#888',
+                  boxShadow: isSelected ? '0 0 15px rgba(201,168,76,0.1)' : 'none',
+                }}
+              >
+                <div className="flex items-center gap-3">
+                  <div className={`w-4 h-4 rounded-sm border flex items-center justify-center transition-colors ${isSelected ? 'bg-[#C9A84C] border-[#C9A84C]' : 'border-[#333]'}`}>
+                    {isSelected && <div className="w-2 h-2 bg-black rounded-[1px]" />}
+                  </div>
+                  <span className={isSelected ? 'font-bold' : ''}>{m.label}</span>
+                </div>
+                <span className="text-[10px] opacity-40 group-hover:opacity-100 transition-opacity">
+                  {m.id === 0 ? quizQuestions.length :
+                   m.id === 99 ? quizQuestions.filter(q => q.module === 0).length :
+                   quizQuestions.filter(q => q.module === m.id).length}q
+                </span>
+              </motion.button>
+            );
+          })}
         </div>
       </div>
 
-      {selectedModule !== null && (
-        <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} className="text-center">
-          <div className="text-sm mb-4" style={{ color: '#888' }}>
-            {filteredQuestions.length} questões selecionadas
-          </div>
-          <button
-            onClick={() => setStarted(true)}
-            disabled={filteredQuestions.length === 0}
-            className="px-10 py-4 rounded-xl font-extrabold text-lg tracking-wider cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed pulse-gold"
-            style={{
-              background: filteredQuestions.length > 0 ? 'linear-gradient(135deg, #C9A84C, #F0C96A)' : '#333',
-              color: '#000',
-              border: 'none',
-            }}
+      <AnimatePresence>
+        {selectedModules.length > 0 && (
+          <motion.div 
+            initial={{ opacity: 0, y: 20 }} 
+            animate={{ opacity: 1, y: 0 }} 
+            exit={{ opacity: 0, y: 10 }}
+            className="text-center"
           >
-            ⚡ COMEÇAR QUIZ
-          </button>
-        </motion.div>
-      )}
+            <div className="text-sm mb-4 font-medium" style={{ color: '#888' }}>
+              <span style={{ color: '#C9A84C' }}>{filteredQuestions.length}</span> questões carregadas com base na sua seleção.
+            </div>
+            <button
+              onClick={() => setStarted(true)}
+              disabled={filteredQuestions.length === 0}
+              className="px-12 py-4 rounded-xl font-extrabold text-lg tracking-widest cursor-pointer disabled:opacity-30 disabled:cursor-not-allowed pulse-gold shadow-xl"
+              style={{
+                background: 'linear-gradient(135deg, #C9A84C, #F0C96A)',
+                color: '#000',
+                border: 'none',
+              }}
+            >
+              INICIAR DESAFIO ⚡
+            </button>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }

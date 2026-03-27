@@ -9,7 +9,7 @@ export const quizQuestions = [
   question: "O que representa a letra σ (sigma) em Six Sigma?",
   options: ["A média do processo","O desvio padrão do processo","A taxa de defeitos","O nível de satisfação do cliente"],
   correct: 1,
-  explanation: "Sigma (σ) é o símbolo estatístico para desvio padrão, que mede a variabilidade do processo. Seis Sigma significa operar a 6 desvios padrão da média, resultando em apenas 3,4 DPMO." },
+  explanation: "Imagine um arqueiro: a média é o centro do alvo, e o sigma (σ) é o quão espalhadas estão as flechas. Seis Sigma significa que mesmo suas 'piores' flechas ainda acertam dentro do alvo (limites de especificação)." },
 
 { id:"q002", module:1, topic:"Fundamentos", difficulty:"easy",
   question: "Quantos defeitos por milhão de oportunidades (DPMO) um processo operando a 6 sigma produz?",
@@ -128,7 +128,7 @@ export const quizQuestions = [
     "A linearidade do sistema de medição"
   ],
   correct: 1,
-  explanation: "Cp mede apenas a relação entre a largura das especificações e a variabilidade do processo (potencial). Cpk considera TAMBÉM o centramento — se o processo está deslocado para um lado, o Cpk será menor que o Cp." },
+  explanation: "Use a analogia da garagem: o Cp diz se o seu carro cabe na garagem (largura). O Cpk diz se o carro cabe E se você o estacionou no centro — se ele estiver muito encostado na parede (descentrado), o Cpk será baixo, mesmo que o carro seja pequeno." },
 
 { id:"q014", module:3, topic:"MSA", difficulty:"medium",
   question: "Em um Gage R&R, qual porcentagem de variação (%GRR) torna o sistema de medição inaceitável?",
@@ -174,7 +174,7 @@ export const quizQuestions = [
     "O intervalo de confiança do resultado"
   ],
   correct: 1,
-  explanation: "O p-valor é a probabilidade de observar dados tão extremos (ou mais) do que os coletados, se H₀ fosse verdadeira. Se p < α (geralmente 0,05), rejeitamos H₀ — há evidência estatística de diferença." },
+  explanation: "Pense no p-valor como a 'força da evidência' em um tribunal. Um p-valor pequeno (≤ 0,05) diz que o que vimos é tão estranho que a hipótese de 'tudo está normal' (H₀) provavelmente é falsa. Se o p for baixo, o H₀ cai!" },
 
 { id:"q019", module:4, topic:"Estatística", difficulty:"medium",
   question: "Para comparar as médias de 4 grupos independentes, qual teste estatístico é mais apropriado?",
