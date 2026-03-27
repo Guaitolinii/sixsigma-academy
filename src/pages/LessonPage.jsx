@@ -7,7 +7,16 @@ import { ChevronLeft, ChevronRight, CheckCircle, BookOpen } from 'lucide-react';
 
 function renderMarkdown(text) {
   if (!text) return '';
-  let html = text
+  
+  // Protege blocos de código
+  const codeBlocks = [];
+  let html = text.replace(/```(?:\w+)?\n([\s\S]*?)```/g, (_, code) => {
+    const id = `__CODE_BLOCK_${codeBlocks.length}__`;
+    codeBlocks.push(`<pre><code>${code.trim()}</code></pre>`);
+    return id;
+  });
+
+  html = html
     .replace(/^### (.*$)/gm, '<h3>$1</h3>')
     .replace(/^## (.*$)/gm, '<h2>$1</h2>')
     .replace(/^# (.*$)/gm, '<h1>$1</h1>')
@@ -16,21 +25,37 @@ function renderMarkdown(text) {
     .replace(/^> (.*$)/gm, '<blockquote>$1</blockquote>')
     .replace(/^- (.*$)/gm, '<li>$1</li>')
     .replace(/^\d+\. (.*$)/gm, '<li>$1</li>')
-    .replace(/`([^`]+)`/g, '<code>$1</code>')
-    .replace(/\n\n/g, '</p><p>')
-    .replace(/\|(.+)\|/g, (match) => {
-      const cells = match.split('|').filter(c => c.trim());
-      if (cells.every(c => c.trim().match(/^[-:]+$/))) return '';
-      const tag = match.includes('---') ? 'th' : 'td';
-      return '<tr>' + cells.map(c => `<${tag}>${c.trim()}</${tag}>`).join('') + '</tr>';
-    });
+    .replace(/`([^`]+)`/g, '<code>$1</code>');
 
-  html = html.replace(/(<li>.*<\/li>\n?)+/g, (match) => {
-    return '<ul>' + match + '</ul>';
+  // Tabelas: Identifica linhas de tabela e ignora o separador |---|
+  const lines = html.split('\n');
+  const processedLines = lines.map(line => {
+    if (line.trim().startsWith('|') && line.trim().endsWith('|')) {
+      const cells = line.split('|').filter(c => c.trim() !== '');
+      if (cells.every(c => c.trim().match(/^[-:]+$/))) return '<!-- SEP -->';
+      return `<tr>${cells.map(c => `<td>${c.trim()}</td>`).join('')}</tr>`;
+    }
+    return line;
   });
 
-  html = html.replace(/(<tr>.*<\/tr>\n?)+/g, (match) => {
-    return '<table>' + match + '</table>';
+  html = processedLines.join('\n');
+
+  // Agrupa <tr> em <table>
+  html = html.replace(/(?:<tr>.*<\/tr>\n?)+/g, (match) => {
+    return `<table>${match.replace(/<!-- SEP -->/g, '')}</table>`;
+  });
+
+  // Agrupa <li> em <ul>
+  html = html.replace(/(?:<li>.*<\/li>\n?)+/g, (match) => {
+    return `<ul>${match}</ul>`;
+  });
+
+  // Parágrafos
+  html = html.replace(/\n\n/g, '</p><p>');
+
+  // Restaura blocos de código
+  codeBlocks.forEach((block, i) => {
+    html = html.replace(`__CODE_BLOCK_${i}__`, block);
   });
 
   return html;
